@@ -1,0 +1,208 @@
+/* icon */
+// 导入全局变量
+@import "../other/variables.less";
+
+// 导入混合宏
+@import "../mixins/mixins.less";
+[class*="-50"],
+[class*="-32"],
+[class*="-12"],{
+	/*.tran(opacity ease .2s);
+	opacity: .8;
+	&:hover{
+		opacity: 1;
+	}*/
+}
+/* icon-80 */
+[class*="icon-wechat"]:before {
+	content: "\e60d";
+	background-color: @wechat-32;
+	font-size: .5em;
+	.text-s(.08em .08em .4em rgba(0,0,0,.3));
+}
+[class*="icon-qq"]:before {
+	content: "\e613";
+	background-color: @qq-32;
+	font-size: .6em;
+	.text-s(.02em .02em .1em rgba(0,0,0,.1));
+}
+[class*="icon-sina"]:before {
+	content: "\e60a";
+	background-color: @sina-32;
+	font-size: .6em;
+	.text-s(.02em .02em .1em rgba(0,0,0,.1));
+}
+.icon-wechat-80,
+.icon-qq-80,
+.icon-sina-80{
+	.db; .squ(80px);
+	line-height: 80px;
+	font-size: 80px;
+	color: #fff;
+	text-align: center;
+	&:before {
+		.db; .squ(80px);
+		.br;
+	}
+}
+.icon-facebook-80,
+.icon-twitter-80,
+.icon-google-80{
+	.db; .squ(80px);
+	line-height: 80px;
+	font-size: 80px;
+}
+.icon-facebook-80:before {
+	color: @facebook-80;
+}
+.icon-twitter-80:before {
+	color: @twitter-80;
+}
+.icon-google-80:before {
+	color: @google-80;
+}
+.icon-facebook-80,
+.icon-facebook-32{
+	&:before{
+		content: "\e607";
+	}
+}
+.icon-twitter-80,
+.icon-twitter-32{
+	&:before{
+		content: "\e60c";
+	}
+}
+.icon-google-80,
+.icon-google-32{
+	&:before{
+		content: "\e609";
+	}
+}
+
+/* icon-32 */
+.icon-facebook-32,
+.icon-twitter-32,
+.icon-google-32{
+	.db; .squ(32px);
+	line-height: 32px;
+	font-size: 32px;
+}
+.icon-wechat-32,
+.icon-qq-32,
+.icon-sina-32{
+	.db; .squ(32px);
+	line-height: 32px;
+	font-size: 32px;
+	color: #fff;
+	text-align: center;
+	&:before {
+		.db; .squ(32px);
+		.br;
+	}
+}
+.icon-facebook-32:before {
+	color: @facebook-32;
+}
+.icon-twitter-32:before {
+	color: @twitter-32;
+}
+.icon-google-32:before {
+	color: @google-32;
+}
+
+/* icon-12 */
+.icon-facebook-12,
+.icon-twitter-12,
+.icon-google-12{
+	.db; .squ(12px);
+	line-height: 12px;
+	font-size: 12px;
+}
+.icon-facebook-12:before {
+	content: "\e606";
+	color: @facebook-12;
+}
+.icon-twitter-12:before {
+	content: "\e60b";
+	color: @twitter-12;
+}
+.icon-google-12:before {
+	content: "\e608";
+	color: @google-12;
+}
+
+// 自定义图标
+.ico-close {
+	.posr;
+	.db;
+	i {
+		.posa;
+		.squ(70%);
+		top:  50%;
+		left: 50%;
+		.trans(-50%, -50%);
+		.tran;
+		&:before,
+		&:after {
+			content: '';
+			.posa;
+			top: 49%;
+			left: 20%;
+			.db;
+			.wh(60%; 2);
+			.bc(@grayD);
+			.tranO(50% 50%);
+			.tran(.5s);
+		}
+		&:before {
+		}
+		&:after {
+		}
+	}
+	&:hover {
+		i {
+			&:before,
+			&:after {
+				top: 46%;
+				left: 0%;
+				.wh(100%; 1);
+				.bc(@gray);
+			}
+			&:before {
+				.rotate(225);
+			}
+			&:after {
+				.rotate(135);
+			}
+		}
+	}
+}
+.ico-close-32 {
+	.squ(32);
+	i {
+		&:before,
+		&:after {
+		}
+		&:before {
+
+		}
+		&:after {
+			
+		}
+	}
+	&:hover {
+		i {
+			&:before,
+			&:after {
+
+			}
+			&:before {
+
+			}
+			&:after {
+				
+			}
+		}
+	}
+}

@@ -1,0 +1,33 @@
+<!-- header start -->
+<div id="headerBox" class="header" ng-controller="headerController">
+	<div class="header-con">
+		<a href="/" class="logo"></a>
+		<div class="header-search">
+			<div id="keywordsMap" class="keywords-map">
+				<span ng-repeat="list in keywordMap" style="color: hsl({{list.color}}, 100%, 20%);background-color: hsl({{list.color}}, 100%, 80%);">{{list.text}}<a class="iconfont icon-close-b" style="color: hsl({{list.color}}, 100%, 30%);" onclick="SEARCH_HANDLE.removeKeyword(this);" data-key="{{list.text}}"></a></span>
+			</div>
+			<input id="searchContext" type="text" class="input hide" placeholder="{{info.placeholder}}" name="searchContext" onfocus="SEARCH_HANDLE.focus();" onblur="SEARCH_HANDLE.blur();">
+			<a id="btnSearch" class="btn-search iconfont icon-search" ng-click="searchSubmit();"></a>
+		</div>
+		<ul id="headerMenu" class="header-menu">
+			<li><a href="/page/{{LANG.NAME}}/shop.html" ng-bind="LANG.TYPE.SHOP"></a></li>
+			<li><a href="/page/{{LANG.NAME}}/community.html" ng-bind="LANG.TYPE.COMMUNITY"></a></li>
+		</ul>
+	</div>
+</div>
+<!-- header end -->
+
+<!-- user-side start -->
+<div id="loginBox" class="login-box{{navState}}" ng-controller="userSide">
+	<div class="login-con">
+		<div class="user-info">
+			<a id="btnNav" class="btn-nav iconfont icon-list" ng-click="sideShow(true);"></a>
+			<div id="userLogin" class="user-login"></div>
+		</div>
+		<div class="nav-more">
+			<ul id="navList"></ul>
+		</div>
+		<div class="nav-mask" ng-click="sideShow(false);"></div>
+	</div>
+</div>
+<!-- user-side end -->

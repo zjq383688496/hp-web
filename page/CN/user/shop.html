@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html ng-app="shops">
+    <head lang="en">
+        <meta charset="UTF-8">
+        <title>shop</title>
+            <link rel="stylesheet" href="/font/iconfont.css">
+            <link rel="stylesheet" href="/css/header.css">
+            <link rel="stylesheet" href="/css/user/shop.css">
+    </head>
+<body>
+    <div modheaderfull></div>
+    <div moduserhead></div>
+    <!--list-->
+    <div class="container media" ng-controller="shopCtr">
+        <!-- nav -->
+        <ul class="like-nav" id="search" placeholder="Search Artwork, Blogs, Artist">
+            <li>
+                <a href="">灯丝圈</a>
+            </li>
+            <li class="active">
+                <a href="">商店</a>
+            </li>
+            <!--<li><a href="/user/user-like-artwork.html" ng-bind="navThree"></a></li>-->
+        </ul>
+        <ul class="art-box a-imageload">
+            <li data-index="{{$index}}" ng-repeat="ushop in ushopItems" class="gallery">
+                <div class="art-img">
+                    <span class="art-span img-loading">
+                        <img src="{{imgUrl}}{{ushop.uri}}{{qnProduct}}" class="a-imageshow">
+                    </span>
+                </div>
+                <div class="text">
+                    <h2>
+                        <span class="user">
+                            <a href="/page/CN/user/gallery.html?uid={{ushop.uId}}">
+                                <b><img class="a-imageshow" src="{{imgUrl}}{{ushop.picture}}{{qnIcon}}" /></b><font ng-bind="ushop.customerName"></font></a>
+                        </span>
+                    </h2>
+                </div>
+                <div class="light-price">
+                    <span><!--  ng-class="like.light?'ico-likes':''"  -->
+                        <b class="iconfont icon-bulb"></b>
+                        <i ng-bind="ushop.collectionNumber">2</i>
+                    </span>
+                    <span>
+                        <font ng-bind="ushop.currencySymbol"></font>&nbsp;<font ng-bind="ushop.collectionNumber"></font>
+                    </span>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <!-- JS -->
+    <script src="/js/config.js"></script>
+    <script src="/js/ArtJS/lib/jquery-2.1.4.min.js"></script>
+    <script src="/js/ArtJS/ArtJS.js"></script>
+    <script src="/js/ArtJS/plug-in-unit.js"></script>
+    <script src="/js/init.js"></script>
+    <script src="/js/ArtJS/lib/angular.min.js"></script>
+    <script src="/module/mod-header-full.js"></script>
+    <script src="/module/mod-user-head.js"></script>
+    <script src="/js/user/headPortrait.js"></script>
+    <script src="/js/user/shop.js"></script>
+</body>
+</html>

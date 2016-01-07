@@ -1,0 +1,79 @@
+<!--start-->
+<div class="copy-fist copy-all">
+    <div class="colse-box">
+        <font>版权保护</font>
+        <a class="" href="javascript:;" id="colse"><i class="iconfont icon-close-b"></i></a>
+    </div>
+    <div class="c-txt">
+        我们正在核实是否有类似作品
+    </div>
+</div>
+<!--成功-->
+<div class="copy-two copy-all">
+    <div class="colse-box">
+        <font>版权保护</font>
+        <a class="colse" href="javascript:;" id="colse"><i class="iconfont icon-close-b"></i></a>
+    </div>
+    <h2><font>您申请版权保护的图片是您的原创作品</font><br>
+        <font>现在起您可以享受版权保护</font></h2>
+    <div class="c-two-img">
+        <span class="ib-box">
+            <img ng-bind="copyright" id="copy-img">
+        </span>
+    </div>
+    <h2 class="title">
+        您还剩余2222
+    </h2>
+    <div class="copy-bnt">
+        <a href="javascript:;" ng-click="copySure()">
+            确定
+        </a>
+    </div>
+</div>
+<!--失败-->
+<div class="copy-three copy-all">
+    <div class="colse-box">
+        <font>版权保护</font>
+        <a class="" href="javascript:;" id="colse"><i class="iconfont icon-close-b"></i></a>
+    </div>
+    <h2>请提供能证明您是原作者的信息</h2>
+    <div class="copy-three-ed">
+        <!--证明证明信息-->
+        <div class="zhm-xinxi">
+            <div class="lab">证明信息</div>
+            <div class="text">
+                <textarea id="textarea" maxlength="300" ng-model="title" ng-keydown="fontLength($event)" ng-keyup="fontLength($event)"></textarea>
+                <span style="{{title.length>=300?'color:#f00':''}}">
+					<font class="ng-binding" id="copy-on-a"></font>/<font id="copy-on-b"></font>
+				</span>
+            </div>
+        </div>
+        <div class="zhm-img">
+            <div class="lab">证明图片</div>
+            <div class="cop-img">
+                <ul id="ul-up-file">
+                    <li>
+                        <div id="up-file">
+
+                        </div>
+                        <div id="up-file-div" title="证明图片" upfileimg>
+                            <label for="fileDemo" class="iconfont icon-add">
+                                <input type="file" multiple="multiple" mark="3" onchange="handleFiles(this.files)" name="fileDemo" id="fileDemo" maxlength="3" class="fileDemo" accept="image/jpeg,image/gif,image/png"/>
+                            </label>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="copy-bnt">
+        <a href="javascript:;" class="cancel">
+            取消
+        </a>
+        <a href="javascript:;" ng-click="proofSubt()">
+            确定
+        </a>
+    </div>
+</div>
+<!--遮罩层-->
+<div class="copy-out"></div>

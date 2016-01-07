@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+	<title></title>
+</head>
+<body>
+<div ng-app="app" ng-controller="parentCtr">
+    <div ng-controller="childCtr1">name :
+        <input ng-model="name" type="text" ng-change="change(name);" />
+    </div>
+    <div ng-controller="childCtr2">Ctr1 name:
+        <input ng-model="ctr1Name" />
+    </div>
+</div>
+
+<div ng-controller="Sandcrawler">
+    <p>Location: </p>
+    <button ng-click="move('Mos Eisley South')">Move</button>
+    <div ng-controller="Droid">
+        <p>Location: </p>
+        <button ng-click="sell('Owen Farm')">Sell</button>
+    </div>
+</div>
+
+    <div ng-controller="MainCtrl">
+	     <input type="text" ng-model="test" />
+	     <div ng-click="change()">click me</div>
+	</div>
+	<div ng-controller="sideCtrl">
+	    <div ng-click="add()">my name </div>
+	</div>
+
+</body>
+
+<script src="/js/config.js"></script>
+<script src="/js/ArtJS/lib/jquery-2.1.4.min.js"></script>
+<script src="/js/ArtJS/lib/angular.min.js"></script>
+
+<script type="text/javascript">
+	var rooetScop = angular.module('myApp', []);
+		/*rooetScop.controller("parentCtr",function ($scope) {
+		    $scope.$on("Ctr1NameChange",
+		    function (event, msg) {
+		        console.log("parent", msg);
+		        $scope.$broadcast("Ctr1NameChangeFromParrent", msg);
+		    });
+		}).controller("childCtr1", function ($scope) {
+		    $scope.change = function (name) {
+		        console.log("childCtr1", name);
+		        $scope.$emit("Ctr1NameChange", name);
+		    };
+		}).controller("childCtr2", function ($scope) {
+		    $scope.$on("Ctr1NameChangeFromParrent",
+
+		    function (event, msg) {
+		        console.log("childCtr2", msg);
+		        $scope.ctr1Name = msg;
+		    });
+		}).controller("Sandcrawler", function ($scope) {
+		    $scope.location = "Mos Eisley North";
+		    $scope.obj = {location:"Mos Eisley North"};
+		    $scope.move = function(newLocation) {
+		        $scope.location = newLocation;
+		        console.log($scope.location);
+		    }
+		}).controller("Droid", function ($scope) {
+		    $scope.sell = function(newLocation) {
+		    	console.log("aaaaa");
+		        $scope.location = newLocation;
+		    }
+		}).factory('instance', function(){
+		    return {};
+		}).controller('MainCtrl', function($scope, instance) {
+		  $scope.change = function() {
+		       instance.name = $scope.test;
+		  };
+		}).controller('sideCtrl', function($scope, instance) {
+		    $scope.add = function() {
+		        $scope.name = instance.name;
+		    };
+		});*/
+      //service共享数据
+      //因为在angularjs中service是singleton的，所以我们可以定义一个service，该service有两个接口方法；getter和setter，分别用来进行设定和取得值
+</script>
+</html>

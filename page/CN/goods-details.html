@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html ng-app="goodsDetails">
+	<head>
+		<meta charset="utf-8">
+		<title>商品详情</title>
+		<link rel="stylesheet" href="/font/iconfont.css">
+		<link rel="stylesheet" href="/css/header.css">
+		<link rel="stylesheet" href="/css/goods-details.css">
+	</head>
+<body>
+
+<!-- container -->
+<div class="e-ripple goods-details" ng-controller="goodsDetailsCtr">
+	<div class="d-top">
+		<!-- 预览图 -->
+		<div class="d-preview">
+			<div class="img img-loading">
+				<i style="background-image: url({{imgUrl}}{{goodsImg.uri}}{{qn320}});"></i>
+				<i ng-show="goodsImg.backImguri" style="background-image: url({{imgUrl}}{{goodsImg.backImguri}}{{qn320}});"></i>
+			</div>
+		</div>
+		<!-- 详细信息 -->
+		<div class="d-info" ng-show="detail">
+			<p class="d-block price"><span ng-bind="detail.currencySymbol"></span> <span ng-bind="detail.sellPrice"></span></p>
+			<p class="color">
+				<a class="iconfont icon-check{{item.id == goodsIds? ' s-active': ''}}" ng-repeat="item in detail.threeCategoryInfo" style="background-color: {{item.colorTemplet}};" ng-click="selectColor(item, item.id);"></a>
+			</p>
+			<p class="d-block type">
+				<a class="{{(item.categoryId == colorItem.parentCategoryId || item.id == typeItem.id)? 's-active': ''}}" ng-repeat="item in (detail.ifHasWidthHeight? sizeDetail.propertyInfos: sizeDetail.fourCategoryInfo)" ng-click="selectType(item, item.categoryId);" ng-bind="item.categoryName"></a>
+			</p>
+			<p class="d-block size" ng-show="detail.ifHasWidthHeight">
+				<a class="{{item.id == sizeItem.id? 's-active': ''}}" ng-repeat="item in (detail.ifHasWidthHeight? sizeDetail.fourCategoryInfo: [])" ng-click="selectSize(item, item.id);" ng-bind="item.categoryName"></a>
+			</p>
+			<div class="d-block amount">
+				<div class="number">
+					<input class="a-number" maxlength="3" value="1" ng-model="goodsAmount" ng-change="amountChange(0);">
+					<div class=" btn-box">
+						<a class="btn-up" ng-click="amountChange(1);"><i class="iconfont icon-angleup"></i></a>
+						<a class="btn-down" ng-click="amountChange(-1);"><i class="iconfont icon-angledown"></i></a>
+					</div>
+				</div>
+			</div>
+			<div class="d-block btn-cart">
+				<b class="price"><span ng-bind="detail.currencySymbol"></span> <span ng-bind="(detail.ifHasWidthHeight? sizeItem.sellPrice: typeItem.sellPrice) * goodsAmount">0</span></b>
+				<a class="e-btn btn-blue" ng-bind="LANG.BUTTON.CARTADD" ng-click="addCart($event);"></a>
+			</div>
+		</div>
+		<a class="iconfont icon-report"></a>
+	</div>
+	<div class="d-center">
+		<!-- 标题 -->
+		<p class="title">
+			<span ng-bind="detail.goodsName"></span>
+			<i class="t-shadow"></i>
+		</p>
+		<!-- 用户名 -->
+		<div class="user">
+			<div class="user-li">
+				<a class="user-icon"><i style="background-image: url({{imgUrl}}{{detail.ownerPicture}}{{qn40}});"></i></a>
+				<b ng-bind="detail.ownerName"></b>
+			</div>
+		</div>
+		<!-- 描述 -->
+		<div class="summary" ng-show="detail.description && detail.description">
+			<p class="txt" ng-bind="detail.description"></p>
+		</div>
+		<!-- 相关商品 -->
+		<div class="relevance-goods">
+			<p class="relevance">
+				<span ng-bind="LANG.TEXT.T061"></span>
+				<i class="t-shadow"></i>
+			</p>
+			<div class="goods a-imageload">
+				<a class="img-loading" ng-repeat="item in detail.suggestGoods" ng-click="selectGoods(item.id);"><img data-src="{{imgUrl}}{{item.uri}}{{qn270}}"></a>
+			</div>
+		</div>
+	</div>
+	<!-- <div class="dialog dialog-report{{reportStatus? ' show': ''}}">
+		<a class="ico-close ico-close-32"><i></i></a>
+		<h2 class="d-title">为什么举报这个艺术品？</h2>
+		<div class="report-list">
+			<a class="s-active"><i class="iconfont icon-check"></i>裸露或色情</a>
+			<a><i class="iconfont icon-check"></i>攻击或歧视</a>
+			<a><i class="iconfont icon-check"></i>暴力画面</a>
+		</div>
+		<div class="btn-box">
+			<a class="e-ripple e-btn btn-blue" ng-bind="LANG.BUTTON.SUBMIT"></a>
+		</div>
+	</div> -->
+	<!-- <div class="dialog dialog-share{{reportStatus? ' show': ''}}">
+		<a class="ico-close ico-close-32"><i></i></a>
+		<div class="img img-loading"><i style="background-image: url({{imgUrl}}{{goodsImg.uri}}{{qn320}});"></i></div>
+	</div> -->
+	<div class="dialog dialog-buy{{dialogBuyStatus? ' show': ' hide'}}">
+		<a class="ico-close ico-close-32" ng-click="dialogBuyStatus=false"><i></i></a>
+		<h2 class="d-title" ng-bind="detail.goodsName"></h2>
+		<div class="d-content">
+			<dl class="size" ng-show="detail.ifHasWidthHeight">
+				<dt>
+					<b>{{LANG.TEXT.T040}}</b>
+					<b>{{LANG.TEXT.T041}} (cm)</b>
+					<b>{{LANG.TEXT.T042}} (cm)</b>
+				</dt>
+				<dd ng-repeat="item in (detail.ifHasWidthHeight? sizeDetail.fourCategoryInfo: [])">
+					<div><a>{{item.categoryName}}</a></div>
+					<div>{{item.width}}</div>
+					<div>{{item.hight}}</div>
+				</dd>
+			</dl>
+		</div>
+	</div>
+</div>
+
+
+<!-- JS -->
+<script src="/js/config.js"></script>
+<script src="/js/ArtJS/lib/jquery-2.1.4.min.js"></script>
+<script src="/js/ArtJS/ArtJS.js"></script>
+<script src="/js/init.js"></script>
+<script src="/js/ArtJS/lib/angular.min.js"></script>
+<script src="/js/goods-details.js"></script>
+
+</body>
+</html>

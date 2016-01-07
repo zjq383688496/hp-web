@@ -1,0 +1,155 @@
+@charset "utf-8";
+
+
+// 引入全局方法
+@import "../global.less";
+
+// 引入 tag 样式
+@import "../module/user-header.less";
+
+@ucolor:#96a0aa;
+.art-box{
+	li{
+		height: 340px;
+		.fl;
+		.mt(0);
+		.ml(15);
+		.mr(15);
+		.mb(20);
+		.art-img{
+			.oh();
+			.posr();
+			left: 0;
+			top:0;
+			.wh(270px; 270px);
+			.tran(all ease .3s);
+			.br(2);
+			.art-span{
+				.wh(270px; 270px);
+				.db;
+				.lh(270);
+				.tc;
+				img{
+					vertical-align:middle;
+					.di();
+					.scale(1);
+				}
+				img:hover{
+					.scale(1.1);
+				}
+			}
+			.art-span:after{
+				background: red;
+				.posa();
+				left:0;
+				top:0;
+			}
+			.push-delete{
+				background:@sd-gray7;
+				.posa();
+				top:0;
+				left:0;
+				.wh(100%; 62px);
+				visibility: hidden;
+				.tran(all ease .5s);
+				opacity: 0;
+				span{
+					.db;
+					.fl;
+					.font-s(12px);
+					.w(80px);
+					.tc;
+					.lh(62px);
+					.ml(5);
+					.mr(5);
+					a{
+						color: @grayF;
+					}
+				}
+			}
+		}
+		.art-img:hover{
+			box-shadow: 0 8px 20px rgba(0,0,0,.2);
+			background:0;
+			.push-delete{
+				visibility: visible;
+				opacity: 1;
+			}
+		}
+		.text{
+			.w(250);
+			.tc();
+			.p(10px);
+			h2{
+				.font-s(14);
+				font-weight:normal;
+				.oh();
+				text-overflow: ellipsis;
+    			white-space: nowrap;
+    			span{
+				    height:20px;
+				    .db;
+				    .lh(20);
+				    a{
+				    	color:@gray9;
+				    }
+				    b{
+				    	.wh(20;20);
+				    	.oh;
+				    	.mr(10);
+				    	display:inline-block;
+				    	vertical-align: middle;
+				    	img{
+				    		.wh(20;20);
+				    		.br(100%);
+				    	}
+				    }
+    			}
+			}
+		}
+		.light-price {
+			.wh(100%;24px);
+			.lh(24);
+			.font-s(14);
+			span{
+				.w(50%);
+				.fl;
+				.db;
+				.lh(24);
+				color:@gray6;
+				.tc;
+				b{
+					color:#ffde66;
+				}
+			}
+		}
+	}
+}
+//like-nav
+.like-nav{
+	.wh(300; 36);
+	.ma;
+	.mb(42);
+	li{
+		.fl;
+		.font-s(14);
+		.ml(30);
+		.mr(30);
+		transition: border .5s;
+		-moz-transition: border .5s; /* Firefox 4 */
+		-webkit-transition: border .5s; /* Safari 和 Chrome */
+		-o-transition: border .5s;
+		a{
+			color: @gray6;
+			.db;
+			.wh(84;32);
+			.tc;
+			.oh;
+    		z-index: 10;
+		}
+	}
+	li.active,
+	li:hover{
+		border-bottom: 2px solid @gray0;
+	}
+}

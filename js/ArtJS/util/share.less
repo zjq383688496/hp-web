@@ -1,0 +1,56 @@
+﻿//
+// Share
+// --------------------------------------------------
+
+
+// 导入全局变量
+@import "../../../less/other/variables.less";
+
+// 导入混合宏
+@import "../../../less/mixins/mixins.less";
+
+.util-share {
+	.posa;
+	z-index: 10;
+}
+.util-share-list {
+	a {
+		.db;
+		.squ(40);
+		.lh(40);
+		.mt(4);
+		.tc;
+		color: @white;
+		.br(0 4px 4px 0);
+		&:nth-child(1) {
+			.mt(0);
+		}
+		i {
+			.fz(20);
+			.fw(100);
+		}
+	}
+	.util-share-icon-wechat {
+		.bc(@wechat-32);
+	}
+	.util-share-icon-qq {
+		.bc(@qq-32);
+	}
+	.util-share-icon-sina-weibo {
+		.bc(@sina-32);
+	}
+	.util-share-icon-facebook {
+		.bc(@facebook-32);
+	}
+	.util-share-icon-twitter {
+		.bc(@twitter-32);
+	}
+	.util-share-icon-google {
+		.bc(@google-32);
+	}
+}
+.util-share-left {
+	left: 0;
+	top: 50%;
+	.tranY(-50%);
+}

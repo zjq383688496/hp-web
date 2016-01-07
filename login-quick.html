@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html ng-app="loginQuick">
+<head>
+	<meta charset="utf-8">
+	<title>快速登录</title>
+	<meta name="keywords" content="Arts">
+	<meta name="description" content="art">
+	<link rel="stylesheet" type="text/css" href="/font/iconfont.css">
+	<link rel="stylesheet" href="/css/header.css">
+	<link rel="stylesheet" href="/css/login-quick.css">
+</head>
+
+<body ng-controller="loginQuickCtr">
+<div class="quick-login-box">
+	<div class="logo"></div>
+
+	<!-- 第三方登录 -->
+	<div id="slidesBox" class="slides-box hide">
+		<div class="slides">
+			<ul class="slides_container">
+				<li>
+					<div>
+						<a id="weixin" class="iconfont icon-wechat-80" onclick="LOGIN.wechat.signup();"></a>
+						<a id="QQ" class="iconfont icon-qq-80" onclick="LOGIN.QQ.signup();"></a>
+						<a id="sina" class="iconfont icon-sina-80" onclick="LOGIN.sina.signup();"></a>
+					</div>
+					<div>
+						<a id="facebook" class="iconfont icon-facebook-80" onclick="LOGIN.facebook.signup();"></a>
+						<span id="google_login" data-gapiattached="true" onclick="LOGIN.google.signup();"><a class="iconfont icon-google-80"></a></span>
+						<!-- <a id="twitter" class="iconfont icon-twitter-80"></a> -->
+					</div>
+				</li>
+			</ul>
+			<a id="prev" class="iconfont prev icon-arrow-left" data-dir="-1"></a>
+			<a id="next" class="iconfont next icon-arrow-right" data-dir="1"></a>
+			<div class="slides_dot"></div>
+		</div>
+	</div>
+
+	<!-- 按钮 -->
+	<div class="btn-box">
+		<a id="btnLogin" class="dialog-open" data-dialog="#localLogin">登 录</a>
+		<a id="btnSign" class="dialog-open" data-dialog="#localRegister">注 册</a>
+	</div>
+
+	<!-- 本站登录 -->
+	<div id="localLogin" class="local-login">
+		<div class="title">快 速 登 录</div>
+		<div class="input-box">
+			<i class="iconfont icon-person"></i>
+			<input type="text" id="usernameLogin" class="ipt" placeholder="账号">
+		</div>
+		<div class="input-box">
+			<i class="iconfont icon-lock"></i>
+			<input type="password" id="passwordLogin" class="ipt" placeholder="密码 6-16字符">
+		</div>
+		<div class="remember-box">
+			<label id="labt" for="rememberMe">
+				<input type="checkbox" id="rememberMe" name="check" checked>
+				记住密码
+			</label>
+			<a class="forget-passwd" target="_blank" href="/user/forgetPasswd.html">忘记密码</a>
+		</div>
+		<a id="btnLoginLocal" class="btn-login-local" onclick="LOGIN.submit.login();">登 录</a>
+		<a class="dialog-close iconfont icon-minus"></a>
+	</div>
+
+	<!-- 本站注册 -->
+	<div id="localRegister" class="local-register">
+		<div class="title">快 速 注 册</div>
+		<div class="input-box">
+			<i class="iconfont icon-person"></i>
+			<input type="text" id="usernameReg" class="ipt" placeholder="账号">
+		</div>
+		<div class="input-box">
+			<i class="iconfont icon-mail"></i>
+			<input type="text" id="usermailReg" class="ipt" placeholder="邮箱">
+		</div>
+		<div class="input-box">
+			<i class="iconfont icon-lock"></i>
+			<input type="password" id="passwordReg" class="ipt" placeholder="密码 6-16字符">
+		</div>
+		<a id="btnRegisterLocal" class="btn-register-local" onclick="LOGIN.submit.register();">注 册</a>
+		<a class="dialog-close iconfont icon-minus"></a>
+	</div>
+
+	<!-- dialog mask -->
+	<div class="dialog-mask dialog-close"></div>
+
+	<!-- iframe close -->
+	<a class="iframe-close iconfont icon-close-b" onclick="parent.ArtJS.util.dialog.close();"></a>
+
+</div>
+
+<script src="/js/config.js"></script>
+<script src="/js/ArtJS/lib/jquery-2.1.4.min.js"></script>
+<script src="/js/ArtJS/ArtJS.js"></script>
+<!--<script src="/js/ArtJS/lib/angular.min.js"></script>-->
+<script src="/js/login.js"></script>
+
+</body>
+</html>

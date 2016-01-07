@@ -1,0 +1,53 @@
+#ui-calendar { font-size:12px; font-family:Arial; overflow:hidden; background-color:#fff; border:solid 1px #ccc; box-shadow:3px 4px 5px #ccc; margin:0; padding:0; position:absolute; z-index:10001; }
+/* date-months */
+#ui-calendar .date-months { overflow:hidden; clear:both; *zoom:1; }
+#ui-calendar .date-month { float:left; overflow:hidden; width:196px; padding:0 0 10px; }
+#ui-calendar .date-title { background:#eee; height:30px; line-height:30px; text-align:center; color:#000; font-size:12px; font-weight:bold; margin-bottom:5px; }
+#ui-calendar .date-title span { margin:0 2px; cursor:pointer; }
+#ui-calendar .date-title span:hover { background-color:#fff; }
+#ui-calendar .date-weeks { height:24px; margin:0 10px; padding-left:1px; width:175px; }
+#ui-calendar .date-weeks label { display:block; float:left; width:25px; height:25px; font-weight:bold; color:#666; font-size:12px; line-height:24px; text-align:center; }
+#ui-calendar .date-weeks label.week0,
+#ui-calendar .date-weeks label.week6 { color:#f90; }
+#ui-calendar .date-items { margin:0 10px; overflow:hidden; border-left:solid 1px #ddd; border-top:solid 1px #ddd; width:175px; }
+#ui-calendar .date-items span,
+#ui-calendar .date-items a { display:block; float:left; width:24px; height:24px; font-weight:bold; color:#000; font-size:12px; line-height:24px; text-align:center; border-bottom:solid 1px #ddd; border-right:solid 1px #ddd; }
+#ui-calendar .date-items span { color:#ccc; font-weight:normal; }
+#ui-calendar .date-items a { text-decoration:none; cursor:pointer; }
+#ui-calendar .date-items a:hover { background:#999; color:#fff; }
+#ui-calendar .date-items a.today { background:#ffc; color:#f00; }
+#ui-calendar .date-items a.current { background:#999; color:#fff; }
+/* date-footer */
+#ui-calendar .date-footer { display:block; height:22px; padding:0 10px 10px; position:relative; }
+#ui-calendar .date-footer .date-time { font-family:verdana; display:block; text-align:center; }
+#ui-calendar .date-footer .date-time input { width:20px; border:solid 1px #ccc; background-color:#ffe; height:20px; text-align:center; font-size:12px; vertical-align:middle; }
+#ui-calendar .date-footer .date-today { position:absolute; left:10px; top:0; width:35px; height:20px; line-height:20px; display:block; cursor:pointer; text-decoration:none; color:#333; text-align:center; }
+#ui-calendar .date-footer a.date-clear { position:absolute; right:10px; top:0; display:block; line-height:22px; text-decoration:underline; color:#999; cursor:pointer; }
+/* date-switch */
+#ui-calendar .date-switch {}
+#ui-calendar .date-switch a { position:absolute; top:4px; font-family:verdana; display:block; width:20px; height:20px; line-height:20px; font-size:20px; text-align:center; overflow:hidden; color:#666; text-decoration:none; cursor:pointer; border-radius:2px; }
+#ui-calendar .date-switch a.lastmonth { left:5px; }
+#ui-calendar .date-switch a.nextmonth { right:5px; }
+#ui-calendar .date-switch ul { display:none; position:absolute; top:30px; left:0; right:0; bottom:0; background-color:#fff; background-color:rgba(255,255,255,0.9); *background-color:#fff; padding:5px; _border-bottom:solid 1px #ddd; }
+#ui-calendar .date-switch li { float:left; width:80px; height:20px; line-height:20px; background-color:#eee; text-align:center; border:solid 1px #ddd; margin:5px; cursor:pointer; }
+/* date-button */
+#ui-calendar .disabled { filter:alpha(opacity=30); -moz-opacity:0.3; opacity:0.3; }
+#ui-calendar .date-button {
+	border: solid 1px #999;
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#fafafa), to(#d0d0d0));
+	background-image: -o-linear-gradient(top, #fafafa, #d0d0d0);
+	background-image: -moz-linear-gradient(top, #fafafa, #d0d0d0);
+	background-image: -ms-linear-gradient(top, #fafafa, #d0d0d0);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#fafafa', EndColorStr='#d0d0d0');
+	-ms-filter-: progid:DXImageTransform.Microsoft.gradient(startColorStr='#fafafa', EndColorStr='#d0d0d0');
+	background-color: #ddd;
+}
+#ui-calendar .date-button:active {
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#c0c0c0), to(#fafafa));
+	background-image: -o-linear-gradient(top, #c0c0c0, #fafafa);
+	background-image: -moz-linear-gradient(top, #c0c0c0, #fafafa);
+	background-image: -ms-linear-gradient(top, #c0c0c0, #fafafa);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#c0c0c0', EndColorStr='#fafafa');
+	-ms-filter-: progid:DXImageTransform.Microsoft.gradient(startColorStr='#c0c0c0', EndColorStr='#fafafa');
+	background-color: #fafafa;
+}

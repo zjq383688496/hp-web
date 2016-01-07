@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html ng-app="shop">
+	<head>
+		<meta charset="utf-8">
+		<title>艺术品</title>
+		<link rel="stylesheet" href="/font/iconfont.css">
+		<link rel="stylesheet" href="/css/header.css">
+		<link rel="stylesheet" href="/css/home.css">
+	</head>
+<body>
+
+<div modheaderfull></div>
+
+<div modhometag></div>
+
+<!-- container -->
+<div class="container" ng-controller="shopCtr">
+	<ul class="art-box a-imageload">
+		<li data-index="{{$index}}" ng-repeat="item in pageItems">
+			<a class="art-img img-loading e-ripple" ng-click="goodsInfo(item.id);"><img data-src="{{imgUrl}}{{item.uri}}{{qnProduct}}"></a>
+			<div class="art-info">
+				<p class="art-title" title="{{item.title}}" ng-bind="item.title"></p>
+				<a class="art-user" data-user="{{item.memberName}}"><b class="img-loading"><img data-src="{{imgUrl}}{{item.memberImg}}{{qnIcon}}"></b></a>
+				<p class="art-ctr">
+					<span><a class="iconfont icon-icon{{item.light == true? ' art-light': ''}}" ng-click="artsLike(this);"></a><i ng-bind="item.collectionNumber"></i></span>
+					<span>{{item.currencySymbol}}{{item.sellPrice}}</span>
+				</p>
+			</div>
+		</li>
+	</ul>
+	<div class="{{loading}}"></div>
+</div>
+
+<!-- JS -->
+<script src="/js/config.js"></script>
+<script src="/js/ArtJS/lib/jquery-2.1.4.min.js"></script>
+<script src="/js/ArtJS/ArtJS.js"></script>
+<script src="/js/init.js"></script>
+<script src="/js/ArtJS/lib/angular.min.js"></script>
+<script src="/module/mod-header-full.js"></script>
+<script src="/module/mod-home-tag.js"></script>
+<script src="/js/shop.js"></script>
+
+</body>
+</html>

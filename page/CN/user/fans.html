@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html ng-app="fans">
+    <head lang="en">
+        <meta charset="UTF-8">
+        <title>fans</title>
+            <link rel="stylesheet" href="/font/iconfont.css">
+            <link rel="stylesheet" href="/css/header.css">
+            <link rel="stylesheet" href="/css/user/fans.css">
+    </head>
+<body>
+    <div modheaderfull></div>
+    <div moduserhead></div>
+    <!--list-->
+    <div class="container media" ng-controller="fansCtr">
+        <div class="fans-warp" ng-repeat="fans in fansItems">
+            <div class="icon-bnt">
+                <div class="{{fans.isFollowed?'bnt active':'bnt'}}">
+                    <i class="iconfont icon-check"></i>
+                    <a href="javascript:;" artistsId="{{fans.artistsId}}" code="{{fans.isFollowed?'1':'0'}}" class="" ng-click="ngFollow($event)" ng-bind='fans.isFollowed==true?"已关注":"关注"'></a>
+                </div>
+                <div class="icon">
+                    <a href="/page/CN/user/gallery.html?id={{fans.uId}}">
+                        <img src="{{imgUrl}}{{fans.artistsHead}}{{qnIcon}}">
+                    </a>
+                </div>
+                <div class="name">
+                    <a href="/page/CN/user/gallery.html?id={{fans.uId}}" ng-bind="fans.artistsName"></a>
+                    <span>
+                        <font ng-bind="fans.artworkCount"></font>圈子·<font ng-bind="fans.fansCount"></font>粉丝
+                    </span>
+                </div>
+            </div>
+            <div class="fans-list">
+                <ul class="art-box a-imageload">
+                    <li >
+                        <span class="art-span img-loading" data-index="{{$index}}" ng-repeat="image in fans.artsUrl">
+                            <img data-src="{{imgUrl}}{{image}}{{qnProduct}}">
+                        </span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- JS -->
+    <script src="/js/config.js"></script>
+    <script src="/js/ArtJS/lib/jquery-2.1.4.min.js"></script>
+    <script src="/js/ArtJS/ArtJS.js"></script>
+    <script src="/js/ArtJS/plug-in-unit.js"></script>
+    <script src="/js/init.js"></script>
+    <script src="/js/ArtJS/lib/angular.min.js"></script>
+    <script src="/module/mod-header-full.js"></script>
+    <script src="/module/mod-user-head.js"></script>
+    <script src="/js/user/headPortrait.js"></script>
+    <script src="/js/user/fans.js"></script>
+</body>
+</html>

@@ -1,0 +1,168 @@
+@charset "utf-8";
+
+// 引入全局方法
+@import "../global.less";
+
+.mod-home-tag {
+	.clearfix;
+	.wh(100%, 46);
+	display: none;
+	.home-tag {
+		.posf;
+		z-index: 1;
+		.w(100%);
+		.bc(@grayF);
+	}
+	dl {
+		.fz(12);
+		dt {
+			.posr;
+		}
+		dd {
+			.tran;
+			.scale(.9);
+			opacity: 0;
+			.hide;
+			.tranO(center 0);
+			.bc(@white);
+		}
+		&:hover {
+			dd {
+				.scale(1);
+				opacity: 1;
+				.show;
+			}
+		}
+		a {
+			.db;
+			cursor: pointer;
+		}
+	}
+}
+
+// 商品分类
+.sort-product {
+	.posr;
+	.fl;
+	.tc;
+	dt {
+		.posr;
+		.wh(110, 46);
+		.lh(34);
+	}
+	s {
+		.posa;
+		z-index: 1;
+		left: 50%;
+		bottom: -1px;
+		.ml(-9);
+		.whb(18, 9);
+		.hide;
+		&:before,
+		&:after {
+			content: '';
+			.posa;
+			.db;
+			.squ(0);
+		}
+		&:after {
+			top: 1px;
+			left: 1px;
+			.borl(8px solid @tran);
+			.borr(8px solid @tran);
+			.borb(8px solid @grayF);
+		}
+		&:before {
+			.borl(9px solid @tran);
+			.borr(9px solid @tran);
+			.borb(9px solid @grayD);
+		}
+	}
+	dd {
+		.posa;
+		left: -28px;
+		.w(164);
+		.mt(-1);
+		.bor(1px solid @grayE);
+		.box-s(0 4px 8px @sd-gray1);
+		.br(8px);
+	}
+	a {
+		.th(40);
+		&:hover,
+		&.s-active {
+			span {
+				.borb(2px solid @gray3);
+			}
+		}
+	}
+	span {
+		.p(0 5px 2px);
+		.borb(2px solid @tran);
+	}
+	&:hover {
+		s {
+			.show;
+		}
+	}
+}
+
+// 兴趣
+.sort-interest {
+	.fr;
+	.wh(120, 34);
+	dt {
+		.th(32);
+		.bor(1px solid @grayE);
+		.br(16px);
+		text-indent: 26px;
+		.tran;
+	}
+	dd {
+		.mt(-1);
+		.bor(1px solid @grayE);
+		.bort;
+		.br(0 0 16px 16px);
+		.oh;
+	}
+	a {
+		.th(40);
+		.mt(10);
+		.pl(10);
+		&:hover {
+			.bc(@grayE);
+		}
+	}
+	i {
+		@fz: 24;
+		.fl;
+		.whb(@fz, @fz);
+		.lh(@fz);
+		.fz(@fz);
+		vertical-align: middle;
+		.mt(3);
+	}
+	span {
+		.ml(10);
+	}
+	&:hover {
+		dt {
+			.br(16px 16px 0 0);
+		}
+		s {
+			.bort(0px solid @orange);
+			.borb(6px solid @orange);
+		}
+	}
+	s {
+		.posa;
+		top: 12px;
+		left: 12px;
+		.squ(0);
+		.borl(6px solid @tran);
+		.borr(6px solid @tran);
+		.bort(6px solid @orange);
+		.borb(0px solid @orange);
+		.tran;
+	}
+}

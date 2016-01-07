@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>ArtBulb</title>
+<meta charset="UTF-8">
+<meta name="keywords" content="Artbulb">
+<meta name="description" content="Artbulb">
+<script src="js/ArtJS/lib/jquery-2.1.4.min.js"></script>
+<script src="js/ArtJS/ArtJS.js"></script>
+<script type="text/javascript" src="http://qzonestyle.gtimg.cn/qzone/openapi/qc_loader.js" data-appid="101218992" data-redirecturi="http://www.artbulb.com/userLogin/qqLogin.html" charset="utf-8" ></script>
+<script>
+if (QC.Login.check()) {
+	QC.api('get_user_info').success(function(s) {
+		var reqData = s.data;
+		QC.Login.getMe(function(openId, accessToken){
+			location.href = '/login-quick.html?login=QQ&loginAccount='+reqData.nickname+'&openId='+openId+'&imageUrl='+reqData.figureurl_2;
+		});
+	}).error(function(f) {	// 失败回调
+		location.href = '/login-quick.html?login=QQ';
+	});
+}
+</script>
+</head>
+
+<body>
+</body>
+</html>

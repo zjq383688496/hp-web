@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html ng-app="gallery">
+    <head lang="en">
+        <meta charset="UTF-8">
+        <title>gallery</title>
+            <link rel="stylesheet" href="/font/iconfont.css">
+            <link rel="stylesheet" href="/css/header.css">
+            <link rel="stylesheet" href="/css/user/gallery.css">
+    </head>
+<body ng-controller="galleryCtr">
+    <div modheaderfull></div>
+    <div moduserhead></div>
+    <div class="container media">
+        <ul class="art-box a-imageload" style="display:none">
+            <li class="update fileInput" id="btn-uploader" style="display:none" ng-if='cooid==id'>
+                <span id="pickfiles" class="iconfont icon-add"></span>
+                <i>上传作品</i>
+                <div id = "_uploadFormDiv">
+                    <form method="post" id="uploadSaveInfo" action="/goodsSite/artsOperate/uploadArtwork"></form>
+                </div>
+            </li>
+            <li data-index="{{$index}}" ng-repeat="gallery in galleryItems" class="gallery">
+                <div class="art-img">
+                    <span ng-click="openGallery(gallery)" class="art-span img-loading">
+                        <img data-src="{{imgUrl}}{{gallery.uri}}{{qnProduct}}">
+                    </span>
+                    <div class="push-delete" id="copy-box" onclick="event.stopPropagation()" ng-if='cooid==id'>
+                        <span>
+                            <a target="_blank" href="/goods-release.html?artId={{gallery.esId}}">发布商品</a>
+                        </span>
+                        <span>
+                            <a href="javascript:;" ng-click="artCopyright(gallery.id,gallery.uri,gallery.copyrightStatus,gallery.copyrightNumber,gallery.imageId)" class="copy">版权保护</a>
+                        </span>
+                        <span>
+                            <a class="delete_d" id="{{gallery.id}}" ng-click="delUserArts(gallery.id)" href="javascript:;">删除</a>
+                        </span>
+                    </div>
+                </div>
+                <div class="text">
+                    <h2><a ng-click="openArtDeatils('{{gallery.uri}}')" title="{{gallery.nickname}}{{artworkFrom}}" class="des"><font ng-bind="gallery.nickname"></font>的艺术品<font ng-bind="artworkFrom"></font></a></h2>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="up-img-warp" id="show_uploadImg">
+        <table width="100%" border="0">
+            <thead>
+                <tr>
+                    <th width="200">名称</th>
+                    <th width="110">大小</th>
+                    <th width="250">进度</th>
+                    <th width="106">操作</th>
+                </tr>
+            </thead>
+            <tbody id="fsUploadProgress">
+
+            </tbody>
+        </table>
+    </div>
+    <div modcopyright></div>
+    <!-- JS -->
+    <script src="/js/config.js"></script>
+    <script src="/js/ArtJS/lib/jquery-2.1.4.min.js"></script>
+    <script src="/js/ArtJS/ArtJS.js"></script>
+    <script src="/js/ArtJS/plug-in-unit.js"></script>
+    <script src="/js/init.js"></script>
+    <script src="/js/ArtJS/lib/angular.min.js"></script>
+    <script src="/module/mod-header-full.js"></script>
+    <script src="/module/mod-user-head.js"></script>
+    <script src="/js/user/headPortrait.js"></script>
+    <script src="/module/mod-user-copyright.js"></script>
+    <script src="/js/user/gallery.js"></script>
+
+    <!-- up img -->
+    <script type="text/javascript" src="/js/jquery.form.js"></script>
+    <script type="text/javascript" src="/js/plupload/moxie.js"></script>
+    <script type="text/javascript" src="/js/plupload/ui.js"></script>
+    <script type="text/javascript" src="/js/plupload/qiniu.js"></script>
+    <script type="text/javascript" src="/js/upArt.js"></script>
+</body>
+</html>

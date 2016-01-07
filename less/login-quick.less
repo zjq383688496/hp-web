@@ -1,0 +1,297 @@
+@charset "utf-8";
+
+// 引入全局方法
+@import "global.less";
+
+* {
+	.m; .p;
+}
+
+html {
+	height: 540px;
+	overflow: hidden;
+}
+
+body {
+	.yahei;
+}
+
+ul, li {
+	list-style: none
+}
+
+a, a:hover {
+	text-decoration: none;
+}
+
+input, textarea {
+	outline: none;
+}
+
+// quick-login-box
+.quick-login-box {
+	width: 490px;
+	height: 540px;
+	zoom: 1;
+	overflow: hidden;
+	a {
+		cursor: pointer;
+	}
+	.logo {
+		.squ(220px);
+		.m(40px auto 0);
+		background: url(../images/logo_new_1x.png) no-repeat;
+		background-image: -webkit-image-set( url(../images/logo_new_1x.png) 1x, url(../images/logo_new_2x.png) 2x );
+		background-image:        -image-set( url(../images/logo_new_1x.png) 1x, url(../images/logo_new_2x.png) 2x );
+	}
+}
+
+// third-login
+.slides-box {
+	.posr;
+	width: 400px;
+	height: 136px;
+	.m(60px auto 0);
+	opacity: 1;
+	.tran(all ease .3s);
+	a.prev,
+	a.next {
+		.posa;
+		top: 10px;
+		.db;
+		width: 40px;
+		height: 60px;
+		line-height: 60px;
+		.fz(28px);
+		color: @gray-arrow;
+		.tc;
+		.tran;
+		&:hover {
+			color: @gray-arrow-hover;
+		}
+	}
+	a.prev {left: 0;}
+	a.next {right: 0;}
+	ul {
+		width: 310px;
+		height: 80px;
+		.ma;
+		overflow: hidden;
+		li {
+			.posr;
+			width: 345px;
+			height: 80px;
+			overflow: hidden;
+		}
+		div {
+			.posa;
+			top: 0;
+			left: 0;
+			display: none;
+			width: 345px;
+			overflow: hidden;
+			&.current,
+			&.wait {
+				display: block;
+			}
+			&.slides-anime {
+				.tran(all ease .4s);
+			}
+		}
+		a {
+			.db;
+			.fl;
+			.squ(80px);
+			.mr(35px);
+		}
+	}
+	.slides_dot {
+		width: 100%;
+		.p(20px 0);
+		.tc;
+		a {
+			display: inline-block;
+			.p(8px);
+			&:hover i{
+				background-color: @gray-lighter;
+			}
+			&.current i{
+				background-color: @gray-arrow;
+			}
+		}
+		i {
+			.db;
+			.squ(6px);
+			.bor(2px solid @gray-arrow);
+			.br;
+			background-color: @white;
+			text-indent: -999px;
+			overflow: hidden;
+		}
+	}
+	&.hide {
+		opacity: 0;
+	}
+}
+
+// btn-box
+.btn-box {
+	width: 410px;
+	.ma;
+	.mt(20px);
+	overflow: hidden;
+	a {
+		.fl;
+		.db;
+		width: 50%;
+		height: 40px;
+		line-height: 40px;
+		.tc;
+		color: @gray-light;
+		&:hover {
+			background-color: @gray-highlight;
+		}
+	}
+}
+
+// dialog-close
+a.dialog-close {
+	.posa;
+	top: 10px;
+	right: 10px;
+	.db;
+	.squ(32px);
+	line-height: 32px;
+	.tc;
+	.fz(24px);
+	.tran;
+	color: @gray-lighter;
+	&:hover {
+		color: @gray;
+	}
+}
+
+// iframe-close
+a.iframe-close {
+	.posa;
+	top: 10px;
+	right: 10px;
+	z-index: 3;
+	.db;
+	.squ(48px);
+	line-height: 48px;
+	.tc;
+	.fz(40px);
+	.tran;
+	color: @gray-lighter;
+	&:hover {
+		color: @gray;
+	}
+}
+
+// dialog-mask
+.dialog-mask {
+	.posf;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	z-index: 1;
+	display: none;
+	.squ(100%);
+	&.show {
+		.db;
+	}
+}
+
+// input
+.input-box {
+	.posr;
+	width: 100%;
+	height: 40px;
+	.mb(15px);
+	.fz(14px);
+}
+input[type=text],
+input[type=password] {
+	width: 244px;
+	height: 18px;
+	line-height: 18px;
+	.p(10px 10px 10px 44px);
+	.bor(1px solid @input-border-login);
+	.br(2px);
+	color: @login-text;
+	.tran;
+	.fz(14px);
+	&.err {
+		.bor(1px solid @input-error);
+		.box-s(inset 0 0 10px @input-error-shadow);
+	}
+	&.sus {
+		//.bor(1px solid @input-sus);
+	}
+	&:focus {
+		.bor(1px solid @input-focus);
+		.box-s(inset 0 0 10px @input-focus-shadow);
+	}
+}
+// btn
+a.btn-login-local,
+a.btn-register-local {
+	.whb(150px; 40px);
+	line-height: 40px;
+	.ma;
+	.tc;
+	color: #fff;
+	.br(4px);
+	.bc(@btn-blue);
+}
+a.btn-login-local {.mt(20px);}
+
+.local-login,
+.local-register {
+	.posa;
+	top: 100%;
+	left: 50%;
+	width: 400px;
+	height: 270px;
+	.bs;
+	.p(0 50px);
+	background-color: @white;
+	.ml(-200px);
+	color: @login-text;
+	opacity: 0;
+	transform: translateY(0%);
+	.tran(all ease .4s);
+	.title {
+		line-height: 50px;
+		.tc;
+	}
+	i.iconfont {
+		.posa;
+		top: 10px;
+		left: 11px;
+		.fz(20px);
+		color: @color-icon;
+	}
+	&.show {
+		opacity: 1;
+		z-index: 2;
+		transform: translateY(-100%);
+	}
+}
+
+// local-login
+.local-login {
+	.remember-box {
+		.fz(14px);
+		a {
+			color: @login-text;
+		}
+	}
+	a.forget-passwd {.fr;}
+}
+
+// local-register
+.local-register {
+}

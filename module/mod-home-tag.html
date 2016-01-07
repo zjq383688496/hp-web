@@ -1,0 +1,33 @@
+<!-- mod-home-tag start -->
+<div id="modHomeTag" class="mod-home-tag" ng-controller="modHomeTagController">
+	<div id="homeTag" class="home-tag">
+		<div class="layout">
+			<!-- product -->
+			<dl ng-repeat="category in sortProduct" class="sort-product">
+				<dt>
+					<a class="{{category.active}}" data-pid="{{category.id}}" ng-click="getIndexMarket(this, 1);"><span ng-bind="category.typeName"></span></a>
+				</dt>
+				<s></s>
+				<dd>
+					<a ng-repeat="product in category.children" class="{{product.active}}" data-pid="{{product.id}}" ng-click="getIndexMarket(this, 2);"><span ng-bind="product.typeName"></span></a>
+				</dd>
+			</dl>
+
+			<!-- interest -->
+			<dl id="sortInterest" class="sort-interest">
+				<dt class="shopSx"><s></s><span ng-bind="sortInterest.typeName"></span></dt>
+				<dd>
+					<a ng-click="getIndexMarket(this, 3);">
+						<i class="iconfont icon-xq-all"></i>
+						<span>{{LANG.TEXT.T057}}</span>
+					</a>
+					<a ng-repeat="interest in sortInterest.children" data-pid="{{interest.id}}" ng-click="getIndexMarket(this, 3);">
+						<i class="iconfont icon-xq-{{interest.className}}"></i>
+						<span ng-bind="interest.typeName"></span>
+					</a>
+				</dd>
+			</dl>
+		</div>
+	</div>
+</div>
+<!-- mod-home-tag end -->

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html ng-app="follow">
+    <head lang="en">
+        <meta charset="UTF-8">
+        <title>follow</title>
+            <link rel="stylesheet" href="/font/iconfont.css">
+            <link rel="stylesheet" href="/css/header.css">
+            <link rel="stylesheet" href="/css/user/fans.css">
+    </head>
+<body>
+    <div modheaderfull></div>
+    <div moduserhead></div>
+    <!--list-->
+    <div class="container media" ng-controller="followCtr">
+        <div class="fans-warp art-box a-imageload" ng-repeat="follow in followItems" id="s">
+            <div class="icon-bnt">
+                <div class="{{follow.isFollowed?'bnt active':'bnt'}}">
+                    <i class="iconfont icon-check"></i>
+                    <span ng-if='cooid!=id' ng-bind='follow.isFollowed==true?"已关注":"关注"'></span>
+
+                    <a href="javascript:;" ng-if='cooid==id' artistsId="{{follow.artistsId}}" code="{{follow.isFollowed?'1':'0'}}" class="" ng-click="ngFollow($event)" ng-bind='follow.isFollowed==true?"已关注":"关注"'></a>
+                </div>
+                <div class="icon">
+                    <a href="/page/CN/user/gallery.html?uid={{follow.uId}}">
+                        <img src="{{imgUrl}}{{follow.artistsHead}}{{qnIcon}}">
+                    </a>
+                </div>
+                <div class="name">
+                    <a href="/page/CN/user/gallery.html?uid={{follow.uId}}" ng-bind="follow.artistsName"></a>
+                    <span>
+                        <font ng-bind="follow.artworkCount"></font>圈子·<font ng-bind="follow.fansCount"></font>粉丝
+                    </span>
+                </div>
+            </div>
+            <div class="fans-list">
+                <ul>
+                    <li >
+                        <span class="art-span img-loading" data-index="{{$index}}" ng-repeat="image in follow.artsUrl">
+                            <img data-src="{{imgUrl}}{{image}}{{qnProduct}}">
+                        </span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- JS -->
+    <script src="/js/config.js"></script>
+    <script src="/js/ArtJS/lib/jquery-2.1.4.min.js"></script>
+    <script src="/js/ArtJS/ArtJS.js"></script>
+    <script src="/js/ArtJS/plug-in-unit.js"></script>
+    <script src="/js/init.js"></script>
+    <script src="/js/ArtJS/lib/angular.min.js"></script>
+    <script src="/module/mod-header-full.js"></script>
+    <script src="/module/mod-user-head.js"></script>
+    <script src="/js/user/headPortrait.js"></script>
+    <script src="/js/user/follow.js"></script>
+</body>
+</html>

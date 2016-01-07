@@ -1,0 +1,79 @@
+<div ng-controller="userInfoController">
+	<!-- user info  -->
+    <div class="userInformation">
+        <div class="userInformation-thumb" upfileimg>
+            <span style="background-image:url({{imgUrl}}{{userinfo.imageUrl}}{{qnIcon}})" id="uplad_avater">
+            </span>
+            <input type="file" title="修改头像" name="fileDemo" class="fileDemo" accept="image/jpeg,image/gif,image/png">
+        </div>
+        <div class="userInformation-Bar">
+            <div class="pos">
+                <div class="userInformation-Bar-l" ng-if='cooid!=id'>
+                    <span style="background-image:url({{imgUrl}}{{userinfo.imageUrl}}{{qnIcon}})"></span>
+                    <i><tt ng-bind="userinfo.nikeName"></tt>
+                        <font ng-bind="userinfo.nikeName">gallery</font>
+                        专卖店
+                    </i>
+                </div>
+                <div class="userInformation-Bar-r">
+                    <a href="/page/CN/user/info.html" ng-if='cooid==id'>编辑</a>
+                    <a href="javascript:;" ng-if='cooid!=id'>关注</a>
+                    <a class="other-share" ng-if='cooid!=id'>
+                        <i class="iconfont icon-share"></i>
+                        分享
+                    </a>
+                </div>
+            </div>
+        </div>
+        <h1 class="userInformation-name" ng-bind="userinfo.nikeName"></h1>
+        <div class="userInformation-links-etc">
+            <span class="iconfont icon-global"></span>
+            <font ng-bind="userinfo.location"></font>
+        </div>
+        <div class="userInformation-introduce" ng-bind="userinfo.description">
+            
+        </div>
+    </div>
+    <!--user nav-->
+	<div class="user-nav-box">
+	    <div class="user-nav">
+	        <ul>
+	            <li>
+	                <a href="">
+	                    <font ng-bind="usernav.like"></font>
+	                    <br>
+	                    <span>喜欢</span>
+	                </a>
+	            </li>
+	            <li>
+	                <a href="/page/CN/user/fans.html">
+	                    <font ng-bind="usernav.followers"></font>
+	                    <br>
+	                    <span>粉丝</span>
+	                </a>
+	            </li>
+	            <li>
+	                <a href="/page/CN/user/follow.html">
+	                    <font ng-bind="usernav.follow"></font>
+	                    <br>
+	                    <span>关注</span>
+	                </a>
+	            </li>
+	            <li>
+	                <a href="/page/CN/user/gallery.html">
+	                    <font ng-bind="usernav.gallery"></font>
+	                    <br>
+	                    <span>专卖店</span>
+	                </a>
+	            </li>
+	            <li>
+	                <a href="">
+	                    <font ng-bind="usernav.topic"></font>
+	                    <br>
+	                    <span>圈子</span>
+	                </a>
+	            </li>
+	        </ul>
+	    </div>
+	</div>
+</div>

@@ -1,0 +1,284 @@
+@charset "utf-8";
+
+// 引入全局方法
+@import "global.less";
+
+// 引入icon, button样式
+//@import "style/icon.less";
+@import "style/button.less";
+
+// header
+.header {
+	width: 100%;
+	height: 54px;
+	.header-con {
+		.posr;
+		z-index: 1;
+		width: 100%;
+		margin: 0 auto;
+		height: 54px;
+		padding: 12px 500px 12px 200px;
+		background-color: @white;
+		.bs;
+		.tran;
+		.box-s(0 0 20px @tran);
+		&.fixed {
+			.posf;
+			top: 0;
+			left: 50%;
+			transform: translateX(-50%);
+		}
+	}
+	.logo {
+		.posa;
+		left: 40px;
+		top: 7px;
+		width: 140px;
+		height: 40px;
+		.imgr(~"/images/logo_1x.png", ~"/images/logo_2x.png");
+	}
+	.header-search {
+		.posr; top: 0; left: 0;
+		width: 100%;
+		height: 30px;
+		.bs;
+		.br(30px);
+		.input {
+			.fl; width: 100%;
+			.bs;
+			border: 1px solid @input-border;
+			height: 30px;
+			padding: 6px 10px 6px 16px;
+			font-family: 'Microsoft YaHei';
+			position: relative;
+			background-color: transparent;
+			.br(30px);
+			&.show {opacity: 1;}
+			&.hide {opacity: 0;}
+			&:focus {
+				border: 1px solid @input-border-focus;
+				box-shadow: inset 0 0 10px @input-border-focus;
+			}
+		}
+		a.btn-search {
+			.posa;
+			right: 0;
+			top: 0;
+			z-index: 3;
+			.db;
+			width: 80px;
+			.th(30);
+			.tc;
+			.fz(24);
+			color: @gray-dark;
+			cursor: pointer;
+			.tran;
+			.br(28px);
+			//background-color: @white;
+			&:hover {
+				width: 100px;
+				.bc(@gray-highlight);
+				box-shadow: -4px 0 10px rgba(0, 0, 0, .2);
+			}
+		}
+		.keywords-map {
+			.posa;
+			top: 3px;
+			left: 5px;
+			z-index: 3;
+			height: 22px;
+			line-height: 22px;
+			span {
+				.posr;
+				.fl;
+				.db;
+				.mr(5);
+				.pl(10);
+				.pr(36);
+				.br(24px);
+				.fz(16);
+				cursor: default;
+			    &:hover a {
+			    	.bc(@key-close-color);
+			    }
+			}
+			a {
+				.posa;
+			    top: 2px;
+			    right: 3px;
+			    .db;
+			    width: 20px;
+			    height: 18px;
+			    line-height: 18px;
+			    .tc;
+			    .fz(14);
+			    .br(20px);
+			    cursor: pointer;
+			    .tran(all ease .3s);
+			}
+			&.show {.db;}
+			&.hide {display: none;}
+		}
+	}
+	// header-menu
+	.header-menu {
+		position: absolute;
+		top: 12px;
+		right: 220px;
+		width: 270px;
+		height: 34px;
+		overflow: hidden;
+		.ma;
+		li {
+			.fl;
+			.m(0 16px);
+			.fz(14);
+			a {
+				width: 46px;
+				.th(30);
+				color: @gray;
+				z-index: 10;
+				.db;
+				.tc;
+				overflow: hidden;
+			}
+			&.cur,
+			&:hover {
+				border-bottom: 2px solid @dark;
+			}
+		}
+	}
+}
+// user-side
+.login-box {
+	.nav-more {
+		.posf;
+		top: 0;
+		right: 0;
+		z-index: 11;
+		.tran(all ease .3s);
+		transform: translateX(100%);
+		width: 250px;
+		height: 100%;
+		.bs;
+		.pt(30);
+		background-color: @side-bg;
+		box-shadow: 0 0 0 @tran;
+	}
+	ul {
+		.fz(14);
+		li {
+		}
+		i {
+			.fz(16); .mr(30);
+		}
+		a {
+			.pl(40);
+			.db;
+			.th(54);
+			color: @side-color;
+			/*.tran;*/
+			&:hover {
+				background-color: @side-bg-hover;
+			}
+		}
+		b {
+			.fz(20);
+			.mr(30);
+			font-weight: 100;
+		}
+	}
+	.nav-mask {
+		.posf;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		z-index: 2;
+		display: none;
+		width: 100%;
+		height: 100%;
+		background-color: @side-mask;
+	}
+	.user-info {
+		.posa;
+		top: 0;
+		right: 0;
+		height: 24px;
+		z-index: 1;
+		.p(15px 0);
+		a {
+			.mr(10);
+			line-height: 24px;
+			color: @gray-light;
+			cursor: pointer;
+			span {
+				.p(0 10px);
+				.fz(14);
+			}
+		}
+		&.fixed {
+			.posf;
+		}
+	}
+	a.btn-nav,
+	a.icon-cart {
+		.fr;
+		.db;
+		.squ(24);
+		line-height: 24px;
+		.bs;
+		.tc;
+		.fz(16);
+	}
+	.user-login {
+		.fr;
+		.db;
+		.th(24);
+		a.user-url {
+			.posr;
+			.db;
+			.fl;
+			.ellipsis();
+			max-width: 160px;
+			.pl(30);
+			.fz(14);
+			.user-icon {
+				.posa;
+				top: 0;
+				left: 0;
+				.squ(24);
+			}
+		}
+	}
+}
+.login-box.show {
+	.nav-more {
+		.box-s(0 0 50px @sd-gray5);
+		transform: translateX(0%);
+	}
+	.nav-mask {
+		.db;
+	}
+}
+.fixed-top {
+	.posf!important;
+	top: 0;
+}
+.fixed-top.header-con {
+	.box-s(0 0 20px @sd-gray2);
+}
+
+
+// layout
+.layout,
+.container {
+	.ma;
+	.clearfix;
+}
+.layout {
+	.w(@layout);
+}
+.container {
+	.w(@container);
+}
