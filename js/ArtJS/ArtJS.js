@@ -1784,13 +1784,14 @@
 			});
 			ArtJS.login.success = function() {
 				ArtJS.login.getUser(function (data) {
-					if (ArtJS.server.language === $.browser.getLanguage()) {
+					/*if (ArtJS.server.language === $.browser.getLanguage()) {
 						ArtJS.page.closeDialog();
 						ArtJS.page.header.refreshUserInfo(data);
 						ArtJS.login.callback(data);
 					} else {
 						ArtJS.page.refresh();
-					}
+					}*/
+					ArtJS.page.refresh();
 				});
 			};
 		},
@@ -2248,14 +2249,17 @@
 	ArtJS.load.add('address', {     js: st + '/util/address.js', css: st+'/util/address.css' });
 	ArtJS.load.add('lang', {        js: st + '/lang/'+$.browser.getLanguage()+'.js' });
 	ArtJS.load.add('header', {      js: st + '/util/header.js', requires: 'lang' });
+	ArtJS.load.add('svg-grop', {     js: st + '/util/svgGrop.js', requires: 'lang' });
+	ArtJS.load.add('plug-in-unit', {js: st + '/util/plug-in-unit.js', requires: 'lang' });
 	ArtJS.load.add('util.share', {  js: st + '/util/share.js', css: st+'/util/share.css', requires: 'util.qrcode' });
+	
 })(jQuery);
 
 (function($) {
 	if (!$ || !window.ArtJS) return
 	ArtJS.server = {
 		art: document.location.protocol + '//www.cmall.com/',
-		image: 'http://image.cmall.com/imgsrv/',
+		image: document.location.protocol + '//image.cmall.com/imgsrv/',
 		url: 'cmall.com',
 		language: $.browser.getLanguage(),
 		name: ''

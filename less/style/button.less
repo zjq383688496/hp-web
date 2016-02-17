@@ -63,3 +63,30 @@
 		.bc(@blue);
 	}
 }
+.btn-black {
+	.bc(@dark);
+	color: @white;
+}
+.btn-white {
+	.bc(@white);
+	color: @dark;
+	&:hover {
+		.bc(@dark);
+		color: @white;
+	}
+}
+.btn-gray {
+	.bc(@gray5);
+	color: @white;
+	&:hover {
+		.bc(@gray3);
+	}
+}
+.btn-green {
+	.bc(#3fbf70);
+	color: @white;
+}
+.btn-blue-g {
+	.bc(#6d7989);
+	color: @white;
+}

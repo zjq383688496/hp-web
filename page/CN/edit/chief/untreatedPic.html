@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html ng-app="normalEditor">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="p:domain_verify" content="eb2b9d076f41193f56c07370e5ec96ea"/>
+	<title>所有未处理数据</title>
+	<link rel="stylesheet" href="/font/iconfont.css">
+	<link rel="stylesheet" href="/css/header.css">
+	<link rel="stylesheet" href="/css/edit/normal.css">
+	<link rel="stylesheet" href="/js/ArtJS/ui/art.dialog.css">
+	<link rel="stylesheet" href="/js/ArtJS/ui/art.pager.css">
+	<link rel="stylesheet" href="/js/ArtJS/ui/slider.css">
+</head>
+<body class="edit" ng-controller="normalContoller">
+	<!-- 头部start -->
+	<div editor-header></div>
+	<!-- 头部 end -->
+	<!-- 导航start -->
+	<div class="nav container">
+		<h2 class="title">所有未处理数据</h2>
+		</div>
+	<!-- 导航end -->
+   <!-- 筛选器start -->
+	<div editor-selector></div>
+<!-- 筛选器end -->
+
+<!-- 产品列表 start -->
+	<div class="container tab-list goodList a-imageload">
+		<!-- <div class="{{loading}}"></div> -->
+
+		<div editor-goods-list></div>
+		<!-- <button class="btn" type="button">获取待审核数据</button> -->
+	</div>
+
+	<div  class="container tab-list workList hide">
+		
+		<button class="btn" type="button">获取待审核数据</button>
+
+	</div>
+
+
+	<div class="container tab-list blogList hide">
+		
+		<button class="btn" type="button">获取待审核数据</button>
+
+	</div>
+
+	<!-- <div class="pager-box">
+		<ul class="pager">
+			<li class="prev disable">&lt;前页</li>
+			<li class="active">1</li>
+			<li>2</li>
+			<li>3</li>
+			<li>4</li>
+			<li>5</li>
+			<li>6</li>
+			<li>7</li>
+			<li>8</li>
+			<li>9</li>
+			<li class="disable">...</li>
+			<li>57</li>
+			<li>58</li>
+			<li class="next">&gt;后页</li>
+		</ul>
+	</div> -->
+<!-- 产品列表 end -->
+	<script src="/js/config.js"></script>
+	<script src="/js/ArtJS/lib/jquery-2.1.4.min.js"></script>
+	<script src="/js/ArtJS/ArtJS.js"></script>
+	<script src="/js/init.js"></script>
+	<script src="/js/ArtJS/lib/angular.min.js"></script>
+	<script src="/module/editor/header.js"></script>
+	<script src="/module/editor/nav.js"></script>
+	<script src="/module/editor/selector.js"></script>
+	<script src="/module/editor/goods-list.js"></script>
+	<script src="/js/ArtJS/ui/art.dialog.js"></script>
+	<script src="/js/ArtJS/ui/art.pager.js"></script>
+	<script src="/js/ArtJS/ui/slider.js"></script>
+	<script src="/js/editor/lang.js"></script>
+	<!-- up img -->
+    <script src="/js/jquery.form.js"></script>
+    <script src="/js/plupload/moxie.js"></script>
+    <script src="/js/plupload/ui.js"></script>
+    <script src="/js/plupload/qiniu.js"></script>
+	<script src="/js/editor/editor-upload.js"></script>
+	<script src="/js/editor/chief/untreatedPic.js"></script>
+</body>
+</html>

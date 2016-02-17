@@ -1,0 +1,169 @@
+<ul ng-repeat="flow in [0,1,2,3]">
+	<li class="first" ng-repeat="derivative in editorDerivative.derivativeList track by $index" ng-if="$index%4==flow">
+			<span class="check"><input type="checkbox" class="checkbox"><em>选择</em></span>
+			<div class="item-box">
+				<div class="top-box">
+				<span class="recommond-check"><input type="checkbox" ng-model="derivative.defaultInfo.recom" ng-chnange="">推荐</span>
+				<i class="btn-del" ng-click="editorDerivative.delGoods(item,$event)">×</i>
+				<span class="flag" ng-click="editorDerivative.setTop()">分类置顶</span>
+				</div>
+				<div class="img-box">
+				<!-- /images/img-loading_1x.gif -->
+					<!-- <div class="svg-box" data-ng-bind-html="editorDerivative.trustAsHtml(derivative.defaultInfo.svgContent)">
+					</div> -->
+					<!-- SVG -->
+					<div class="svg" ng-init="editorDerivative.changSvgSetinit(derivative)" 
+						id="svg{{derivative.defaultInfo.derivationId}}" 
+						data-derivationId="{{derivative.defaultInfo.derivationId}}" 
+						data-productId="{{derivative.defaultInfo.productId}}" 
+						data-templetId="{{derivative.defaultInfo.templetId}}"
+					>
+					</div>
+
+					<!-- <img src="/images/img-loading_1x.gif" alt=""> -->
+					<div class="edit-block" set-svg="" data-id="30084183">
+						<div class="eb-left">
+							<a class="btn-horizontal" ng-click="setTransformTopCenter(panlList.defaultInfo,'L');"><i class="iconfont icon-horizontal"></i></a>
+							<a class="btn-vertical" ng-click="setTransformTopCenter(panlList.defaultInfo,'T');"><i class="iconfont icon-vertical"></i></a>
+						</div>
+						<div class="eb-centent">
+							<s></s>
+							<i></i>
+						</div>
+						<div class="eb-right"></div>
+					</div>
+				</div>
+				<h3 class="title">
+					<!-- <span class="label">标题：</span> -->
+					<span ng-bind="derivative.defaultInfo.productName">手机壳</span>
+				</h3>
+				<div class="sku-tag">
+					<!-- <dl class="color" >
+						<dt class="label first">颜色：</dt>
+						<dd class="iconfont icon-check red"></dd>
+						<dd class="iconfont icon-check black"></dd>
+						<dd class="iconfont icon-check white"></dd>
+						<dd class="iconfont icon-check blue"></dd>
+						<dd class="iconfont icon-check gray"></dd>
+						<dd class="iconfont icon-check green"></dd>
+						<dd class="iconfont icon-check yellow"></dd>
+						<dd class="iconfont icon-check orange"></dd>
+						<dd></dd>
+					</dl> -->
+					<dl class="first-dl">
+						<!-- <dt class="label first"></dt> -->
+						<dd ng-repeat="childInfo in derivative.childInfos" ng-if="childInfo.templetName!='ep'" class="first-dd">
+							<span class="span {{childInfo.templetValue?'iconfont color':''}} {{derivative.defaultInfo.derivationId==childInfo.derivationId?(childInfo.templetValue?'icon-check':''):'active'}}" style="{{childInfo.templetValue?'background:'+childInfo.templetValue:''}}" ng-bind="childInfo.templetValue==''?childInfo.templetName:''" ng-click="editorDerivative.setDefaultInfo(derivative,childInfo)"></span>
+							<!-- <div class="sku-box-con" > -->
+								<div class="sku-box" ng-show="childInfo.isShow" ng-if="childInfo.childInfos.length>0">
+								<dl class="sku">
+								<!-- <dt class="label first"></dt> -->
+								<dd ng-repeat="child in childInfo.childInfos" style="{{childInfo.templetValue?'background:'+childInfo.templetValue:''}}">{{child.templetValue==''?childInfo.templetName:''}} {{child.defaultShow}}</dd>
+								<!-- <dd>iphone 6</dd>
+								<dd>iphone 6 plus</dd> -->
+							</dl>
+							</div>
+							<!-- </div> -->
+						</dd><!-- 
+						<dd>Samsung</dd>
+						<dd>Sony</dd> -->
+					</dl>
+
+					<!-- <div class="sku-box-con">
+									<div class="sku-box">
+									<dl class="sku">
+									<dt class="label first"></dt>
+									<dd class="active">iphone5</dd>
+									<dd>iphone 6</dd>
+									<dd>iphone 6 plus</dd>
+								</dl>
+								</div>
+								</div>	 -->			
+				</div>
+				</div>
+			</li>
+		</ul>
+
+		<button type="button" class="btn" ng-click="editorDerivative.submitGoods()">提交</button>
+
+
+		<!-- <ul>
+			<li class="first">
+			<span class="check"><input type="checkbox" class="check"><em>选择</em></span>
+			<div class="item-box">
+				<span class="recommond-check"><input type="checkbox">推荐</span>
+				<i class="btn-del" ng-click="delGoods(item,$event)">×</i>
+				<span class="flag">分类置顶</span>
+		
+				<div class="img-box">
+				/images/img-loading_1x.gif
+					<img src="/images/img-loading_1x.gif" alt="">
+				</div>
+				<h3 class="title">
+					<span class="label">标题：</span>
+					<span ng-bind="item.goodsName"></span>
+				</h3>
+				<div class="sku-tag">
+					<dl class="color">
+						<dt class="label first">颜色：</dt>
+						<dd class="red">√</dd>
+						<dd class="black">√</dd>
+						<dd class="white">√</dd>
+						<dd class="blue">√</dd>
+						<dd class="gray">√</dd>
+						<dd class="green">√</dd>
+						<dd class="yellow">√</dd>
+						<dd class="orange">√</dd>
+						<dd></dd>
+					</dl>
+					<dl class="sku">
+						<dt class="label first"></dt>
+						<dd class="active">Apple</dd>
+						<dd>Samsung</dd>
+						<dd>Sony</dd>
+					</dl>					
+				</div>
+				</div>
+			</li>
+			<li class="first">
+			<span class="check"><input type="checkbox" class="check"><em>选择</em></span>
+			<div class="item-box">
+				<span class="recommond-check"><input type="checkbox">推荐</span>
+				<i class="btn-del" ng-click="delGoods(item,$event)">×</i>
+				<span class="flag">分类置顶</span>
+		
+				<div class="img-box">
+				/images/img-loading_1x.gif
+					<img src="/images/img-loading_1x.gif" alt="">
+				</div>
+				<h3 class="title">
+					<span class="label">标题：</span>
+					<span ng-bind="item.goodsName"></span>
+				</h3>
+				<div class="sku-tag">
+					<dl class="color">
+						<dt class="label first">颜色：</dt>
+						<dd class="red">√</dd>
+						<dd class="black">√</dd>
+						<dd class="white">√</dd>
+						<dd class="blue">√</dd>
+						<dd class="gray">√</dd>
+						<dd class="green">√</dd>
+						<dd class="yellow">√</dd>
+						<dd class="orange">√</dd>
+						<dd></dd>
+					</dl>
+					<dl class="sku">
+						<dt class="label first"></dt>
+						<dd class="active">Apple</dd>
+						<dd>Samsung</dd>
+						<dd>Sony</dd>
+					</dl>					
+				</div>
+				</div>
+			</li>
+		</ul> -->
+<!-- 
+		<div>
+			<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='800' height='800'><g id='background'><image xlink:href='http://image.cmall.com/imgsrv/template/2015/12/309/15122912102470314.png' width='800.0' height='800.0' id='7749'/></g><g id='frame_7753' transform='translate(265.0,64.0)'><defs><style type='text/css'>#frame_7753{mask:url(#frame_7753_mask);}</style></defs><mask id='frame_7753_mask'><image xlink:href='http://image.cmall.com/imgsrv/template/2015/12/309/m15122912102584e4a.jpg' width='462.0' height='462.0' id='frame_7753_mask'/></mask><g id='frame_7753_face'><image xlink:href='http://image.cmall.com/imgsrv/artsrelease/319819/o_1aaii70mhom8h8mo1s1icr1os19.png' width='589.7872340425532' height='462.0' id='active' transform='translate(-63.89361702127661,0.0)'/></g></g></svg>
+		</div> -->

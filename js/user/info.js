@@ -32,6 +32,7 @@ infoApp.controller('infoCtr', function ($scope, $http, $timeout) {
 				$scope.imgUrl    = ArtJS.server.image;
 				$scope.qnIcon = '?imageView2/1/format/jpg/w/120/h/120/q/50';
 				$scope.inforMation = [];
+				$scope.LANG      = LANG;
 				$scope.gender ="";
 				gender =$("#gender");
 				$scope.getMember = function (callback, error) {
@@ -79,7 +80,7 @@ infoApp.controller('infoCtr', function ($scope, $http, $timeout) {
 				//confirm
 				$scope.confirm =function(){
 					$scope.DATA = {
-						nickName: $("#userName").val(),
+						nikeName: $("#userName").val(),
 		                gender: $('label.active >input').val(),
 		                description: $("#user_desc").val(),
 					};
@@ -101,7 +102,7 @@ infoApp.controller('infoCtr', function ($scope, $http, $timeout) {
 				}
 				//
 				$scope.cancel =function(){
-					window.history.go();
+					window.history.go(-1);
 				}
 				//ChangePwdBtn
 				$scope.ChangePwdBtn =function(){
@@ -137,7 +138,7 @@ infoApp.controller('infoCtr', function ($scope, $http, $timeout) {
 					}
 					else if($newpwd.val().length <6){
 						$newpwd.addClass("error");
-						$('#newMsg').html('密码太短');
+						$('#newMsg').html(LANG.TITLE.PASSDUAN);
 						falgPwd =false;
 					}
 					else if($confirmpwd.vewNull()){
@@ -146,7 +147,7 @@ infoApp.controller('infoCtr', function ($scope, $http, $timeout) {
 					}
 					else if($newpwd.val() != $confirmpwd.val()){
 						$('#newMsg').vewHtml();
-						$('#confirMsg').html('密码不匹配');
+						$('#confirMsg').html(LANG.TITLE.PASSPIPEI);
 						falgPwd =false;
 					}
 					else{

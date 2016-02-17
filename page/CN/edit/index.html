@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html ng-app="mod-header-full">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<title>获取问题</title>
+	<link rel="stylesheet" href="/font/iconfont.css">
+    <link rel="stylesheet" type="text/css" href="/css/header.css">
+    <style type="text/css">
+		.nav{
+			/*height:30px;*/
+			line-height: 30px;
+		}
+		.nav .title {
+			float: left;
+			padding:10px 15px;
+		}
+		.nav .tab{
+			list-style:none;
+		}
+		.nav .tab li{
+			display: inline-block;
+			padding: 10px 25px;
+		}
+		.nav .tab li.active,.nav .tab li:hover{
+			font-weight:700;
+			background:#f10;
+			color:#fff;
+		}
+		.btn{
+			padding:10px 30px;
+		}
+		.hide{
+			display:none;
+		}
+    </style>
+</head>
+<body>
+	<!-- 头部开始 -->
+	<div modheaderfull></div>
+	
+	<nav class="nav">
+		<h2 class="title">主分类</h2>
+		<ul class="tab">
+			<li data-code="goodList" class="active">商品</li>
+			<li data-code="workList">原作</li>
+			<li data-code="blogList">博客</li>
+		</ul>
+	</nav>
+
+	<section class="tabList goodList">
+		
+		商品：<button class="btn" type="button">获取待审核数据</button>
+
+	</section>
+
+	<section  class="tabList workList hide">
+		
+		原作：<button class="btn" type="button">获取待审核数据</button>
+
+	</section>
+
+
+	<section class="tabList blogList hide">
+		
+		博客：<button class="btn" type="button">获取待审核数据</button>
+
+	</section>
+
+	<script src="/js/config.js"></script>
+	<script src="/js/ArtJS/lib/jquery-2.1.4.min.js"></script>
+	<script src="/js/ArtJS/ArtJS.js"></script>
+	<script src="/js/init.js"></script>
+	<script src="/js/ArtJS/lib/angular.min.js"></script>
+	<script src="/module/mod-header-full.js"></script>
+	<script src="/js/edit/index.js"></script>
+
+</body>
+</html>

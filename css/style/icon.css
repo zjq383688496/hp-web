@@ -1,0 +1,191 @@
+/* icon */
+/* 混合宏 */
+[class*="-50"],
+[class*="-32"],
+[class*="-12"] {
+  /*.tran(opacity ease .2s);
+	opacity: .8;
+	&:hover{
+		opacity: 1;
+	}*/
+}
+/* icon-80 */
+[class*="icon-wechat"]:before {
+  content: "\e60d";
+  background-color: #64ab23;
+  font-size: .5em;
+  text-shadow: 0.08em 0.08em 0.4em rgba(0, 0, 0, 0.3);
+}
+[class*="icon-qq"]:before {
+  content: "\e613";
+  background-color: #1fb9e6;
+  font-size: .6em;
+  text-shadow: 0.02em 0.02em 0.1em rgba(0, 0, 0, 0.1);
+}
+[class*="icon-sina"]:before {
+  content: "\e60a";
+  background-color: #d0422b;
+  font-size: .6em;
+  text-shadow: 0.02em 0.02em 0.1em rgba(0, 0, 0, 0.1);
+}
+.icon-wechat-80,
+.icon-qq-80,
+.icon-sina-80 {
+  display: block;
+  width: 80px;
+  height: 80px;
+  line-height: 80px;
+  font-size: 80px;
+  color: #fff;
+  text-align: center;
+}
+.icon-wechat-80:before,
+.icon-qq-80:before,
+.icon-sina-80:before {
+  display: block;
+  width: 80px;
+  height: 80px;
+  border-radius: 100%;
+}
+.icon-facebook-80,
+.icon-twitter-80,
+.icon-google-80 {
+  display: block;
+  width: 80px;
+  height: 80px;
+  line-height: 80px;
+  font-size: 80px;
+}
+.icon-facebook-80:before {
+  color: #587bb4;
+}
+.icon-twitter-80:before {
+  color: #75b5de;
+}
+.icon-google-80:before {
+  color: #f15f63;
+}
+.icon-facebook-80:before,
+.icon-facebook-32:before {
+  content: "\e607";
+}
+.icon-twitter-80:before,
+.icon-twitter-32:before {
+  content: "\e60c";
+}
+.icon-google-80:before,
+.icon-google-32:before {
+  content: "\e609";
+}
+/* icon-32 */
+.icon-facebook-32,
+.icon-twitter-32,
+.icon-google-32 {
+  display: block;
+  width: 32px;
+  height: 32px;
+  line-height: 32px;
+  font-size: 32px;
+}
+.icon-wechat-32,
+.icon-qq-32,
+.icon-sina-32 {
+  display: block;
+  width: 32px;
+  height: 32px;
+  line-height: 32px;
+  font-size: 32px;
+  color: #fff;
+  text-align: center;
+}
+.icon-wechat-32:before,
+.icon-qq-32:before,
+.icon-sina-32:before {
+  display: block;
+  width: 32px;
+  height: 32px;
+  border-radius: 100%;
+}
+.icon-facebook-32:before {
+  color: #3289da;
+}
+.icon-twitter-32:before {
+  color: #00acf0;
+}
+.icon-google-32:before {
+  color: #e05a50;
+}
+/* icon-12 */
+.icon-facebook-12,
+.icon-twitter-12,
+.icon-google-12 {
+  display: block;
+  width: 12px;
+  height: 12px;
+  line-height: 12px;
+  font-size: 12px;
+}
+.icon-facebook-12:before {
+  content: "\e606";
+  color: #3a5999;
+}
+.icon-twitter-12:before {
+  content: "\e60b";
+  color: #00acf0;
+}
+.icon-google-12:before {
+  content: "\e608";
+  color: #e05a50;
+}
+.ico-close {
+  position: relative;
+  display: block;
+}
+.ico-close i {
+  position: absolute;
+  width: 70%;
+  height: 70%;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate3d(-50%, -50%, 0px) scale(1) rotate(0deg);
+  transform: translate3d(-50%, -50%, 0px) scale(1) rotate(0deg);
+  -webkit-transform-style: preserve-3d;
+  -webkit-transition: all ease 0.2s;
+  -moz-transition: all ease 0.2s;
+  transition: all ease 0.2s;
+}
+.ico-close i:before,
+.ico-close i:after {
+  content: '';
+  position: absolute;
+  top: 49%;
+  left: 20%;
+  display: block;
+  width: 60%;
+  height: 2px;
+  background-color: #dddddd;
+  transform-origin: 50% 50%;
+  -webkit-transition: 0.5s;
+  -moz-transition: 0.5s;
+  transition: 0.5s;
+}
+.ico-close:hover i:before,
+.ico-close:hover i:after {
+  top: 46%;
+  left: 0%;
+  width: 100%;
+  height: 1px;
+  background-color: #666666;
+}
+.ico-close:hover i:before {
+  -webkit-transform: rotate(225deg);
+  transform: rotate(225deg);
+}
+.ico-close:hover i:after {
+  -webkit-transform: rotate(135deg);
+  transform: rotate(135deg);
+}
+.ico-close-32 {
+  width: 32px;
+  height: 32px;
+}

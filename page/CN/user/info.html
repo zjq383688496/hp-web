@@ -2,7 +2,7 @@
 <html ng-app="uersinfo">
     <head lang="en">
         <meta charset="UTF-8">
-        <title>info</title>
+        <title></title>
             <link rel="stylesheet" href="/font/iconfont.css">
             <link rel="stylesheet" href="/css/header.css">
             <link rel="stylesheet" href="/css/user/info.css">
@@ -16,7 +16,7 @@
             <span class="info-pic-thumb" style="background-image:url({{imgUrl}}{{inforMation.imageUrl}}{{qnIcon}})"></span>
             <span class="info-pic-photo">
                 <i class="iconfont icon-xq-photo"></i>
-                <input type="file" title="修改头像" name="upIco" class="fileDemo" accept="image/jpeg,image/gif,image/png">
+                <input type="file" title="{{LANG.BUTTON.ICONED}}}" name="upIco" class="fileDemo" accept="image/jpeg,image/gif,image/png">
             </span>
         </div>
         <div class="info-data">
@@ -26,37 +26,37 @@
                     <div class="info-input"><i ng-bind="inforMation.accountName"></i></div>
                 </li>
                 <li>
-                    <span class="label">电子邮箱：</span>
+                    <span class="label"><font ng-bind="LANG.TEXT.T103"></font>：</span>
                     <div class="info-input"><i ng-bind="inforMation.email"></i></div>
                 </li>
                 <li>
-                    <span class="label">昵称：</span>
+                    <span class="label"><font ng-bind="LANG.TEXT.T104"></font>：</span>
                     <div class="info-input"><input type="text" maxlength="30" value="{{inforMation.nikeName}}" class="text" ng-blur="onName()" id="userName" /><span class="sp_hint"></span></div>
                 </li>
                 <li>
-                    <span class="label">我的简介：</span>
+                    <span class="label"><font ng-bind="LANG.TITLE.ABOUT"></font>：</span>
                     <div class="info-input"><textarea id="user_desc" onkeydown="if(event.keyCode==13){event.keyCode=0;event.returnValue=false;}" maxlength="160" ng-bind="inforMation.description"></textarea></div>
                 </li>
                 <li>
-                    <span class="label">性别：</span>
+                    <span class="label"><font ng-bind="LANG.TITLE.SEX"></font>：</span>
                     <div class="info-input" id="gender">
                         <label>
-                            <i></i><input type="radio" name="gender" value="2" id="male">男
+                            <i></i><input type="radio" name="gender" value="2" id="male"><font ng-bind="LANG.TITLE.MALE"></font>
                         </label>
                         <label>
-                            <i></i><input type="radio" name="gender" value="1" id="female">女
+                            <i></i><input type="radio" name="gender" value="1" id="female"><font ng-bind="LANG.TITLE.FEMALE"></font>
                         </label>
                         <label>
-                            <i></i><input type="radio" name="gender" value="0" id="Secret">保密
+                            <i></i><input type="radio" name="gender" value="0" id="Secret"><font ng-bind="LANG.TITLE.SECRECY"></font>
                         </label>
                     </div>
                 </li>
                 <li class="info-bnt">
-                    <a class="revamp-pwd" ng-click="ChangePwdBtn()">修改密码</a>
+                    <a class="revamp-pwd" ng-click="ChangePwdBtn()" ng-bind="LANG.BUTTON.PASSWDED"></a>
                 </li>
                 <li class="info-cancel-confirm">
-                    <a class="cancel" ng-click="cancel()">取消</a>
-                    <a class="confirm" ng-click="confirm()">确定</a>
+                    <a class="cancel" ng-click="cancel()" ng-bind="LANG.BUTTON.CANCEL"></a>
+                    <a class="confirm" ng-click="confirm()" ng-bind="LANG.BUTTON.ENTER"></a>
                 </li>
             </ul>
         </div>
@@ -64,23 +64,23 @@
     <!--changepsw-->
     <div class="change-pwd" id="changePwdBox">
         <div class="colse-box">
-            <font>修改密码</font>
+            <font ng-bind="LANG.BUTTON.PASSWDED"></font>
             <a class="colse" href="javascript:;" id="pwdClose"><i class="iconfont icon-close-b"></i></a>
         </div>
         <div class="change-pwd-form">
             <ul>
                 <li>
-                    <span>旧密码</span><div><input type="text" value="" id="oldpwd" placeholder="旧密码" /><i class="error-msg" id="oldMsg"></i></div>
+                    <span ng-bind="LANG.TITLE.PASSWDOLD"></span><div><input type="text" value="" id="oldpwd" placeholder="{{LANG.TITLE.PASSWDOLD}}" /><i class="error-msg" id="oldMsg"></i></div>
                 </li>
                 <li>
-                    <span>新密码</span><div><input type="text" value="" id="newpwd" placeholder="新密码" /><i class="error-msg" id="newMsg"></i></div>
+                    <span ng-bind="LANG.TITLE.PASSWDNEW"></span><div><input type="text" value="" id="newpwd" placeholder="{{LANG.TITLE.PASSWDNEW}}" /><i class="error-msg" id="newMsg"></i></div>
                 </li>
                 <li>
-                    <span>确认密码</span><div><input id="confirmpwd" type="text" value="" placeholder="确认密码" /><i class="error-msg" id="confirMsg"></i></div>
+                    <span ng-bind="LANG.BUTTON.PASSWDET"></span><div><input id="confirmpwd" type="text" value="" placeholder="{{LANG.BUTTON.PASSWDET}}" /><i class="error-msg" id="confirMsg"></i></div>
                 </li>
             </ul>
             <div class="bnt">
-                <a class="bnt-confirm" ng-disabled="signup_form.$invalid" ng-click="ChangeEditPwd()">确定</a>
+                <a class="bnt-confirm" ng-disabled="signup_form.$invalid" ng-click="ChangeEditPwd()" ng-bind="LANG.BUTTON.ENTER"></a>
             </div>
         </div>
     </div>

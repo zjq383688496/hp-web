@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html ng-app="mallSearch">
+	<head>
+		<meta charset="utf-8">
+		<title>创e商城</title>
+		<link rel="stylesheet" type="text/css" href="/font/iconfont.css">
+		<link rel="stylesheet" type="text/css" href="/css/header.css">
+		<link rel="stylesheet" href="/css/home.css">
+		<link rel="stylesheet" href="/css/search.css">
+	</head>
+<body>
+
+<div modheaderfull></div>
+
+
+<!-- container -->
+<div class="container" ng-controller="mallSearchCtr">
+	<div class="wrapper">
+	    <!--导航结束-->
+	    <ul class="box-menu" id="search" placeholder="搜索艺术品、艺术家或文章">
+	        <!-- <li class="hover"><a data-works="2" data-search="4" data-href="SearchServer/service/search/">圈子</a></li> -->
+	       <li ng-repeat="nav in navData.navList" ng-class="navData.activeNav==nav.code?'hover':''" ng-click="navChange(nav.code)">
+	       	<a data-works="{{nav.works}}" data-search="{{nav.search}}" data-href="{{nav.href}}" ng-bind="nav.name"></a>
+	       </li>
+	        <!-- <li class="hover"><a data-works="1" data-search="3" data-href="SearchServer/service/search/">商品</a></li>
+	        <li><a data-works="0" data-search="1" data-href="SearchServer/service/search/">收藏品</a></li>
+	        <li><a data-works="3" data-search="2" data-href="SearchServer/service/search/">艺术家</a></li> -->
+	    </ul>
+	    <!--头部结束-->
+	</div>
+	
+	<!--圈子-->
+	<ul class="art-box a-imageload circle" ng-style="tabData.cirList.length>0?'display:block':'display:none'">
+		<li data-index="{{$index}}" ng-repeat="item in tabData.cirList">
+			<a class="art-img img-loading e-ripple" href="/page/{{LANG.NAME}}/detail.html?id={{base64encode(item.id)}}"><img data-src="{{item.cover||item.topicCover}}{{qnProduct}}"></a>
+			<div class="art-info">
+				<h2 class="special"><a target="_blank" href="/page/{{LANG.NAME}}/detail.html?id={{base64encode(item.id)}}" ng-bind="item.title"></a></h2>
+				<!-- <p class="art-title" title="{{item.goodsName}}" ng-bind="item.goodsName"></p> -->
+				<a class="art-user" data-user="{{item.memberName||item.ownerName}}" href="/page/{{LANG.NAME}}/user/gallery.html?uid={{item.memberId || item.ownerMemberId}}"><b class="img-loading"><img data-src="{{imgUrl}}{{item.memberPic||item.ownerHead||'/images/tips01.png'}}{{qnIcon}}"></b></a>
+				<!-- <p class="art-ctr">
+					<span><a class="iconfont icon-icon{{item.light == true? ' art-light': ''}}" ng-click="artsLike(this);"></a><i ng-bind="item.likeCount||item.like"></i></span>
+					<span>{{item.currencySymbol}}{{item.look||item.lookCount||'0'}}</span>
+				</p> -->
+			</div>
+		</li>
+	</ul>
+	<!--商品-->
+	<ul class="art-box a-imageload" ng-style="tabData.goodList.length>0?'display:block':'display:none'">
+		<li data-index="{{$index}}" ng-repeat="item in tabData.goodList">
+			<a class="art-img img-loading e-ripple" ng-click="goodsInfo(item.goodsId);"><img data-src="{{imgUrl}}{{item.imagePath}}{{qnProduct}}"></a>
+			<div class="art-info">
+				<p class="art-title" title="{{item.goodsName}}" ng-bind="item.goodsName"></p>
+				<a class="art-user" data-user="{{item.createUserName}}" href="/page/{{LANG.NAME}}/user/gallery.html?uid={{item.createUserId}}"><b class="img-loading"><img data-src="{{imgUrl}}{{item.createUserImage}}{{qnIcon}}"></b></a>
+				<p class="art-ctr">
+					<span><a class="iconfont icon-icon{{item.light == true? ' art-light': ''}}" ng-click="artsLike(this);"></a><i ng-bind="item.likeCount"></i></span>
+					<span>{{item.currencySymbol}}{{item.sellPrice}}</span>
+				</p>
+			</div>
+		</li>
+	</ul>
+	<!--收藏品-->
+	<ul class="art-box a-imageload" ng-style="tabData.favList.length>0?'display:block':'display:none'">
+		<li data-index="{{$index}}" ng-repeat="item in tabData.favList">
+			<a class="art-img img-loading e-ripple" ng-click="goodsInfo(item.id);"><img data-src="{{imgUrl}}{{item.uri}}{{qnProduct}}"></a>
+			<div class="art-info">
+				<p class="art-title" title="{{item.title}}" ng-bind="item.title"></p>
+				<a class="art-user" data-user="{{item.memberName}}" href="/page/{{LANG.NAME}}/user/gallery.html?uid={{item.memberId}}"><b class="img-loading"><img data-src="{{imgUrl}}{{item.memberImg}}{{qnIcon}}"></b></a>
+				<p class="art-ctr">
+					<span><a class="iconfont icon-icon{{item.light == true? ' art-light': ''}}" ng-click="artsLike(this);"></a><i ng-bind="item.collectionNumber"></i></span>
+					<span>{{item.currencySymbol}}{{item.sellPrice}}</span>
+				</p>
+			</div>
+		</li>
+	</ul>
+	<!--艺术家-->
+	<ul class="art-box a-imageload" ng-style="tabData.artList.length>0?'display:block':'display:none'">
+		<li data-index="{{$index}}" ng-repeat="item in tabData.artList">
+			<a class="art-img img-loading e-ripple" ng-click="goodsInfo(item.goodsId);"><img data-src="{{imgUrl}}{{item.imagePath}}{{qnProduct}}"></a>
+			<div class="art-info">
+				<p class="art-title" title="{{item.goodsName}}" ng-bind="item.goodsName"></p>
+				<a class="art-user" data-user="{{item.createUserName}}" href="/page/{{LANG.NAME}}/user/gallery.html?uid={{item.createUserId}}"><b class="img-loading"><img data-src="{{imgUrl}}{{item.createUserImage}}{{qnIcon}}"></b></a>
+				<p class="art-ctr">
+					<span><a class="iconfont icon-icon{{item.light == true? ' art-light': ''}}" ng-click="artsLike(this);"></a><i ng-bind="item.likeCount"></i></span>
+					<span>{{item.currencySymbol}}{{item.sellPrice}}</span>
+				</p>
+			</div>
+		</li>
+	</ul>
+	<div class="{{loading}}"></div>
+</div>
+
+<!-- JS -->
+<script src="/js/config.js"></script>
+<script src="/js/ArtJS/lib/jquery-2.1.4.min.js"></script>
+<script src="/js/ArtJS/ArtJS.js"></script>
+<script src="/js/init.js"></script>
+<script src="/js/ArtJS/lib/angular.min.js"></script>
+<script src="/module/mod-header-full.js"></script>
+<script src="/js/search1.js"></script>
+
+</body>
+</html>

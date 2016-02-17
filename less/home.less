@@ -1,10 +1,104 @@
 @charset "utf-8";
 
-// 引入全局方法
-@import "global.less";
-
 // 引入 tag 样式
 @import "module/home-tag.less";
 
 // 引入 product 样式
 @import "module/home-product.less";
+
+.shop-content {
+	//.df;
+	//.jc;
+	.pt(32);
+	.clearfix;
+	.home-side {
+		.posr;
+		z-index: 2;
+		.fl;
+		.w(150);
+		.clearfix;
+		//.flex(3);
+		//.oh;
+	}
+	.mod-home-side {
+		.posf;
+		.w(150);
+		top: 128px;
+		bottom: 0;
+	}
+	.home-goods {
+		.posr;
+		z-index: 1;
+		.fr;
+		.w(850);
+		.bc(@white);
+		//.flex(17);
+	}
+	.home-banner {
+		.posr;
+		.wh(100%; 240);
+		.br(10px);
+		.oh;
+		.banner-img,
+		li,
+		img {
+			.db;
+			.wh(100%; 240);
+		}
+		.banner-img {
+
+		}
+		li {
+			.posa;
+			top: 0;
+			left: 0;
+			z-index: 0;
+			opacity: 0;
+			.tran(all 1s ease);
+			&.i-show {
+				z-index: 1;
+				opacity: 1;
+			}
+		}
+		.i-dotUl {
+			.posa;
+			z-index: 1;
+			bottom: 20px;
+			.wh(100%; 24);
+			.tc;
+			.i-dot {
+				.dib;
+				.squ(12);
+				.p(6px);
+				.m(0 3px);
+				&:hover,
+				&.s-active {
+					s {
+						.bc(@red);
+					}
+				}
+			}
+			s {
+				.db;
+				.squ(12);
+				.bc(@white);
+				.box-s(1px 1px 2px @sd-gray5);
+				.br;
+				.tran;
+			}
+		}
+	}
+}
+
+.data-not {
+	display: none;
+	.w(100%);
+	/*.lh(40);*/
+	.mt(130);
+	.fz(14);
+	.tc;
+	p {
+		.mt(30);
+		color: @gray-light;
+	}
+}

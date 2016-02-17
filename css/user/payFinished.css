@@ -1,0 +1,58 @@
+.pay-finish {
+		padding-top: 110px;
+		text-align: center;
+	}
+	.pay-sus, .pay-err {
+		display: none;
+	}
+	.img-sus, .img-err {
+		display: block;
+		width: 130px;
+		height: 150px;
+		margin: 0 auto;
+	}
+	.img-sus {
+		background: url(/images/img-pay-sus.png) center top no-repeat;
+	}
+	.img-err {
+		background: url(/images/img-404.png) center top no-repeat;
+	}
+	.pay-finish p {
+		height: 60px;
+		line-height: 60px;
+		font-size: 30px;
+		color: #fff;
+	}
+	.pay-finish span {
+		display: block;
+		height: 20px;
+		line-height: 20px;
+		font-size: 14px;
+		color: #96a0ab;
+	}
+	.pay-finish i {
+		color: #000;
+	}
+	.pay-finish b {
+		margin-right: 4px;
+		font-size: 16px;
+	}
+	.pay-sus p {
+		color: #000;
+	}
+	.pay-err p {
+		color: #f15f63;
+	}
+	.btn-box {
+		margin-top: 50px;
+	}
+	.btn-box a {
+		display: inline-block;
+		width: 160px;
+		height: 32px;
+		line-height: 32px;
+		border-radius: 4px;
+		background-color: #000;
+		color: #fff;
+		margin: 0 10px;
+	}

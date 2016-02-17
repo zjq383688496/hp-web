@@ -9,69 +9,145 @@
 	</head>
 <body>
 
+<div modheaderfull></div>
+
 <!-- container -->
-<div class="e-ripple goods-details" ng-controller="goodsDetailsCtr">
+<div class="goods-details" ng-controller="goodsDetailsCtr">
 	<div class="d-top">
 		<!-- 预览图 -->
 		<div class="d-preview">
 			<div class="img img-loading">
-				<i style="background-image: url({{imgUrl}}{{goodsImg.uri}}{{qn320}});"></i>
-				<i ng-show="goodsImg.backImguri" style="background-image: url({{imgUrl}}{{goodsImg.backImguri}}{{qn320}});"></i>
+				<i style="background-image: url({{imgUrl}}{{imgs.imagePath}}{{qn355}});"></i>
+				<i ng-show="imgs.backImagePath" style="background-image: url({{imgUrl}}{{imgs.backImagePath}}{{qn355}});"></i>
 			</div>
 		</div>
 		<!-- 详细信息 -->
 		<div class="d-info" ng-show="detail">
-			<p class="d-block price"><span ng-bind="detail.currencySymbol"></span> <span ng-bind="detail.sellPrice"></span></p>
-			<p class="color">
-				<a class="iconfont icon-check{{item.id == goodsIds? ' s-active': ''}}" ng-repeat="item in detail.threeCategoryInfo" style="background-color: {{item.colorTemplet}};" ng-click="selectColor(item, item.id);"></a>
+
+			<!-- 标题 -->
+			<p class="title" ng-if="detail.goodsName!=''">
+				<span ng-bind="detail.goodsName"></span>
 			</p>
-			<p class="d-block type">
-				<a class="{{(item.categoryId == colorItem.parentCategoryId || item.id == typeItem.id)? 's-active': ''}}" ng-repeat="item in (detail.ifHasWidthHeight? sizeDetail.propertyInfos: sizeDetail.fourCategoryInfo)" ng-click="selectType(item, item.categoryId);" ng-bind="item.categoryName"></a>
+
+			<!-- 单价 -->
+			<!-- <p class="d-block price">
+				<span ng-bind="nowInfo.currencySymbol"></span>
+				<span ng-bind="nowInfo.sellPrice * amount">0</span>
+				<span>{{ nowInfo.customFlg === 1? ' / ㎡': '' }}</span>
+			</p> -->
+
+			<!-- 颜色 || 类型 -->
+			<!-- <p class="d-block color" ng-if="colorItem.length">
+				<a class="iconfont icon-check{{item.goodsId == nowColor.goodsId? ' s-active': ''}}" ng-repeat="item in colorItem" style="background-color: {{item.skuValue}};" ng-click="selectColor(item);"></a>
+			</p> -->
+			<p class="d-block color-circle" ng-if="colorItem.length">
+				<a class="{{item.goodsId == nowColor.goodsId? ' s-active': ''}}{{item.skuValue === '#FFFFFF'? ' s-white': ''}}" ng-repeat="item in colorItem" style="background-color: {{item.skuValue}};" ng-click="selectColor(item);"></a>
 			</p>
-			<p class="d-block size" ng-show="detail.ifHasWidthHeight">
-				<a class="{{item.id == sizeItem.id? 's-active': ''}}" ng-repeat="item in (detail.ifHasWidthHeight? sizeDetail.fourCategoryInfo: [])" ng-click="selectSize(item, item.id);" ng-bind="item.categoryName"></a>
+			<p class="d-block type" ng-if="typeItem.length">
+				<a class="{{item.goodsId == nowType.goodsId? 's-active': ''}}" ng-repeat="item in typeItem" ng-click="selectType(item);" ng-bind="item.skuValue || item.skuName || ''"></a>
 			</p>
-			<div class="d-block amount">
-				<div class="number">
-					<input class="a-number" maxlength="3" value="1" ng-model="goodsAmount" ng-change="amountChange(0);">
-					<div class=" btn-box">
-						<a class="btn-up" ng-click="amountChange(1);"><i class="iconfont icon-angleup"></i></a>
-						<a class="btn-down" ng-click="amountChange(-1);"><i class="iconfont icon-angledown"></i></a>
+
+			<!-- 尺码 -->
+			<p class="d-block size" ng-show="sizeItem.length">
+				<a class="{{item.goodsId == goodsIds? 's-active': ''}}" ng-repeat="item in sizeItem" ng-click="selectSize(item);" ng-bind="item.skuValue || item.skuName || ''"></a>
+			</p>
+
+			<!-- 尺码详情 -->
+			<div class="size-chart" ng-if="nowInfo.ifHasWidthHeight">
+				<span ng-bind="LANG.GOODS.CHART"></span>
+
+				<div class="dialog-buy bg-chart-{{LANG.NAME}}">
+					<div class="d-content">
+						<dl class="d-size" ng-show="nowInfo.ifHasWidthHeight">
+							<dt>
+								<b>{{LANG.TEXT.T040}}</b>
+								<b>{{LANG.TEXT.T041}} (cm)</b>
+								<b>{{LANG.TEXT.T042}} (cm)</b>
+							</dt>
+							<dd ng-repeat="item in sizeItem">
+								<div ng-bind="item.skuValue || item.skuName || ''"></div>
+								<div ng-bind="item.skuWidth"></div>
+								<div ng-bind="item.skuHeigth"></div>
+							</dd>
+						</dl>
 					</div>
 				</div>
 			</div>
-			<div class="d-block btn-cart">
-				<b class="price"><span ng-bind="detail.currencySymbol"></span> <span ng-bind="(detail.ifHasWidthHeight? sizeItem.sellPrice: typeItem.sellPrice) * goodsAmount">0</span></b>
-				<a class="e-btn btn-blue" ng-bind="LANG.BUTTON.CARTADD" ng-click="addCart($event);"></a>
+
+			<!-- 预览 -->
+			<p class="d-block preview" ng-if="previewItem.length">
+				<a class="{{item.goodsId == goodsIds? 's-active': ''}}" ng-repeat="item in previewItem" ng-click="selectPreview(item);" ng-bind="item.skuValue || item.skuName || ''"></a>
+			</p>
+
+			<div class="d-block amount">
+				<span ng-bind="nowInfo.currencySymbol + ' ' + nowInfo.sellPrice + (nowInfo.customFlg === 1? ' / ㎡': '')"></span>
+				<span>x</span>
+				<div class="number">
+					<a class="btn-down" ng-click="amountChange(-1);"><i class="iconfont icon-minus"></i></a>
+					<input class="a-number" maxlength="3" value="1" ng-model="amount" ng-change="amountChange(0);">
+					<a class="btn-up" ng-click="amountChange(1);"><i class="iconfont icon-iconfontadd"></i></a>
+				</div>
+				<span ng-bind="nowInfo.currencySymbol + ' ' + nowInfo.sellPrice * amount"></span>
+			</div>
+			<div class="btn-cart">
+				<!-- <b class="price"><span ng-bind="nowInfo.currencySymbol"></span> <span ng-bind="nowInfo.sellPrice * amount">0</span></b> -->
+				<a class="e-btn btn-black" ng-click="addCart($event);"><i class="iconfont icon-cart"></i><span ng-bind="LANG.BUTTON.CARTADD"></span></a>
+				<a class="e-btn btn-white" ng-click="edit($event);" ng-if="detail.goodsType==2"><i class="iconfont icon-edit"></i><span ng-bind="LANG.TYPE.DIY"></span></a>
+			</div>
+			<div class="btn-user">
+				<a class="{{detail.light == true? 's-active': ''}}" ng-click="artsLike(oId, detail);">
+					<i class="iconfont icon-guanzhu-on"></i>
+					<span ng-bind="detail.lightTotal"></span>
+				</a>
+				<a>
+					<i class="iconfont icon-paper-plane"></i>
+					<span ng-bind="LANG.GLOBAL.SHARE"></span>
+				</a>
 			</div>
 		</div>
-		<a class="iconfont icon-report"></a>
+		<!-- <a class="iconfont icon-report"></a> -->
 	</div>
 	<div class="d-center">
+
 		<!-- 标题 -->
 		<p class="title">
-			<span ng-bind="detail.goodsName"></span>
-			<i class="t-shadow"></i>
+			<span ng-bind="LANG.GOODS.ABOUT"></span>
 		</p>
-		<!-- 用户名 -->
-		<div class="user">
-			<div class="user-li">
-				<a class="user-icon"><i style="background-image: url({{imgUrl}}{{detail.ownerPicture}}{{qn40}});"></i></a>
-				<b ng-bind="detail.ownerName"></b>
+
+		<!-- 关于设计 -->
+		<div class="about">
+			<!-- 用户名 -->
+			<div class="user">
+				<a class="user-li" href="/page/{{LANG.NAME}}/user/gallery.html?uid={{detail.createUserId}}" target="_blank">
+					<span class="user-icon"><i style="background-image: url({{imgUrl}}{{detail.createUserImagePath}}{{qn40}});"></i></span>
+					<span class="user-name">
+						<b ng-bind="LANG.TEXT.T036"></b>
+						<b ng-bind="detail.createUserName"></b>
+					</span>
+				</a>
+
+				<div class="user-btn">
+					<!-- <a class="e-btn btn-green" ng-click="follow($event);"><i class="iconfont icon-personadd"></i><span ng-bind="LANG.BUTTON.FOLLOW"></span></a> -->
+					<a class="e-btn btn-blue-g" href="/page/{{LANG.NAME}}/user/store.html?uid={{detail.createUserId}}" target="_blank"><i class="iconfont icon-shop"></i><span ng-bind="LANG.GOODS.SHOP"></span></a>
+				</div>
 			</div>
+
+			<!-- 描述 -->
+			<div class="summary">
+				<h4 ng-bind="detail.goodsName"></h4>
+				<p class="txt" ng-if="detail.description" ng-bind="detail.description"></p>
+			</div>
+
 		</div>
-		<!-- 描述 -->
-		<div class="summary" ng-show="detail.description && detail.description">
-			<p class="txt" ng-bind="detail.description"></p>
-		</div>
+		
 		<!-- 相关商品 -->
-		<div class="relevance-goods">
+		<div class="relevance-goods" ng-if="relatedGoods.length">
 			<p class="relevance">
-				<span ng-bind="LANG.TEXT.T061"></span>
+				<span ng-bind="LANG.TEXT.T110"></span>
 				<i class="t-shadow"></i>
 			</p>
 			<div class="goods a-imageload">
-				<a class="img-loading" ng-repeat="item in detail.suggestGoods" ng-click="selectGoods(item.id);"><img data-src="{{imgUrl}}{{item.uri}}{{qn270}}"></a>
+				<a class="img-loading" ng-repeat="item in relatedGoods" ng-click="selectGoods(item.goodsId);"><img data-src="{{imgUrl}}{{item.imagePath}}{{qn270}}"></a>
 			</div>
 		</div>
 	</div>
@@ -91,26 +167,45 @@
 		<a class="ico-close ico-close-32"><i></i></a>
 		<div class="img img-loading"><i style="background-image: url({{imgUrl}}{{goodsImg.uri}}{{qn320}});"></i></div>
 	</div> -->
-	<div class="dialog dialog-buy{{dialogBuyStatus? ' show': ' hide'}}">
-		<a class="ico-close ico-close-32" ng-click="dialogBuyStatus=false"><i></i></a>
-		<h2 class="d-title" ng-bind="detail.goodsName"></h2>
-		<div class="d-content">
-			<dl class="size" ng-show="detail.ifHasWidthHeight">
-				<dt>
-					<b>{{LANG.TEXT.T040}}</b>
-					<b>{{LANG.TEXT.T041}} (cm)</b>
-					<b>{{LANG.TEXT.T042}} (cm)</b>
-				</dt>
-				<dd ng-repeat="item in (detail.ifHasWidthHeight? sizeDetail.fourCategoryInfo: [])">
-					<div><a>{{item.categoryName}}</a></div>
-					<div>{{item.width}}</div>
-					<div>{{item.hight}}</div>
-				</dd>
-			</dl>
-		</div>
-	</div>
-</div>
 
+	<!-- 自定义弹出框 -- star -->
+	<div class="custom-panle" onclick="$('.custom-panle').fadeOut()">
+	    <div class="find-panle" onclick="event.stopPropagation()">
+	        <a class="iconfont buy-f-close" onclick="$('.custom-panle').fadeOut()"></a>
+	        <div class="b-title">
+	            <font>商品名称</font>
+	        </div>
+	        <ul class="w-h">
+	        	<li>
+		            <div class="tp-one">宽<input type="text" class="text" ng-model="customArr.width" ng-keyup="customReckon()">CM</div>
+		            <div class="tp-tow">
+						<font ng-bind="nowInfo.minPrintWidth"></font>~<font ng-bind="nowInfo.maxPrintWidth"></font>cm
+		            </div>
+	            </li>
+	            <li>
+	            	<div class="tp-one">高<input type="text" class="text" ng-model="customArr.height" ng-keyup="customReckon()">CM</div>
+		            <div class="tp-tow">
+						<font ng-bind="nowInfo.minPrintHeight"></font>~<font ng-bind="nowInfo.maxPrintHeight"></font>cm
+		            </div>
+	            </li>
+	        </ul>
+	        <div class="buy-price">
+	            <span>
+	                <font ng-bind="nowInfo.currencySymbol"></font>
+	                <font ng-bind="nowInfo.sellPrice"></font>
+	                 x 
+	                <font ng-bind="customArr.sq"></font>
+	                 m2 ＝
+	            </span>
+	            <i>
+	                <font ng-bind="nowInfo.currencySymbol"></font><font ng-bind="customArr.price"></font>
+	            </i>
+	        </div>
+	        <a class="a-bnt" href="{{artsdiyHref}}" target="_blank" onclick="$('.custom-panle').fadeOut()">编 辑</a>
+	    </div>
+	</div>
+	<!-- 自定义弹出框 -- end -->
+</div>
 
 <!-- JS -->
 <script src="/js/config.js"></script>
@@ -118,6 +213,7 @@
 <script src="/js/ArtJS/ArtJS.js"></script>
 <script src="/js/init.js"></script>
 <script src="/js/ArtJS/lib/angular.min.js"></script>
+<script src="/module/mod-header-full.js"></script>
 <script src="/js/goods-details.js"></script>
 
 </body>

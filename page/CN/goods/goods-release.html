@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html ng-app="goodsRelease">
+	<head>
+		<meta charset="utf-8">
+		<meta name="p:domain_verify" content="eb2b9d076f41193f56c07370e5ec96ea"/>
+		<title>发布</title>
+		<link rel="stylesheet" href="/font/iconfont.css">
+		<link rel="stylesheet" href="/css/header.css">
+		<link rel="stylesheet" href="/css/goods/goods-release.css">
+	</head>
+	<body ng-controller="goodsReleaseCtr">
+		<div modheaderfull></div>
+		<div id="goodsRelease" class="goods-release">
+			<!-- top -->
+			<div class="gr-top">
+				<div id="grTopCtrl" class="gr-top-ctrl">
+					<!-- fixed-top -->
+					<div class="btn-box">
+						<a id="btnCancel" class="btn-cancel" ng-if="!artsClassCekd || artsClassCekd=='ord'" ng-click="closeWindow()">取 消</a>
+						<a id="btnStep2" class="btn-release" ng-if="artsClassCekd==false" ng-click="totStap(true);">下一步</a>
+						
+						<a id="btnStep1" class="btn-cancel" ng-if="artsClassCekd==true" ng-click="totStap(false);">上一步</a>
+						<a id="btnRelease" class="btn-release" ng-if="artsClassCekd==true || artsClassCekd=='ord'" ng-click="postPublishArts();">发 布</a>
+					</div>
+				</div>
+			</div>
+			<!-- sell-type -->
+			<div class="sell-type" ng-if="artsClassCekd==false">
+				<div class="title">您发布的是什么类型</div>
+				<ul class="list">
+					<li ng-repeat="artList in artsClass" ng-class="ckType.id==artList.id?'active':''" ng-click="changCkType(artList)">
+						<p class="icon" style="background-image:url({{imgUrl}}{{artList.icon}}?imageView2/1/format/jpg/w/70/h/70/q/70)"></p>
+						<p ng-bind="artList.typeName"></p>
+					</li>
+				</ul>
+			</div>
+
+			<!-- content -->
+			<div class="gr-content clear" ng-show="artsClassCekd==true || artsClassCekd=='ord'">
+				<!-- thumbnails -->
+				<!-- 商品 -->
+				<div class="type-level clear" ng-show="ckType.showType==2">
+					<label class="so-title">
+						商品
+					</label>
+					<div class="type-a clear">
+						<dl class="t-1">
+							<!-- <dt ng-bind="LANGUAGE_NOW.activity.main">一级分类</dt> -->
+							<dd>
+								<div class="s-select" s-select>
+									<div class="s-name" ng-bind="artsLipType.typeName"></div>
+									<ul>
+										<li ng-repeat="artsLipS in artsLip" ng-bind="artsLipS.typeName" ng-click="changArtsLip(artsLipS)"></li>
+									</ul>
+								</div>
+							</dd>
+						</dl>
+						<dl class="t-2" ng-show="artsLipTypeFind!=''">
+							<!-- <dt ng-bind="LANGUAGE_NOW.activity.secondary">二级分类</dt> -->
+							<dd>
+								<div class="s-select" s-select>
+									<div class="s-name" ng-bind="artsLipTypeFind.typeName"></div>
+									<ul>
+										<li ng-repeat="artsLipc in artsLipType.children" ng-bind="artsLipc.typeName" ng-click="changArtsLipc(artsLipc)"></li>
+									</ul>
+								</div>
+							</dd>
+						</dl>
+					</div>
+					<div class="type-b clear products" ng-repeat="infos in goodsDetailsStar">
+						<div class="float-l">
+							<div class="float-l">
+								<dl class="t-1">
+									<dt>三级分类(商品颜色或尺寸)</dt>
+									<dd>
+										<input class="text className" type="text" placeholder="图片色" name="userColor" ng-model="infos.detailName">
+									</dd>
+								</dl>
+								<dl class="t-2-1">
+									<dt>价格</dt>
+									<dd>
+										<i name="priceType" ng-bind="PublishData.currencySymbol"></i>
+										<input class="text price" type="text" placeholder="价格" ng-model="infos.price">
+									</dd>
+								</dl>
+								<dl class="t-3">
+									<dt>库存</dt>
+									<dd>
+										<input class="text stock" type="text" placeholder="库存" name="userSize" ng-model="infos.stock">
+										<i>件</i>
+									</dd>
+								</dl>
+							</div>
+							<div class="float-l">
+								<dl class="t-ti">
+									<dt class="m-l0">尺寸</dt>
+								</dl>
+								<dl class="t-ti">
+									<dt>宽</dt>
+									<dd>
+										<input class="text artWidth" type="text" name="userSize" ng-model="infos.sellWidth">
+										<i>cm</i>
+									</dd>
+								</dl>
+								<dl class="t-ti">
+									<dt>高</dt>
+									<dd>
+										<input class="text artHeight" type="text" name="userSize" ng-model="infos.sellHeight">
+										<i>cm</i>
+									</dd>
+								</dl>
+								<dl class="t-ti">
+									<dt>厚</dt>
+									<dd>
+										<input class="text artLength" type="text" name="userSize" ng-model="infos.sellLength">
+										<i>cm</i>
+									</dd>
+								</dl>
+							</div>
+						</div>
+
+						<dl class="t-4">
+							<dt>图片</dt>
+							<div class="d-img iconfont" ng-class="infos.imageUrl[0].url!='null'?'':'btn-add iconfont icon-add'" style="background-image: url({{infos.domain}}{{infos.imageUrl[0].url}}?imageView2/1/format/jpg/w/150/h/150/q/70);" ng-click="upfileImg($event,infos.imageUrl[0])">
+								<input type="file" class="upfile">
+								<a>编辑</a>
+							</div>
+						</dl>
+						<a class="del" ng-if="goodsDetailsStar.length>1" ng-click="delSellInfos($index)">删除这个规格</a>
+					</div>
+
+					<a class="add-commodity" ng-click="addSellInfos()"><i class="iconfont icon-iconfontadd"></i> <font>添加一个三级分类</font></a>
+				</div>
+				<!-- 原作 -->
+				<div class="type-level clear" ng-show="ckType.showType==1">
+					<div id="Original" class="type-b clear" ng-repeat="infos in goodsDetailsStar">
+						<div class="so-title-yz">
+							<b class="m-l25">您要出售原作吗？</b>
+							<font>不出售</font>
+							<a class="SellCheck iconfont" ng-class="PublishData.saleFlag==1?'active':''" ng-click="changeInfos(infos,$event)">
+							</a>
+							<font>出售</font>
+						</div>
+						<div class="type-yz" ng-class="PublishData.saleFlag!=1?'hidden':''">
+							<div class="t-6">
+								<p class="title">原作销售须知</p>
+								<ul>
+									<li><i>•</i> <font>艺术品销售佣金10%（市场最低）</font></li>
+									<li><i>•</i> <font>衍生品收入归原作购买者</font></li>
+									<li><i>•</i> <font>艺术灯买家遍布全球37个国家，跨国销售成本会自动加到作品价格中由买家承担</font></li>
+									<li><i>•</i> <font>卖家只需负责把作品运到您当地艺术灯仓库，其余物流由艺术灯提供</font></li>
+									<li class="bottom">
+										<font>更多信息，请阅读</font><a href="/" target="_blank">《原作销售须知》</a>
+									</li>
+								</ul>
+							</div>
+							<div class="float-l t-5">
+								<dl>
+									<dt>尺寸</dt>
+								</dl>
+								<dl>
+									<dt>宽</dt>
+									<dd>
+										<input class="text artWidth" placeholder="宽" ng-model="infos.sellWidth">
+										<i class="cm">cm</i>
+									</dd>
+								</dl>
+								<dl>
+									<dt>高</dt>
+									<dd>
+										<input class="text artHeight" placeholder="高" ng-model="infos.sellHeight">
+										<i class="cm">cm</i>
+									</dd>
+								</dl>
+								<dl>
+									<dt>厚</dt>
+									<dd>
+										<input class="text artLength" placeholder="高" ng-model="infos.sellLength">
+										<i class="cm">cm</i>
+									</dd>
+								</dl>
+							</div>
+							<dl class="t-2">
+								<dt>原作价格</dt>
+								<ul id="OriginalPrice" ng-init="OriginalPrice()">
+									<li ng-class="infos.saleWay==1?'show':''">
+										<label class="radio" data-type="1"><input type="radio" name="OriginalPrice" ng-checked="infos.saleWay==1"><font>公开出售</font></label>
+										<div class="find">
+											<i name="priceType" ng-bind="PublishData.currencySymbol"></i>
+											<input class="text w100 price" type="text" placeholder="价格" ng-model="infos.price">
+										</div>
+									</li>
+									<li ng-class="infos.saleWay==2?'show':''">
+										<label class="radio" data-type="2"><input type="radio" name="OriginalPrice" ng-checked="infos.saleWay==2"><font>询价出售</font></label>
+										<div class="find">
+											<input class="text email" type="text" placeholder="询价邮箱" ng-model="infos.askEmail">
+										</div>
+									</li>
+								</ul>
+							</dl>
+							<dl class="t-4 ml20">
+								<dt><font>细节图</font>&nbsp;(<font>建议上传</font>)</dt>
+								<div class="infos_img">
+									<div ng-repeat="dimg in infos.imageUrl" ng-class="dimg.url!='null'?'':'btn-add iconfont icon-add'" style="background-image: url({{infos.domain}}{{dimg.url}}?imageView2/1/format/jpg/w/70/h/70/q/60);" ng-click="upfileImg($event,dimg)">
+										<input type="file" class="upfile">
+										<a>编辑</a>
+									</div>
+								</div>
+							</dl>
+						</div>
+					</div>
+				</div>
+
+				<div class="html-concent table-tow" ng-show="ckType.showType==2">
+					<div class="find">
+						<div class="left">
+							<p class="title">商品描述</p>
+						</div>
+						<div class="right">
+							<!--style给定宽度可以影响编辑器的最终宽度-->
+							<script type="text/plain" id="html-concent" style="width:620px;height:300px;">
+							</script>
+						</div>
+					</div>
+				</div>
+
+				<!-- user-info -->
+				<div class="art-info table-tow clear">
+					<div class="find">
+						<div class="left">
+							<p class="title">标题</p>
+						</div>
+						<div id="artTiele" class="right au-title">
+							<input maxlength="40" ng-model="PublishData.title">
+							<span><i id="inputLimit" ng-class="PublishData.title.length>=40?'red':''" ng-bind="PublishData.title.length">00</i>/40</span>
+						</div>
+					</div>
+					<div class="find">
+						<div class="left">
+							<p class="title">作者</p>
+						</div>
+						<div class="right au-select-box">
+							<div id="userNamePan" class="au-select">
+								<img id="iconUser" ng-src="{{imgUrl}}{{author.uri}}">
+								<input id="userName" ng-model="author.nickName" ng-keyup="searchArtists(author.nickName);">
+							</div>
+							<div class="au-list" ng-if="author.list.length>0" ng-class="author.list.length>0?'show':''">
+								<ul>
+									<li ng-click="setAuthor(data)" ng-repeat="data in author.list">
+										<a class="au-option">
+											<img src="{{imgUrl}}{{data.artistsHead}}">
+											<font ng-bind="data.artistsName"></font>
+										</a>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="find">
+						<div class="left">
+							<p class="title">标签</p>
+						</div>
+						<div class="right labelMain" label-add>
+							<div id="ArryTag" class="arrytag">
+								<div class="label" ng-repeat="tag in PublishData.labelNames track by $index" ng-if="tag!=''">
+									<font ng-bind="tag"></font>
+									<i class="iconfont icon-close-b" ng-click="removeTag(tag);"></i>
+								</div>
+
+								<div class="text-input">
+									<input type="text" maxlength="20" ng-keyup="keyupFn($event)" ng-keydown="keydownFn($event)" placeholder="添加相关标签，用逗号或回车分隔"/>
+								</div>
+							</div>
+							<div class="recently-used">
+								<span class="title">最近使用</span>
+								<a class="label-link" ng-repeat="bl in PublishData.userLabelNames track by $index" ng-bind="bl" ng-click="addClickTag(bl);"></a>
+							</div>
+							<div class="tips">
+								<span class="t-l">评分 80</span>
+								<span class="t-r">请至少添加五个标签。我们会对您的标签进行评分，越精准分数越高，当评分达到80分时，您的作品就有机会被推向国际市场。</span>
+							</div>
+						</div>
+					</div>
+					<div class="find">
+						<div class="left">
+							<p class="title">主题</p>
+							<p class="title-tow">请选择1 - 2个</p>
+						</div>
+						<div id="getAllTopicType" class="right check-list theme">
+							<label class="check" ng-repeat="data in getAllTopicTypeBases.children" ng-click="typechange(data)">
+								<a class="c-f-checkbox" ng-class="data.haveRight?'checked':''"></a>
+								<font ng-bind="data.typeName"></font>
+							</label>
+						</div>
+					</div>
+					<div class="find">
+						<div class="left">
+							<p class="title">&nbsp;</p>
+						</div>
+						<label class="right limit">
+							<input type="checkbox" class="c-f-checkbox" ng-checked="PublishData.ifContainStint==1" ng-model="PublishData.ifContainStint">
+							<div class="float-l">
+								<p class="title">作品含有限制级内容</p>
+								<p>裸露或色情，攻击或歧视，暴力画面等不适合未成年人观看的内容</p>
+							</div>
+						</label>
+					</div>
+					<div class="find">
+						<div class="left">
+							<p class="title">描述</p>
+							<p class="title-tow">0-1000字</p>
+						</div>
+						<div class="right au-description">
+							<textarea id="description" placeholder="吸引人的简介能让更多人发现您的作品" ng-model="PublishData.description" maxlength="1000"></textarea>
+						</div>
+					</div>
+				</div>
+
+				<!-- goods-list -->
+				<div class="goods-list" ng-show="(ckType.id!=171 && ckType.id!=170 && ckType.id!=344)">
+					<div class="gl-title"><i>销售衍生品</i></div>
+					<div class="gl-list" goods-list>
+						<ul>
+							<li ng-repeat="panlList in GoodsListData" ng-if="panlList.defaultInfo.svgContent!=undefined">
+								<!-- CTRL -->
+								<div class="eb-ctrl">
+									<!-- SVG -->
+									<div class="svg" ng-init="ChangSvgSetinit(panlList);" 
+										id="svg{{panlList.defaultInfo.derivationId}}" 
+										data-derivationId="{{panlList.defaultInfo.derivationId}}" 
+										data-productId="{{panlList.defaultInfo.productId}}" 
+										data-templetId="{{panlList.defaultInfo.templetId}}"
+									>
+									</div>
+									<div class="edit-block" set-svg data-id="{{panlList.defaultInfo.derivationId}}">
+										<div class="eb-left">
+											<a class="btn-horizontal" ng-click="setTransformTopCenter(panlList.defaultInfo,'L');"><i class="iconfont icon-horizontal"></i></a>
+											<a class="btn-vertical" ng-click="setTransformTopCenter(panlList.defaultInfo,'T');"><i class="iconfont icon-vertical"></i></a>
+										</div>
+										<div class="eb-centent">
+											<s></s>
+											<i></i>
+										</div>
+										<div class="eb-right"></div>
+									</div>
+								</div>
+								<div class="eb-content">
+									<!-- NAME -->
+									<p class="name" ng-bind="panlList.defaultInfo.productName"></p>
+									<a class="edit" ng-click="editPrce($event,panlList)">编辑收入</a>
+									<p class="costPrice">
+										<font ng-bind="panlList.defaultInfo.currencySymbol"></font>
+										<font ng-bind="((panlList.defaultInfo.costPrice*(panlList.defaultInfo.commission/100))+panlList.defaultInfo.costPrice) | number:2"></font>
+									</p>
+									<div class="clear"></div>
+									<!-- COLOR -->
+									<div class="gl-main">
+										<div class="deft-label-mian" ng-repeat="list in panlList.childInfos" ng-if="list.templetName!='ep'">
+											<label 
+												class="deft-label iconfont {{(list.templetValue!=''?'gl-color':'gl-type')}}" 
+												ng-class="list.release?'icon-check':''" 
+												style="background-color:{{list.templetValue!=''?list.templetValue:''}}" 
+												ng-click="ChangSvg($event,panlList,list);" 
+												data-id="{{list.derivationId}}" ng-bind="list.templetValue==''?list.templetName:''">
+											</label>
+											<div class="find" ng-if="list.childInfos!=null">
+												<div class="t-c">
+													<label 
+														ng-repeat="clist in list.childInfos" 
+														class="deft-label iconfont {{(clist.templetValue!=''?'gl-color':'gl-type')}}" 
+														ng-class="clist.release?'icon-check':''" 
+
+														style="background-color:{{clist.templetValue!=''?clist.templetValue:''}}" 
+														ng-if="clist.templetName!='ep'" 
+														ng-click="ChangSvg($event,panlList,clist);" 
+														data-id="{{clist.derivationId}}" ng-bind="clist.templetValue==''?clist.templetName:''">
+													</label>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<label class="release" ng-class="panlList.defaultInfo.recom==true?'opacity1':''" ng-click="SellOriginal(panlList,panlList.defaultInfo.recom)">
+									<a class="c-f-checkbox" ng-class="panlList.defaultInfo.recom?'checked':''"></a>
+									在我的专卖店展示此商品
+									<span class="tip">
+										选择的商品会展示在专卖店<br>
+										没选择的商品显示在商品详情页的“相关商品”里<br>
+										请选择1-3个，已选择3个
+									</span>
+								</label>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div id="floatBox" class="float-box" style="display:none;">
+			<div class="fb-mask"></div>
+			<div class="fb-dialog">
+				<div class="fb-title">修改您的收入比例</div>
+				<a class="btn-close" onclick="$('#floatBox').hide();"><i class="iconfont icon-close-s"></i></a>
+				<div class="fb-table">
+					<div class="fb-tr">
+						<div class="fb-th">供货价</div>
+						<div class="fb-th">您的收入</div>
+						<div class="fb-th">售价</div>
+					</div>
+					<div class="fb-tr">
+						<div class="fb-td" id="DeliveryRates"></div>
+						<div class="fb-td">+</div>
+						<div class="fb-td">
+							<div class="fb-percent">
+								<input id="numPercent" value="0">
+								<i>%</i>
+							</div>
+							<span id="priceUser">
+								<!-- <i name="priceType">$</i>
+								<s id="priceUser"></s> -->
+							</span>
+						</div>
+						<div class="fb-td">=</div>
+						<div class="fb-td">
+							<span id="priceSell">
+								<!-- <i name="priceType">$</i>
+								<s id="priceSell">1000</s> -->
+							</span>
+						</div>
+					</div>
+				</div>
+				<div class="fb-btn">
+					<a id="btnCloseDialog" class="btn-close-dialog" onclick="$('#floatBox').hide();">取 消</a>
+					<a id="btnEnter" class="btn-enter">确 认</a>
+				</div>
+			</div>
+		</div>
+
+		<!-- goods-release end -->
+		<script src="/js/config.js"></script>
+		<script src="/js/ArtJS/lib/jquery-2.1.4.min.js"></script>
+
+		<!-- 编辑器 -->
+	    <script type="text/javascript" charset="utf-8" src="/js/ArtJS/util/utf8-jsp/ueditor.config.js"></script>
+	    <script type="text/javascript" charset="utf-8" src="/js/ArtJS/util/utf8-jsp/ueditor.all.min.js"> </script>
+	    <!--建议手动加在语言，避免在ie下有时因为加载语言失败导致编辑器加载失败-->
+	    <!--这里加载的语言文件会覆盖你在配置项目里添加的语言类型，比如你在配置项目里配置的是英文，这里加载的中文，那最后就是中文-->
+	    <script type="text/javascript" charset="utf-8" src="/js/ArtJS/util/utf8-jsp/lang/zh-cn/zh-cn.js"></script>
+		<!-- 编辑器--end -->
+
+		<script src="/js/ArtJS/ArtJS.js"></script>
+		<script src="/js/init.js"></script>
+		<script src="/js/ArtJS/lib/angular.min.js"></script>
+		<script src="/module/mod-header-full.js"></script>
+		<script src="/js/goods/goods-release.js"></script>
+	</body>
+</html>

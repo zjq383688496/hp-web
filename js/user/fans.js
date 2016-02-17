@@ -8,11 +8,8 @@ fansApp.controller('fansCtr', function ($scope, $http, $timeout) {
 			}
 			var status = true;
 			var scrollStatus = true;
-
-			$scope.cooid =ArtJS.cookie.get("User_id");
-
-        	$scope.id =request('id');
-
+			$scope.cooid = ArtJS.cookie.get("User_id");
+        	$scope.id = request('uid');
 			$scope.DATA = {
 				pageSize: 16,
 				pageNo: 1,
@@ -22,12 +19,14 @@ fansApp.controller('fansCtr', function ($scope, $http, $timeout) {
 			};
 			$scope.imgUrl    = ArtJS.server.image;
 			$scope.qnIcon = '?imageView2/1/format/jpg/w/60/h/60/q/50';
-			$scope.qnProduct = '?imageView2/1/format/jpg/w/172/h/172/q/50';
+			$scope.qnProduct = '?imageView2/1/format/jpg/w/150/h/150/q/50';
 			$scope.LANG      = LANG;
 			$scope.fansItems = [];
 
-			$('.art-box').show();
+			$('.fans-nav-right').show();
+			$('.a-fans').addClass('active');
 			$scope.getFansFollows = function (callback, error) {
+				$('.data-not').hide();
 				status = true;
 				$scope.fansItems = [];
 				$scope.DATA.pageNo = 1;
@@ -43,6 +42,7 @@ fansApp.controller('fansCtr', function ($scope, $http, $timeout) {
 					}
 					if (typeof(callback) === 'function') callback();
 				}, function () {
+					 if (!$scope.fansItems.length) $('.data-not').show();
 					 if (typeof(error) === 'function') error();
 				});
 			}
@@ -109,11 +109,11 @@ fansApp.controller('fansCtr', function ($scope, $http, $timeout) {
 								if(code ==1){
 									obj.target.parentNode.setAttribute("class","bnt");
 									obj.target.setAttribute("code",0);
-									obj.target.innerHTML ="关注";
+									obj.target.innerHTML =LANG.PAGE.FOLLOW;
 								}else if(code ==0){
 									obj.target.parentNode.setAttribute("class","bnt active");
 									obj.target.setAttribute("code",1);
-									obj.target.innerHTML ="已关注";
+									obj.target.innerHTML =LANG.BUTTON.FOLLOWING;
 								}
 							}
 						});

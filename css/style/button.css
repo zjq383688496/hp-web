@@ -1,2 +1,123 @@
-
-/*# sourceMappingURL=button.css.map */
+/* 混合宏 */
+.btn-box {
+  text-align: center;
+}
+.e-ripple {
+  position: relative;
+}
+.e-ripple s {
+  position: absolute;
+  z-index: 1;
+  width: 120px;
+  height: 120px;
+  display: block;
+  transform-origin: center;
+  opacity: 0;
+  -webkit-transform: translate3d(-50%, -50%, 0px) scale(1) rotate(0deg);
+  transform: translate3d(-50%, -50%, 0px) scale(1) rotate(0deg);
+  -webkit-transform-style: preserve-3d;
+  border-radius: 100%;
+  pointer-events: none;
+  background-color: rgba(255, 255, 255, 0.5);
+  -webkit-animation: btn-scale 0.6s ease;
+  -moz-animation: btn-scale 0.6s ease;
+  animation: btn-scale 0.6s ease;
+}
+@-webkit-keyframes btn-scale {
+  0% {
+    opacity: 1;
+    -webkit-transform: translate3d(-50%, -50%, 0px) scale(0) rotate(0deg);
+    transform: translate3d(-50%, -50%, 0px) scale(0) rotate(0deg);
+    -webkit-transform-style: preserve-3d;
+  }
+  100% {
+    opacity: 0;
+    -webkit-transform: translate3d(-50%, -50%, 0px) scale(1) rotate(0deg);
+    transform: translate3d(-50%, -50%, 0px) scale(1) rotate(0deg);
+    -webkit-transform-style: preserve-3d;
+  }
+}
+@-moz-keyframes btn-scale {
+  0% {
+    opacity: 1;
+    -webkit-transform: translate3d(-50%, -50%, 0px) scale(0) rotate(0deg);
+    transform: translate3d(-50%, -50%, 0px) scale(0) rotate(0deg);
+    -webkit-transform-style: preserve-3d;
+  }
+  100% {
+    opacity: 0;
+    -webkit-transform: translate3d(-50%, -50%, 0px) scale(1) rotate(0deg);
+    transform: translate3d(-50%, -50%, 0px) scale(1) rotate(0deg);
+    -webkit-transform-style: preserve-3d;
+  }
+}
+@keyframes btn-scale {
+  0% {
+    opacity: 1;
+    -webkit-transform: translate3d(-50%, -50%, 0px) scale(0) rotate(0deg);
+    transform: translate3d(-50%, -50%, 0px) scale(0) rotate(0deg);
+    -webkit-transform-style: preserve-3d;
+  }
+  100% {
+    opacity: 0;
+    -webkit-transform: translate3d(-50%, -50%, 0px) scale(1) rotate(0deg);
+    transform: translate3d(-50%, -50%, 0px) scale(1) rotate(0deg);
+    -webkit-transform-style: preserve-3d;
+  }
+}
+.ripple-blue s {
+  background-color: #66ccff;
+}
+.e-btn {
+  position: relative;
+  width: 180px;
+  height: 40px;
+  display: inline-block;
+  line-height: 40px;
+  text-align: center;
+  cursor: pointer;
+  box-sizing: border-box;
+  font-size: 14px;
+  border-radius: 4px;
+  -webkit-transition: all ease 0.2s;
+  -moz-transition: all ease 0.2s;
+  transition: all ease 0.2s;
+  overflow: hidden;
+}
+.btn-disabled {
+  cursor: default;
+}
+.btn-blue {
+  background-color: #66ccff;
+  color: #ffffff;
+}
+.btn-blue:hover {
+  background-color: #29a4e2;
+}
+.btn-black {
+  background-color: #000000;
+  color: #ffffff;
+}
+.btn-white {
+  background-color: #ffffff;
+  color: #000000;
+}
+.btn-white:hover {
+  background-color: #000000;
+  color: #ffffff;
+}
+.btn-gray {
+  background-color: #555555;
+  color: #ffffff;
+}
+.btn-gray:hover {
+  background-color: #333333;
+}
+.btn-green {
+  background-color: #3fbf70;
+  color: #ffffff;
+}
+.btn-blue-g {
+  background-color: #6d7989;
+  color: #ffffff;
+}

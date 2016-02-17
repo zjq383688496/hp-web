@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>艺术品编辑</title>
+    <link rel="stylesheet" type="text/css" href="/css/editor/public.css">
+    <link rel="stylesheet" type="text/css" href="/css/editor/editor.css">
+    <script src="/js/config.js"></script>
+    <script src="/js/editor/jquery.js"></script>
+    <script src="/js/ArtJS/ArtJS.js"></script>
+    <script src="/js/editor/editor-html.js"></script>
+    <script src="/js/editor/main.js"></script>
+    <script src="/js/editor/old.js"></script>
+    <script src="/js/editor/jquery.masonry.min.js"></script>
+</head>
+<body>
+<input type="hidden" value="" id="countryType"/>
+<input type="hidden" name="stopFlg" id="stopFlg" value="1"/>
+<div class="wrapper">
+    <!--小编导航-->
+    <div class="topic_logo">
+        <a href="/"><img src="/css/editor/cmallLogo.png"></a>
+    </div>
+    <!--导航结束-->
+    <div class="clear"></div>
+    <div class="editor-nav">
+        <a class="by-date" flag="1" href="/editor/new-up.html">新上传<i></i></a>
+        <a class="by-date" flag="2" href="/editor/inspect-tag.html">标签检查<i></i></a>
+        <a class="by-date" flag="3" href="/editor/stick.html" id="zhiding">置顶精品<i></i></a>
+        <a class="by-date" flag="4" href="/editor/editor-index.html" id="eIndex">编辑首页<i></i></a>
+        <!-- <a class="by-date active" flag="6" href="/editor/old-works.html" id="oldArt">艺术品编辑<i></i></a> -->
+        <a class="by-date Trash" flag="5" href="/editor/recycle-bin.html">回收站<i></i> </a>
+    </div>
+    <ul id="box-menu" class="box-menu">
+        <li indextag="5" class="current"><a data-classify="3" data-mark="2" href="javascript:;">艺术品</a></li>
+    </ul>
+    <div class="mune-select clearfix">
+        <div id="m-s">
+            <a href="javascript:;" id="selectxb">按更新时间倒序</a>
+            <ul>
+                <li id="2">按更新时间倒序</li>
+                <li id="1">按更新时间正序</li>
+            </ul>
+        </div>
+        <!--<span id="showCount">查询数量:<i></i></span>-->
+        <!--<div class="mav">
+            <a href="javascript:;" id="M_nav">未发布</a>
+            <ul>
+                <li TagId="0">未发布</li>
+                <li TagId="1">已发布</li>
+            </ul>
+        </div>-->
+    </div>
+    <!--导航结束-->
+    <div class="clear"></div>
+</div>
+<!--衍生品-->
+<br>
+<br>
+<div class="container media">
+    <ul class="art_box clearfix" id="container"  data-works="1">
+
+    </ul>
+    <div align="center" class="loadshowcss" style="display:block"><img src="/css/editor/loading.gif"></div>
+</div>
+</body>
+</html>

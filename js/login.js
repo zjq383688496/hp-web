@@ -566,3 +566,11 @@ $(function () {
 	ArtJS.page.setDomain();
 	ArtJS.track.init({google: true, baidu: true});
 });
+	var loginQuick = angular.module('loginQuick', []);
+	loginQuick.controller('loginQuickCtr', function ($scope, $http, $timeout) {
+		ArtJS.load(['header'], function () {
+			$timeout(function () {
+				$scope.LANG=LANG;
+			});
+		});
+	});

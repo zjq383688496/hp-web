@@ -10,52 +10,58 @@ modHeader.directive('modhometag', function () {
 }).controller('modHomeTagController', function ($scope, $http, $timeout) {
 	ArtJS.load(['header'], function () {
 		$timeout(function () {
-			var status = true;
-			$scope.LANG = LANG;
-
-			// 获取分类(全部)
-			$scope.cls = {
-				'208': 'art',        // 艺术新语
-				'209': 'master',     // 大师作品
-				'210': 'anime',      // 插画动漫
-				'211': 'photo',      // 摄影摄像
-				'212': 'design',     // 平面设计
-				'213': 'handwork',   // 手工艺品
-				'214': 'anime',      // 生活创意
-				'215': 'quotations', // 文艺语录
-				'216': 'movie',      // 影视音乐
-				'217': 'game',       // 游戏人物
-				'218': 'public',     // 爱心公益
-				'345': 'activity',   // 艺术新语
-				'395': 'comic',      // 动漫
-				'397': 'charity'     // 古董收藏
+			var API = {
+				typeBases:   '/topicSocSite/topic/getTypeBasesByPage?',				// 获取分类(全部)
+				interestIds: '/topicSocSite/topic/listInterestIdsByGoodsCount?'		// 获取分类(兴趣)
 			}
-			$scope.getTypeBases = function () {
+			var status = true;
+			var intArr = [];
+			$scope.LANG = LANG;
+			// 获取分类(全部)
+			$scope.getTypeBases = function (callback) {
 				var data = {
 					abbr: LANG.NAME,
 					indexTag: '2',
 					page: 'index',
 					source: 'web'
 				};
-				$http.get('/topicSocSite/topic/getTypeBasesByPage?' + ArtJS.json.toUrl(data)).
+				$http.get(API.typeBases + ArtJS.json.toUrl(data)).
 				success(function (data) {
 					if (data.code == CONFIG.CODE_SUCCESS) {
 						$('.mod-home-tag').show();
 						var sort = data.result;
 						var len  = sort.length;
+						var shopScope = scopeArr['shop'];
+						var newItem = [];
 						for (var i = 0; i < len; i++) {
 							var item = sort[i];
 							var id   = item.id;
-							if (id === 4) $scope.sortProduct = item.children;
-							if (id === 207) {
+							if (id === 4) {
+								$scope.sortProduct = item.children;
+							} else if (id === 207) {
 								var items = item.children;
-								for (var p in items) {
-									var id = items[p].id;
-									items[p].className = $scope.cls[id];
+								for (var j = 0, ilen = items.length; j < ilen; j++) {
+									var node = items[j];
+									var nid = node.id;
+									if (nid != 218 && nid != 345) {
+										newItem.push(node);
+									}
 								}
-								$scope.sortInterest = item;
-							}
+								item.children = newItem;
+								item.typeName = LANG.TYPE.TYPE;
+								$scope.sortInterest = shopScope.sortInterest = item;
+							} else if (id === 2) {
+								var items = item.children;
+								for (var j = 0, ilen = items.length; j < ilen; j++) {
+									var node = items[j];
+									var nid = node.id;
+									newItem.push(node);
+								}
+								item.typeName = LANG.TYPE.TYPE;
+								$scope.sortInterest.children = shopScope.sortInterest.children = newItem;
+							};
 						}
+						if (typeof(callback) === 'function') callback();
 					}
 				}).
 				error(function (data) {
@@ -68,16 +74,14 @@ modHeader.directive('modhometag', function () {
 					abbr: LANG.NAME,
 					typeIds: typeIds.join(',')
 				};
-				$http.get('/topicSocSite/topic/listInterestIdsByGoodsCount?' + ArtJS.json.toUrl(data)).
+				$http.get(API.interestIds + ArtJS.json.toUrl(data)).
 				success(function (data) {
 					if (data.code == CONFIG.CODE_SUCCESS) {
+						var shopScope = scopeArr['shop'];
 						var items = data.result;
 						var len  = items.length;
-						for (var p in items) {
-							var id = items[p].id;
-							items[p].className = $scope.cls[id];
-						}
 						$scope.sortInterest.children = data.result;
+						shopScope.sortInterest.children = data.result;
 					}
 				}).
 				error(function () {
@@ -88,53 +92,176 @@ modHeader.directive('modhometag', function () {
 			//  1: 商品一级分类
 			//  2: 商品二级分类
 			//  3: 兴趣分类
+			$scope.filter = function (dom, data) {
+				var data = shopScope.DATA[data];
+			}
+			$scope.gim1 = function (obj, shopScope) {
+				delete(shopScope.DATA.productCategoryId);
+				var typeIds = [];
+				var category = obj.category;
+				var dom = $('#category_'+category.id);
+				var product = category.children;
+				var len     = product? product.length: 0;
+				if (len) {
+					for (var i = 0; i < len; i++) {
+						typeIds.push(product[i].id);
+					}
+				}
+				$scope.getInterestType(typeIds);
+				shopScope.DATA.parentCategoryId = category.id;
+				dom.addClass('s-active');
+				$scope.gimFn(shopScope, function () {
+					dom.addClass('s-active');
+					$scope.nowTag = obj;
+				}, function () {
+					dom.removeClass('s-active');
+				});
+			}
+			$scope.gim2 = function (obj, shopScope) {
+				delete(shopScope.DATA.parentCategoryId);
+				var typeIds = [];
+				var product  = obj.product;
+				var category = obj.$parent.category;
+				shopScope.DATA.productCategoryId = product.id;
+				typeIds.push(product.id);
+				var dom  = $('#product_'+product.id);
+				var pDom = $('#category_'+product.parentId);
+				$scope.getInterestType(typeIds);
+				shopScope.DATA.parentCategoryId = category.id;
+				dom.addClass('s-active');
+				pDom.addClass('s-active');
+				$scope.gimFn(shopScope, function () {
+					dom.addClass('s-active');
+					pDom.addClass('s-active');
+					$scope.nowTag = obj;
+				}, function () {
+					dom.removeClass('s-active');
+				});
+			}
+			$scope.gim3 = function (obj, shopScope) {
+				var cls = 's-active';
+				var id;
+				var par;
+				if (obj.id) {
+					id  = obj.id;
+					par = $('#interest_'+obj.parentId);
+				} else {
+					id  = obj.interest.id;
+				}
+				var dom = $('#interest_'+id);
+				$scope.filterInt(dom, par, id);
+				if (intArr.length) {
+					shopScope.DATA.interestCategoryId = intArr.join(',');
+				} else {
+					delete(shopScope.DATA.interestCategoryId);
+				}
+				$scope.gimFn(shopScope, function () {
+					$scope.nowTag = obj;
+				}, function () {
+				});
+			}
+			$scope.filterInt = function (dom, par, id) {
+				var cls = 's-active',
+					cnew = 'new-active';//临时
+				intArr = [];
+				if (dom.hasClass(cls) || dom.hasClass(cnew)) {
+					dom.removeClass(cls);
+					dom.removeClass(cnew);//临时
+					var parent = dom.parent();
+					if (par) {
+						var child2 = parent.find('a.' + cls);
+						var child3 = parent.find('a.' + cnew);//临时
+						var len2   = child2.length;
+						if (len2 == 0) par.removeClass(cls);
+						if (child3 == 0) par.removeClass(cnew);//临时
+					} else {
+						var next = parent.next('.sort-dd');
+						if (next.length) next.find('a.' + cls).removeClass(cls);
+						if (next.length) next.find('a.' + cls).removeClass(cnew);//临时
+					}
+				} else {
+					dom.addClass(cls);
+					//if (par) par.addClass(cls);
+
+					// if (par) par.addClass('new-active');
+					if (par){
+						par.removeClass(cls);
+					} 
+				}
+				var cd = $('#sortInterest a.' + cls);
+				var le = cd.length;
+				if (le) {
+					for (var i = 0; i < le; i++) {
+						var pid = cd.eq(i).attr('data-pid');
+						intArr.push(pid);
+					}
+				}
+			}
+			$scope.gimFn = function (shopScope, callback, error) {
+				shopScope.getIndexMarket(function () {
+					if (typeof(callback) === 'function') callback();
+					status = true;
+				}, function () {
+					if (typeof(error) === 'function') error();
+					status = true;
+				});
+			}
 			$scope.getIndexMarket = function (obj, type) {
-				console.log(obj);
-				if (status && $scope.nowTag != obj) {
+				var bb = (type < 3 && $scope.nowTag != obj) || type === 3;
+				if (status && bb) {
 					status = false;
 					if (scopeArr && scopeArr['shop']) {
 						var shopScope = scopeArr['shop'];
-						var category;
+						$('.sort-product').find('.s-active').removeClass('s-active');
 						if (type < 3) {
-							var typeIds = [];
-							$('.sort-product .s-active').removeClass('s-active');
+							delete(shopScope.DATA.interestCategoryId);
+							intArr = [];
 							if (type === 1) {
-								delete(shopScope.DATA.productTypeId);
-								category = obj.category;
-								category.active = 's-active';
-								var product = category.children;
-								var len     = product.length;
-								if (len) {
-									for (var i = 0; i < len; i++) {
-										typeIds.push(product[i].id);
-									}
-								}
+								$scope.gim1(obj, shopScope);
 							} else if (type === 2) {
-								var product = obj.product;
-								category    = obj.$parent.category;
-								product.active = 's-active';
-								shopScope.DATA.productTypeId = product.id;
-								typeIds.push(product.id);
+								$scope.gim2(obj, shopScope);
 							}
-							$scope.getInterestType(typeIds);
-							console.log(shopScope.DATA+"aaaaa");
-							shopScope.DATA.category = category.id;
 						} else {
-							var interest = obj.interest;
-							shopScope.DATA.interestTypeId = interest? interest.id: '';
+							$scope.gim3(obj, shopScope);
 						}
-						shopScope.getIndexMarket(function () {
-							status = true;
-						}, function () {
-							status = true;
-						});
-						$scope.nowTag = obj;
+					} else {
+						status = true;
 					}
 				}
 			};
+			// 发布作品
+			$scope.publish = function () {
+				ArtJS.login.pop(function (o) {
+					location.href = '/page/'+LANG.NAME+'/user/gallery.html?uid='+CONFIG.USER.UESR_ID;
+				});
+			}
 
-			$scope.getTypeBases();
-			scopeArr['shop'] = $scope;
+			// 滚动 bar 消失
+			$scope.barScrollHide = function () {
+				var bar = $('#modHomeTag');
+				var h   = bar.height();
+				var offsetTop=bar.offset().top;
+				var oldScroll=0;//记录前一次的滚动值
+				$(window).bind('scroll load', function () {
+					var st = Math.round($(window).scrollTop());
+					if((h+offsetTop)<st){
+						if(oldScroll>st){
+							bar.removeClass('s-hide');
+						}else{
+							bar.addClass('s-hide');
+						}
+					}
+					oldScroll=st;
+					// if (st > h) bar.addClass('s-hide')
+					// else bar.removeClass('s-hide');
+				});
+			}
+
+			$scope.getTypeBases(function () {
+				$scope.barScrollHide();
+			});
+
+			scopeArr['tag'] = $scope;
 		});
 	});
 });

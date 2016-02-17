@@ -4,7 +4,7 @@ $(function(){
 		var userId = ArtJS.cookie.get("User_id");
 		var imagePathPrefix = "";
 		$.ajax({
-    		url : '/goodsSite/artsOperate/getConfigurationUrl',
+    		url : '/goodsSite/qiNiu/getConfigurationUrl',
     		async : false,
     		type : "get",
     		dataType : "json",
@@ -27,7 +27,7 @@ $(function(){
 		    max_file_size: '300mb',//最大文件限制
 		    flash_swf_url: '/drift/dist/js/plupload/Moxie.swf',//引入flash,相对路径
 		    dragdrop: false, //开启可拖曳上传
-		    uptoken_url:'/goodsSite/artsOperate/getUploadToken',//设置请求qiniu-token的url
+		    uptoken_url:'/goodsSite/qiNiu/getUploadToken',//设置请求qiniu-token的url
 		    unique_names: false ,
 		    save_key: false,
 		    domain: bucket_url,//自己的七牛云存储空间域名
@@ -50,7 +50,11 @@ $(function(){
 	                    if (up.runtime === 'html5' && chunk_size) {
 	                      	progress.setChunkProgess(chunk_size);
 	                    }
-	                    $("#show_uploadImg,.copy-out").show();
+	                    $("#show_uploadImg").addClass('md-show');
+	                    $("body").after('<div class="ga-mark"></div>');
+	                    $('body').css({
+	                    	'overflow':'hidden'
+	                    })
 						$("#fsUploadProgress").html('');
 		    		}
 	            },
@@ -76,7 +80,7 @@ $(function(){
 	            },
 	            'FileUploaded': function(up, file, info) {
 	            	var SuccessDiv=$("#fsUploadProgress tr[name='"+file.name+"'] .delete")
-	            	SuccessDiv.attr("class","Success loading").html("处理中").find("a").remove();
+	            	SuccessDiv.attr("class","loading").html("处理中").find("a").remove();
 	            	var res = eval('('+info+')');
 	            	var origSize = file.origSize;//计算后的值;
 					var imgSize = plupload.formatSize(file.size).toUpperCase();//实际值;
@@ -108,14 +112,17 @@ $(function(){
 										$("#uploadSaveInfo").html("");
 										setTimeout(function () {
 											currtImgaCount++;
+											SuccessDiv.addClass('Success');
 											SuccessDiv.removeClass("loading").html('');
 											if (currtImgaCount == imageTotal) {
+												console.log(data.result+'result');
 												//window.parent.location.reload();
+												window.location.href ='/page/CN/goods/goods-release.html?artId='+data.result
 											}
 										}, 5000);
 									}else{
 										$("body").alertTips({
-											"titles":LANGUAGE_NOW.new001.t0141,
+											"titles":LANG.ALERT.A019,
 											"speed":1000,
 											"closeback":function(){
 												window.onbeforeunload=undefined;

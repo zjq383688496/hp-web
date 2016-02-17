@@ -1,0 +1,39 @@
+<!-- JiaThis Button END -->
+<!--商品分享-->
+<link rel="stylesheet" type="text/css" href="/css/share.css">
+
+<div class="goods_Share" style="display:none;">
+    <span class="Shaer_colse iconfont icon-close-b" ng-click="closeShear();"></span>
+
+    <div class="user-img">
+        <img ng-src="{{shearData.pic}}?imageView2/2/w/240/q/90" id="smalldetailuri-share">
+    </div>
+    <p class="link">
+        <i class="iconfont icon-link"></i><font ng-bind="shearLink"></font>
+        <input type="text" ng-model="shearLink">
+    </p>
+    <a class="copy-link" ng-click="copyLink(shearLink)"><i class="iconfont icon-check"></i><font ng-bind="LANGUAGE_NOW.title.copyLink"><!-- 复制链接 --></font></a>
+    <div class="S_cont S_cont cor808080font" ng-bind="LANGUAGE_NOW.goods.shareFr"><!-- 和朋友分享这个商品 --></div>
+    <div class="Sh_name">
+        <div id="ckepop">
+            <a class="jiathis_button_weixin iconfont icon-wechat">
+            </a>
+            <a class="jiathis_button_cqq iconfont icon-qq"></a>
+            <a class="jiathis_button_tsina iconfont icon-sina-weibo">
+            </a>
+            <!--<a class="jiathis_button_qzone"></a>-->
+            <a class="jiathis_button_fb iconfont icon-facebook">
+            </a>
+            <a class="jiathis_button_twitter iconfont icon-twitter">
+            </a>
+            <a class="jiathis_button_googleplus iconfont icon-google">
+            </a>
+            <span class="jiathis_button_code iconfont icon-qrcode">
+                <span class="qrcode">
+                    <span id="qrcode"></span>
+                    <a class="title" ng-bind="LANGUAGE_NOW.title.downloadCode" ng-click="saveImg()"><!-- 下载二维码 --></a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>

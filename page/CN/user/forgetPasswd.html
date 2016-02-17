@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html ng-app="modPwd">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>找回密码</title>
+    <link rel="stylesheet" type="text/css" href="/font/iconfont.css">
+    <link rel="stylesheet" type="text/css" href="/css/header.css">
+    <link rel="stylesheet" type="text/css" href="/css/user/findPwd.css">
+    <link rel="stylesheet" type="text/css" href="/css/media-queries.css">
+</head>
+<body>
+
+<div modheaderfull></div>
+
+<!--头部结束-->
+<div id="body_wrap">
+    <!--body-->
+    <div class="singlerow container_16" id="body">
+        <div class="forget_nav"><span>找回密码</span></div>
+        <!--content-->
+        <div id="step_one">
+            <h3 style="display:none" class="block_title">找回密码</h3>
+            <div class="block m0">
+                <ul style="display:none" class="step_bar step_bar_password">
+                    <li class="arrow f_org">第一步，验证身份</li>
+                    <li class="arrow">第二步，重置密码</li>
+                    <li>第三步，完成</li>
+                </ul>
+                <ul class="items mb20">
+                    <li>
+                        <div style="text-align:center; padding:6px 0"> <span style="display: none" class="check_success" id="check_success_div">验证码已发送到您注册使用邮箱&nbsp;&nbsp;<a style="color:#65d4d4" id="login_email" class="f_org" href="javascript:;">登录邮箱</a>&nbsp;&nbsp;&nbsp;<i id="time_i"></i></span> <span style="display: none;margin-left:110px" id="email_check_error" class="check_error"><span>邮箱格式不正确</span></span> <span style="display: none;margin-left:110px" id="email_check_success" class="check_success"><span>请输入您的登录邮箱</span></span> <span style="display: none;margin-left:110px" id="email_check_no" class="check_error"><span>邮箱不存在</span></span></div>
+                        <label class="subject f_bold">邮件</label>
+                        <input type="text" placeholder="你的电子邮箱" id="email" class="input w200" value="">
+                    </li>
+                    <li style="margin-bottom: 0px">
+                        <div><span id="TipVarCode" style="display: none;margin-left:110px" class="check_success"> 请输入验证码 </span><span style="display:none" id="f_red" class="f_red">*验证码错误</span><span id="TipVarCode" style="display: none;margin-left:110px" class="check_success"> 请输入验证码 </span> <span id="strVarCode" style="display: none;margin-left:110px" class="check_error">  <span id="successVarCode" style="display: none;margin-left:110px" class="check_success">校验通过</span> </span></div>
+                        <label class="subject f_bold">验证码</label>
+                        <input type="password" disabled="disabled" id="mobilePhone" class="input w200 vb" value="">
+                    </li>
+                    <!--<li style="margin-bottom: 0; margin-top: 24px">
+                        <label class="subject f_bold">旧密码</label>
+                        <input type="password" disabled="disabled" id="oldPsw" class="input w200 vb" value="">
+                    </li>-->
+                    <li style="padding: 8px; margin-bottom: 8px; color: #ff2222">
+                        <div id="TipPassword" style="display: none;margin-left:110px" class="check_success">请输入密码:6-20位，可包含字母、数字</div>
+                        <div id="strPassword" style="display: none;margin-left:110px" class="check_error">6-20位，可包含字母、数字</div>
+                    </li>
+                    <li>
+                        <label class="subject f_bold">新密码</label>
+                        <input type="password" disabled="disabled" id="mPsw" class="input w200 vb" value="">
+                    </li>
+                    <li>
+                    <input type="button" id="next_step" style="display: none" class="btn_l mr10 items_right" value="下一步">
+                    <input type="button" id="send" class="btn_l mr10 items_right" value="发送验证码到邮箱">
+                </li>
+                </ul>
+                <ul class="items mb20" id="mobilePhone_li">
+                    <li>
+                        <div> </div>
+                    </li>
+                </ul>
+                <div class="login_other">
+                    <dl>
+                        <dt class="f_bold mb10">无法收到验证码？</dt><br>
+                        <dd class="mb10"> 1.验证码邮件可能在垃圾邮箱中，请仔细查找。</dd><br>
+                        <dd> 2.由于网络原因可能会延迟，如果您5分钟还未收到邮件，请重新发送。</dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+        <div style="display: none;" id="step_tow">
+            <div class="block">
+                <ul class="items mb20">
+                    <li>
+                        <label class="subject f_bold">您的新密码</label>
+                        <div class="items_right">
+                            <input type="password" class="input w200" id="password" value="">
+                        </div></li>
+                    <li style="padding: 0px">
+                        <div id="TipPassword" style="display: none;margin-left:110px" class="check_success">请输入密码:6-20位，可包含字母、数字</div>
+                        <div id="strPassword" style="display: none;margin-left:110px" class="check_error">6-20位，可包含字母、数字</div>
+                    </li>
+                    <li>
+                        <label for="mobilePhone" class="subject f_bold">再次输入新密码:</label>
+                        <input type="password" id="affirm" class="input w200" value="">
+                    </li>
+                    <li>
+                        <div id="TipAffirmPassword" style="display: none;margin-left:110px" class="check_success">请再次输入你的密码</div>
+                        <div id="strAffirmPassword" style="display: none;margin-left:110px" class="check_error">两次输入的密码不一致</div>
+                    </li>
+                    <li>
+                        <input type="button" id="update_botton" class="btn_l mr10 items_right" value="确认修改">
+                    </li>
+                </ul>
+                <div class="login_other">
+                    <dl>
+                        <dt class="f_bold mb10">无法收到验证码？</dt><br>
+                        <dd class="mb10"> 1.验证码邮件可能在垃圾邮箱中，请仔细查找。</dd><br>
+                        <dd> 2.由于网络原因可能会延迟，如果您5分钟还未收到邮件，请重新发送。</dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+        <div id="step_three" style="display: none;">
+            <div class="block">
+                <div class="t_center"> <br>
+                    <br>
+                    <br>
+                    <span class="success_40"><!----></span> <strong class="f_green">恭喜!密码设置成功,请重新登录！</strong><br>
+                    <br>
+                    <br>
+                    <input type="button" id="back_home_button" class="btn_l mr10 items_right" value="返回首页">
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/js/config.js"></script>
+<script src="/js/ArtJS/lib/jquery-2.1.4.min.js"></script>
+<script src="/js/ArtJS/ArtJS.js"></script>
+<script src="/js/init.js"></script>
+<script src="/js/ArtJS/lib/angular.min.js"></script>
+<script src="/module/mod-header-full.js"></script>
+<script src="/js/old/main.js"></script>
+<script src="/js/old/user/ratepassword.js"></script>
+<script src="/js/old/user/findPwd.js"></script>
+<script src="/js/user/forgetPasswd.js"></script>
+</body>
+</html>

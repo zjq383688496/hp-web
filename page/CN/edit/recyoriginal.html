@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>回收站-原作</title>
+	<link rel="stylesheet" href="/css/edit/normal.css">
+	<link rel="stylesheet" type="text/css" href="/css/edit/editor-shop.css">
+	<link rel="stylesheet" href="/js/ArtJS/ui/art.dialog.css">
+</head>
+<body>
+	<section class="section-warp" ng-app="recykCtr">
+		<!-- 头部start -->
+		<!-- <div modheaderfull></div> -->
+		<!-- <div class="head">
+			<div class="container">
+				<div class="logo">
+					<img src="/images/edit/logo.png">
+				</div>
+				<div class="info">
+					<span class="label">欢迎：</span>
+					<span class="user">登录者ID</span>
+				</div>
+			</div>
+		</div> -->
+		<div editor-header></div>
+
+
+
+		<!-- 导航start -->
+	<div class="nav container section-warp">
+		<!-- <h2 class="title">主分类</h2> -->
+		<ul class="tab">			
+			<li class="active">图片</li>
+			<li >衍生品</li>
+			<!-- <li data-code="goodList">第三方商品</li> -->
+		</ul>
+	</div>
+	<br>
+	<!-- 导航end -->
+		<!-- 头部 end -->
+		<div class="shop-box">
+			<div class="divPbnt">
+				<p>
+					<label for="all">
+						<input type="checkbox" onclick="CheckAll('selectAll',this)" value="on" id="all" name="chkall"/>&nbsp;&nbsp;选中全部
+					</label>
+				</p>
+				<p><input type="button" value="全部清除" class="clearVal" id="rClearVal" disabled="disabled" /></p>
+			</div>
+			<form name="form1" method="post" action="">
+				<ul id="boxDom" class="stick" style="position:relative;">
+				</ul>
+			</form>
+		</div>
+	</section>
+</body>
+<script src="/js/config.js"></script>
+<script src="/js/ArtJS/lib/jquery-2.1.4.min.js"></script>
+<script src="/js/ArtJS/ArtJS.js"></script>
+<script src="/js/ArtJS/plug-in-unit.js"></script>
+<script src="/js/init.js"></script>
+<script src="/js/ArtJS/lib/angular.min.js"></script>
+<script src="/module/editor/header.js"></script>
+<script src="/js/ArtJS/ui/art.dialog.js"></script>
+<script src="/js/edit/main.js"></script>
+<script src="/js/edit/recycleori.js"></script>
+<script type="text/javascript">
+	$(function(){
+		recy.init();
+	});
+</script>
+</html>

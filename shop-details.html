@@ -1,0 +1,334 @@
+<link rel="stylesheet" type="text/css" href="/font/iconfont.css"/>
+<link rel="stylesheet" type="text/css" href="/css/shop-details.css">
+<div ng-controller="shopDetailsCtr" class="shopDetails" style="display:none;">
+    <div class="show_box">
+        <div class="iconfont close" ng-click="closeShopDetails()">&#xe60e;</div>
+        <div class="pro_view">
+            <div class="img_big_l" ng-bind-html="GoodsDetail.svgPreview | trustHtml"></div>
+                <!-- <div class="T-shirts" id="t_div">
+                    
+                    <span style="display: none; left: 30px; top: 171px;">
+                    </span>
+                    <div class="show">
+                    </div>
+                </div> -->
+            <div class="img_sma_r">
+                <div class="select_mune">
+                    <a class="mune" ng-bind="GoodsDetail.goodsName"></a>
+                </div>
+                <div class="p_price">
+                    <strike>
+                        <!-- <font ng-bind="GoodsDetail.currencySymbol"></font>
+                        <font ng-bind="GoodsDetail.currencySymbol"></font> -->
+                    </strike>
+                    <span id="goodpprice">
+                        <font ng-bind="GoodsDetail.currencySymbol"></font>
+                        <font ng-bind="GoodsDetail.sellPrice"></font>
+                        <font ng-if="GoodsDetail.customFlag==1">/m²</font>
+                    </span>
+                </div>
+                <div class="color_list">
+                    <label ng-if="threeCategoryInfo.colorTemplet!=null" title="{{threeCategoryInfo.cnColorName}}" class="poRe" ng-class="threeCategoryInfo.templetId==GoodsDetail.templetId?'active':''" ng-repeat="threeCategoryInfo in GoodsDetail.threeCategoryInfo" ng-click="setGoodsColor(threeCategoryInfo)">
+                        <i style="background:{{threeCategoryInfo.colorTemplet}};">
+                        </i>
+                        <em>
+                        </em>
+                    </label>
+
+                    <a ng-if="threeCategoryInfo.colorTemplet==null && threeCategoryInfo.categoryName!=null && threeCategoryInfo.categoryName!='ep'" class="types" ng-class="threeCategoryInfo.templetId==GoodsDetail.templetId?'active':''" ng-repeat="threeCategoryInfo in GoodsDetail.threeCategoryInfo" ng-click="setGoodsColor(threeCategoryInfo)" ng-bind="threeCategoryInfo.categoryName">
+                    </a>
+                </div>
+                <!--正反面-->
+                <div class="frontAndBack" style="display: block;">
+                    <ul class="thumbimgNew" ng-if="GoodsDetail.svgAbbreviated!=null && GoodsDetail.backImguri!=null">
+                        <li>
+                            <p ng-class="GoodsDetail.svgSelect==1?'active':''" ng-bind-html="GoodsDetail.svgAbbreviated | trustHtml" ng-click="changSvgAbbreviated(1)">
+                            </p>
+                            <span ng-bind="LANGUAGE_NOW.goods.front">
+                                <!-- 正面 -->
+                            </span>
+                        </li>
+                        <li>
+                            <p ng-class="GoodsDetail.svgSelect==2?'active':''">
+                                <img id="bigdetailuri" src="{{img_url}}{{GoodsDetail.backImguri}}?imageView2/2/w/50/q/90" ng-click="changSvgAbbreviated(2)">
+                            </p>
+                            <span ng-bind="LANGUAGE_NOW.goods.back">
+                                <!-- 反面 -->
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <span class="iconfont icon-report" ng-click="ShopRoport($event)"></span>
+        </div>
+        <div class="buy-box">
+            <!--标题-->
+            <h2 class="shop-title" ng-bind="GoodsDetail.goodsName">
+            </h2>
+            <!--用户-->
+            <div class="d-user-box">
+                <div class="user-box-con">
+                    <!-- <div class="user">
+                        <a class="photo" style="background-image:url({{img_url}}{{GoodsDetail.authorPicture}});background-size:cover;"
+                        target="_blank" href="user/user-gallery.html?proprietorId={{GoodsDetail.authorId}}">
+                        </a>
+                        <div>
+                            <span ng-bind="LANGUAGE_NOW.goods.author">
+                                作者
+                            </span>
+                            <b ng-bind="GoodsDetail.authorName"></b>
+                        </div>
+                    </div> -->
+                    <div class="user">
+                        <a class="photo" style="background-image:url({{img_url}}{{GoodsDetail.ownerPicture}});background-size:cover;"
+                        target="_blank" href="user/user-gallery.html?proprietorId={{GoodsDetail.ownerId}}">
+                        </a>
+                        <div>
+                            <!-- <span ng-bind="LANGUAGE_NOW.goods.collectors">
+                                收藏者
+                            </span> -->
+                            <b ng-bind="GoodsDetail.ownerNickName">
+                            </b>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="btn-box">
+                <a class="btn border-black" ng-click="ShopShear($event,GoodsDetail)">
+                    <i class="iconfont icon-share">
+                    </i>
+                    <font ng-bind="LANGUAGE_NOW.goods.share">
+                        <!-- 分 享 -->
+                    </font>
+                </a>
+                <!--<a class="btn border-black" href="pips/editor/editor.ct?goodsId={{GoodsDetail.id}}&countryType=cn" target="_blank">
+                    <i class="iconfont icon-edit">
+                    </i>
+                    编 辑
+                </a>-->
+                <a class="btn" ng-click="showYouhua()" ng-if="GoodsDetail!=undefined && GoodsDetail.categoryId!=undefined">
+                    <i class="iconfont icon-cart">
+                    </i>
+                    &nbsp;
+                    <font ng-bind="GoodsDetail.currencySymbol"></font>
+                    <font ng-bind="GoodsDetail.sellPrice"></font>
+                </a>
+            </div>
+            <div class="author-panle">
+                <span class="introduction ng-binding ng-scope" ng-if="GoodsDetail.description!=''" ng-bind="GoodsDetail.description"></span>
+            </div>
+        </div>
+        <!--相关灯丝圈-->
+        <!--<div class="dsq row" ng-if="GoodsTopics.length>0">
+            <h2 class="shop-title dsq-font">
+                <span>
+                    相 关 灯 丝 圈
+                </span>
+            </h2>
+            <div class="dsq-box row">
+                <ul class="art_box row">
+                    <li>
+                        <div class="art_img" style="background-image: url(http://image.artbulb.com/Fi9s40IhOehDkVWiIlTemj4ckVzn?imageView2/1/w/270/h/270/q/90);">
+                        </div>
+                        <div class="text">
+                            <h2 class="special">
+                                <a target="_blank" href="">
+                                    &nbsp;“小黄人”入侵世界名画
+                                </a>
+                            </h2>
+                            <span class="user">
+                                <a href="">
+                                    <b>
+                                        <img src="http://image.artbulb.com/imgsrv/icon/6b06713baf7ef71596c02a8bc7301273.jpg"
+                                        onerror="javascript:this.src='drift/images/tips01.png'">
+                                    </b>
+                                    SANCHEZAvery
+                                </a>
+                            </span>
+                        </div>
+                    </li>
+                </ul>
+                <div class="c_page row" id="c_page">
+                    <a class="c_prev">
+                    </a>
+                    <em>
+                        <b id="d_page">
+                            1
+                        </b>
+                        /
+                        <i id="z_page">
+                            1
+                        </i>
+                    </em>
+                    <a class="c_next">
+                    </a>
+                </div>
+            </div>
+        </div> -->
+        <!--相关灯商品-->
+        <div class="xg-goods row" ng-if="suggestGoods.length>0">
+            <!--标题-->
+            <h2 class="shop-title dsq-font row">
+                <span ng-bind="LANGUAGE_NOW.goods.relatedPr">
+                    <!-- 相 关 商 品 -->
+                </span>
+            </h2>
+            <div class="goods-list row">
+                <ul class="art_box">
+                    <li ng-repeat="suggest in suggestGoods" ng-click="getGoodsDetail(2,suggest.id)">
+                        <div class="art_img" ng-bind-html="suggest.svgView | trustHtml">
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!--其他购买-->
+    <div class="buy-f-box-panle">
+        <div class="buy-f-box">
+            <div class="iconfont buy-f-close">&#xe60e;</div>
+            <div class="buy-f-con">
+                <div class="goods-name">
+                    <font class="find" ng-bind="GoodsDetail.goodsName"><!-- 商品名称 --></font>
+                </div>
+                <div class="goods-info">
+                    <div class="color_list">
+                        <label ng-if="threeCategoryInfo.colorTemplet!=null" title="{{threeCategoryInfo.cnColorName}}" class="poRe" ng-class="threeCategoryInfo.templetId==GoodsDetail.templetId?'active':''" ng-repeat="threeCategoryInfo in GoodsDetail.threeCategoryInfo" ng-click="setGoodsColorGet(threeCategoryInfo)">
+                            <i style="background:{{threeCategoryInfo.colorTemplet}};">
+                            </i>
+                            <em>
+                            </em>
+                        </label>
+
+                        <a ng-if="threeCategoryInfo.colorTemplet==null && threeCategoryInfo.categoryName!=null && threeCategoryInfo.categoryName!='ep'" class="types" ng-class="threeCategoryInfo.templetId==GoodsDetail.templetId?'active':''" ng-repeat="threeCategoryInfo in GoodsDetail.threeCategoryInfo" ng-click="setGoodsColorGet(threeCategoryInfo)" ng-bind="threeCategoryInfo.categoryName">
+                        </a>
+                    </div>
+                    
+                    <!--除衣服类显示size start-->
+                    <div class="buy_out_size_orth" ng-if="shopCatData.propertyInfos!=null">
+                        <a ng-class="propertyInfos.categoryId==SizeCategoryId?'active':''" ng-repeat="propertyInfos in shopCatData.propertyInfos" ng-bind="propertyInfos.categoryName" ng-click="setSize(propertyInfos)"></a>
+                    </div>
+                    <!--除衣服类显示size end-->
+                    <div class="clear">
+                    </div>
+                    <!--衣服类显示size start-->
+                    <div class="size-box" ng-if="GoodsDetail.ifHasWidthHeight && shopCatData.StarfourCategoryInfo.length>0">
+                        <table cellspacing="0" cellpadding="0" border="0">
+                            <thead>
+                                <tr>
+                                    <th width="30%" ng-bind="LANGUAGE_NOW.goods.size">
+                                        <!-- 尺码 -->
+                                    </th>
+                                    <th width="35%">
+                                        <font ng-bind="LANGUAGE_NOW.goods.width"><!-- 衣宽 --></font>(cm)
+                                    </th>
+                                    <th width="35%">
+                                        <font ng-bind="LANGUAGE_NOW.goods.length"><!-- 衣长 --></font>(cm)
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody id="sizeselectother">
+                                <!-- ng-if="cat.parentCategoryId==GoodsDetail.categoryId" -->
+                                <tr ng-repeat="cat in shopCatData.StarfourCategoryInfo" ng-init="fourOver()">
+                                    <td align="center">
+                                        <div class="size-s">
+                                            <a ng-bind="cat.categoryName" ng-class="cat.id==CatDataThis.id?'active':''" ng-click="setCatDataThis(cat)"></a>
+                                        </div>
+                                    </td>
+                                    <td ng-bind="cat.width"></td>
+                                    <td ng-bind="cat.hight"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="buy_out_size_orth" ng-if="!GoodsDetail.ifHasWidthHeight && shopCatData.StarfourCategoryInfo.length>0">
+                        <a ng-repeat="cat in shopCatData.StarfourCategoryInfo" ng-init="fourOver()" ng-bind="cat.categoryName" ng-class="cat.id==CatDataThis.id?'active':''" ng-click="setCatDataThis(cat)"></a>
+                    </div>
+                    <!--衣服类显示size end-->
+
+
+                    <div class="clear">
+                    </div>
+                    <div ng-if="shopCatData.StarfourCategoryInfo.length>0">
+                        <div class="qty">
+                            <input id="number" class="number" type="text" ng-keyup="verificationNumber($event)" onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))" ng-model="number">
+                            <div class="add-down">
+                                <a class="iconfont angleup" title="增加" ng-click="setNumber('add')">&#xe62f;</a>
+                                <a class="iconfont angledown" title="减少" ng-click="setNumber('reduce')">&#xe62c;</a>
+                            </div>
+                        </div>
+                        <span id="goodprice3" class="p_price">
+                            <em ng-bind="GoodsDetail.currencySymbol">
+                                <!-- 单位 -->
+                            </em>
+                            <i ng-bind="AllNumber">
+                                <!-- 单价 -->
+                            </i>
+                        </span>
+                    </div>
+                    <div class="clear">
+                    </div>
+                </div>
+            </div>
+            <!-- 加入购物车成功 ,加入购物车-->
+            <div class="add-cart" ng-click="AddCat($event)" ng-bind="customSize.type==2?LANGUAGE_NOW.goods.cartSus:LANGUAGE_NOW.goods.cart"></div>
+        </div>
+    </div>
+
+    <!--油画-->
+    <div class="youhua-panle">
+        <div class="youhua">
+            <div class="iconfont buy-f-close">&#xe60e;</div>
+            <div class="b-title">
+                <font ng-bind="GoodsDetail.goodsName"><!-- 商品名称 --></font>
+            </div>
+            <div class="color_list">
+                <label ng-if="threeCategoryInfo.colorTemplet!=null" title="{{threeCategoryInfo.cnColorName}}" class="poRe" ng-class="threeCategoryInfo.templetId==GoodsDetail.templetId?'active':''" ng-repeat="threeCategoryInfo in GoodsDetail.threeCategoryInfo" ng-click="setGoodsColorGet(threeCategoryInfo)">
+                    <i style="background:{{threeCategoryInfo.colorTemplet}};">
+                    </i>
+                    <em>
+                    </em>
+                </label>
+
+                <a ng-if="threeCategoryInfo.colorTemplet==null && threeCategoryInfo.categoryName!=null && threeCategoryInfo.categoryName!='ep'" class="types" ng-class="threeCategoryInfo.templetId==GoodsDetail.templetId?'active':''" ng-repeat="threeCategoryInfo in GoodsDetail.threeCategoryInfo" ng-click="setGoodsColorGet(threeCategoryInfo)" ng-bind="threeCategoryInfo.categoryName">
+                </a>
+            </div>
+            <div class="b-tab">
+                <a ng-repeat="cat in shopCatData.StarfourCategoryInfo" ng-init="fourOver()" ng-class="cat.id==CatDataThis.id && customSize.type==0?'active':''" ng-click="setCatDataThis(cat)">
+                    <font ng-bind="cat.categoryName"></font>
+                </a>
+                <!-- <a ng-class="customSize.type==1?'active':''" ng-click="setCustom()">
+                    自定义
+                </a> -->
+            </div>
+            <div class="w-h" ng-if="customSize.type==1">
+                宽
+                <input type="text" ng-model="customSize.width" ng-change="yzcustomSize(customSize,'width')">
+                CM &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp高
+                <input type="text" ng-model="customSize.height" ng-change="yzcustomSize(customSize,'height')">
+                CM
+            </div>
+            <div class="buy-price">
+                <span ng-if="customSize.type==1">
+                    <font ng-bind="GoodsDetail.currencySymbol"></font>
+                    <font ng-bind="customSize.sellPrice"></font>
+                     x 
+                    <font ng-bind="(customSize.width*customSize.height)/10000 |number:2"></font>
+                     m2 ＝
+                </span>
+                <i>
+                    <font ng-bind="GoodsDetail.currencySymbol"></font>
+                    <font ng-bind="GoodsDetail.sellPrice"></font>
+                </i>
+            </div>
+            
+            <!-- '编 辑' '加入购物车成功':'加入购物车'-->
+            <div class="a-bnt" ng-bind="customSize.type==1?LANGUAGE_NOW.goods.edit:(customSize.type==2?LANGUAGE_NOW.goods.cartSus:LANGUAGE_NOW.goods.cart)" ng-click="customAddCat($event)"></div>
+        </div>
+    </div>
+
+    <shear class="shear"></shear>
+    <report></report>
+</div>

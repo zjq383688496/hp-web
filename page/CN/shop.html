@@ -2,7 +2,7 @@
 <html ng-app="shop">
 	<head>
 		<meta charset="utf-8">
-		<title>艺术品</title>
+		<title>创e商城</title>
 		<link rel="stylesheet" href="/font/iconfont.css">
 		<link rel="stylesheet" href="/css/header.css">
 		<link rel="stylesheet" href="/css/home.css">
@@ -14,21 +14,71 @@
 <div modhometag></div>
 
 <!-- container -->
-<div class="container" ng-controller="shopCtr">
-	<ul class="art-box a-imageload">
-		<li data-index="{{$index}}" ng-repeat="item in pageItems">
-			<a class="art-img img-loading e-ripple" ng-click="goodsInfo(item.id);"><img data-src="{{imgUrl}}{{item.uri}}{{qnProduct}}"></a>
-			<div class="art-info">
-				<p class="art-title" title="{{item.title}}" ng-bind="item.title"></p>
-				<a class="art-user" data-user="{{item.memberName}}"><b class="img-loading"><img data-src="{{imgUrl}}{{item.memberImg}}{{qnIcon}}"></b></a>
-				<p class="art-ctr">
-					<span><a class="iconfont icon-icon{{item.light == true? ' art-light': ''}}" ng-click="artsLike(this);"></a><i ng-bind="item.collectionNumber"></i></span>
-					<span>{{item.currencySymbol}}{{item.sellPrice}}</span>
-				</p>
+<div class="container shop-content" ng-controller="shopCtr">
+	<div class="home-side">
+
+		<!-- mod-home-side start -->
+		<div id="modHomeSide" class="mod-home-side">
+			<div id="modHomeSideContent" class="mod-home-side-content">
+				<!-- interest -->
+				<dl id="sortInterest" class="sort-side">
+					<dt class="shopSx"><span ng-bind="sortInterest.typeName"></span></dt>
+					<dd>
+						<ul class="sort-dl" ng-repeat="interest in sortInterest.children">
+							<li class="sort-dt">
+								<a id="interest_{{interest.id}}" data-pid="{{interest.id}}" ng-click="tagGetIndexMarket(this, 3);" ng-bind="interest.typeName"></a>
+								<i class="iconfont icon-angleright" ng-if="interest.children.length"></i>
+							</li>
+							<li class="sort-dd" ng-if="interest.children.length">
+								<div>
+									<a id="interest_{{item.id}}" ng-repeat="item in interest.children" data-pid="{{item.id}}" ng-click="tagGetIndexMarket(item, 3);" ng-bind="item.typeName"></a>
+								</div>
+								<s></s>
+							</li>
+						</ul>
+						<!-- <a id="interest_{{interest.id}}" ng-repeat="interest in sortInterest.children" data-pid="{{interest.id}}" ng-click="tagGetIndexMarket(this, 3);"><b><i class="iconfont icon-check"></i></b><span ng-bind="interest.typeName"></span></a>
+						<a id="interest_{{type.id}}" ng-repeat="type in sortType.children" data-pid="{{type.id}}" ng-click="tagGetIndexMarket(this, 3);"><b><i class="iconfont icon-check"></i></b><span ng-bind="type.typeName"></span></a> -->
+					</dd>
+				</dl>
 			</div>
-		</li>
-	</ul>
-	<div class="{{loading}}"></div>
+		</div>
+		<!-- mod-home-side end -->
+
+	</div>
+
+	<div class="home-goods">
+
+		<div class="home-banner" ng-show="haveBanner">
+			<ul class="banner-img">
+				<li class="img" ng-repeat="item in banner">
+					<a><img src="{{imgUrl}}{{item.imgUrl}}{{qn850}}"></a>
+				</li>
+			</ul>
+		</div>
+
+		<ul class="art-box a-imageload">
+			<li data-index="{{$index}}" ng-repeat="item in pageItems">
+				<a class="art-img img-loading" ng-click="goodsInfo(item.goodsId);"><img data-src="{{imgUrl}}{{item.imagePath}}{{qnProduct}}"></a>
+				<div class="art-info">
+					<p class="art-title" title="{{item.goodsName}}" ng-bind="item.goodsName"></p>
+					<p class="art-price">{{item.currencySymbol}}{{item.sellPrice}}{{ item.customFlag === 1? ' / ㎡': '' }}</p>
+					<p class="art-title" >
+						<a class="art-user" data-user="{{item.createUserName}}" href="/page/{{LANG.NAME}}/user/gallery.html?uid={{item.createUserId}}"><b class="img-loading"><img data-src="{{imgUrl}}{{item.createUserImage}}{{qnIcon}}"></b></a>
+					</p>
+					<p class="art-price"><a class="iconfont icon-icon{{item.light == true? ' art-light': ''}}" ng-click="artsLike(this);"></a><i ng-bind="item.likeCount"></i></p>
+					<!-- <p class="art-ctr" style="clear:both;">
+						<a class="art-user" data-user="{{item.createUserName}}" href="/page/{{LANG.NAME}}/user/gallery.html?uid={{item.createUserId}}"><b class="img-loading"><img data-src="{{imgUrl}}{{item.createUserImage}}{{qnIcon}}"></b></a>
+						<span><a class="iconfont icon-icon{{item.light == true? ' art-light': ''}}" ng-click="artsLike(this);"></a><i ng-bind="item.likeCount"></i></span>
+					</p> -->
+				</div>
+			</li>
+		</ul>
+		<div class="{{loading}}"></div>
+		<div class="data-not">
+			<img src="/images/img-404.png" style="margin:0 auto;">
+			<p>{{LANG.TEXT.T108}}</p>
+		</div>
+	</div>
 </div>
 
 <!-- JS -->
@@ -40,6 +90,12 @@
 <script src="/module/mod-header-full.js"></script>
 <script src="/module/mod-home-tag.js"></script>
 <script src="/js/shop.js"></script>
-
+<script src="/js/interests.js"></script>
+<style type="text/css">
+	.sort-side a.new-active{
+		font-weight: 700;
+    	color: #333;
+	}
+</style><!--16.2.4-->
 </body>
 </html>

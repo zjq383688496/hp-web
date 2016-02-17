@@ -7,7 +7,7 @@ modHeader.directive('modheaderfull', function () {
 			var HEADER = {
 				init: function () {
 					var me = this;
-					me.$header = $('.header-con, .user-info');
+					me.$header = $('#headerBox>.layout');
 					me.bindEvent();
 				},
 				bindEvent: function () {
@@ -34,9 +34,11 @@ modHeader.directive('modheaderfull', function () {
 				$input: $('#searchContext'),
 				$map: $('#keywordsMap'),
 				$btn: $('#btnSearch'),
-				_keyword: unescape(location.href.getQueryValue('searchContext')) || '',
+				_keyword: decodeURI(location.href.getQueryValue('searchContext')) || '',
+				// keyword:unescape(location.href.getQueryValue('searchContext'))|| '',
 				_keyLen: 0
 			};
+			$scope.searchContext=data._keyword;
 			if (!window.SEARCH_HANDLE) window.SEARCH_HANDLE = {};
 			SEARCH_HANDLE = {
 				submit: function () {

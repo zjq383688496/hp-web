@@ -1,51 +1,96 @@
 <!DOCTYPE html>
-<html ng-app="demo">
-	<head>
-		<meta charset="utf-8">
-		<title>艺术品</title>
-		<link rel="stylesheet" type="text/css" href="font/iconfont.css">
-		<link rel="stylesheet" type="text/css" href="css/header.css">
-	</head>
-<body>
+<html ng-app="works">
+    <head>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no">
+        <title>搜索</title>
+        <meta name="keywords" content="artbulb"/>
+        <meta name="description" content="artbulb"/>        
+		<link rel="stylesheet" href="/font/iconfont.css">
+        <link rel="stylesheet" type="text/css" href="/css/header.css">
+        <link rel="stylesheet" type="text/css" href="/css/style.css">       
+        <link rel="stylesheet" type="text/css" href="/css/media-queries.css">
+        <link rel="stylesheet" type="text/css" href="/css/search.css">
+    </head>
+    <body>
 
-<div modheaderfull></div>
+        <div modheaderfull></div>
+        <!-- <input type="hidden" id="hsrc" data-hs="0"/>
+        <input type="hidden" id="data_key" data_key_s=""/>
+        头部search开始
+        <div class="headerbox">
+            <div class="logo"><a href="/"><img src="/images/logo.png"/></a></div>
+            <div class="top_search">
+                <div id="searchs"><b class="cloce2" id="cloceSearch"><span></span><input type="hidden" id="s_val"/></b></div>
+                <input name="" type="text" id="search" data-search="1" class="input"/>
+                <label class="ztag"></label>
+                <input type="hidden" id="sVal" value=""/>
+                <input type="hidden" id="upVal" value=""/>
+                <input name="" type="button" class="btn" id="dataSearch" data-role="inputS"/>
+            </div>
+           
+        </div>
+        用户信息，注册登录按钮
+        <div class="navbox">
+            <div class="nav_btn"><a href="javascript:void(0)"><img src="/images/nav_ico.png"/></a></div>
+            <div class="user" id="userLogin"></div>
+        </div> -->
+        <!--头部search结束-->
+<div ng-controller="works-ctr">
 
-<!-- container -->
-<div class="container">
-	<h2>icon-50</h2>
-	<div>
-		<i class="iconfont icon-wechat-80"></i>
-		<i class="iconfont icon-qq-80"></i>
-		<i class="iconfont icon-sina-80"></i>
-		<i class="iconfont icon-facebook-80"></i>
-		<i class="iconfont icon-google-80"></i>
-		<i class="iconfont icon-twitter-80"></i>
-	</div>
-	<h2>icon-32</h2>
-	<div>
-		<i class="iconfont icon-wechat-32"></i>
-		<i class="iconfont icon-qq-32"></i>
-		<i class="iconfont icon-sina-32"></i>
-		<i class="iconfont icon-facebook-32"></i>
-		<i class="iconfont icon-google-32"></i>
-		<i class="iconfont icon-twitter-32"></i>
-	</div>
-	<h2>icon-12</h2>
-	<div>
-		<i class="iconfont icon-facebook-12"></i>
-		<i class="iconfont icon-google-12"></i>
-		<i class="iconfont icon-twitter-12"></i>
-	</div>
-</div>
+        <div class="wrapper">
+            <!--导航结束-->
+            <ul class="box-menu" id="search">
+                <li><a data-works="2" data-search="4" data-href="SearchServer/service/search/"></a></li>
+                <li><a data-works="1" data-search="3" data-href="SearchServer/service/search/"></a></li>
+                <li><a data-works="0" data-search="1" data-href="SearchServer/service/search/"></a></li>
+                <li><a data-works="3" data-search="2" data-href="SearchServer/service/search/"></a></li>
+            </ul>
+            <!--头部结束-->
+        </div>
+       <!--艺术品|衍生品|灯丝圈-->
+        <div class="container media search-container">
+            <ul class="art_box clearfix" id="container" data-works="0">
+            </ul>
+           <!--  <div align="center" class="loadshowcss" style="display:block"><img src="/images/loading.gif"></div> -->
+            <!-- <div class="clear"></div> -->
+            <!--艺术家-->
+            <div id="index-Artists" class="my-f-list index-Artists">
 
-<!-- JS -->
-<script src="/js/config.js"></script>
-<script src="/js/ArtJS/lib/jquery-2.1.4.min.js"></script>
-<script src="/js/ArtJS/ArtJS.js"></script>
-<script src="/js/init.js"></script>
-<script src="/js/ArtJS/lib/angular.min.js"></script>
-<script src="/module/mod-header-full.js"></script>
-<script src="/js/demo.js"></script>
+            </div>
+        </div>
+        <div id="goodsDatail">
 
-</body>
+        </div>
+        <artdetails on-finish-render-filters></artdetails>
+        <!-- <div artdetails on-finish-render-filters></div> -->
+        <shear class="shear"></shear>
+        <!-- <div report-mod class="report"></div> -->
+        <shopdetailsdir style="display:none;"></shopdetailsdir>
+        <div class="loading"></div>
+        <div class="data-not">
+            <img src="/images/img-404.png" style="margin:0 auto;">
+            {{LANG.TEXT.T108}}
+        </div>
+        </div>
+       
+        <script src="/js/config.js"></script>
+        <script src="/js/ArtJS/lib/jquery-2.1.4.min.js"></script>
+        <script src="/js/ArtJS/ArtJS.js"></script>
+        <script src="/js/init.js"></script>
+        <script src="/js/ArtJS/lib/angular.min.js"></script>
+        <script src="/js/ArtJS/lib/angular-route.min.js"></script>
+        <script src="/module/mod-header-full.js"></script>
+        <script src="/js/old/jquer-arts.min.js"></script>
+        <script src="/js/old/plug-in-unit.js"></script>
+        <script src="/js/old/jquery.cookie.js"></script>
+        <script src="/js/old/art-details.js"></script>
+        <script src="/js/old/shop-details.js"></script>
+        <script src="/js/old/app.js"></script>
+        <script src="/js/old/works.js"></script>
+        <script src="/js/old/nvarchar.js"></script>
+        <script src="/js/old/main.js"></script>
+        <script src="/js/old/b.js"></script>
+        <script src="/js/search.js"></script>
+    </body>
 </html>

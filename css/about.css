@@ -1,0 +1,53 @@
+.about-box{
+			display: none;
+		}
+		.act::before, .act::after {
+		    content: " ";
+		    display: table;
+		}
+		.act::before, .act::after {
+		    content: " ";
+		    display: table;
+		}
+		.act::after {
+		    clear: both;
+		}
+      	.about-box{
+	      	background: url(/images/about-bg-25.png) no-repeat top center;
+	      	width: 1004px;
+	      	min-height: 412px;
+	      	margin: 0 auto;
+	      	clear: both;
+      		overflow:hidden;
+      	}
+		.about-box h2{
+	      	font-size: 24px;
+	      	font-weight: normal;
+      	}
+		.about-box p{
+	      	font-size: 14px;
+	      	line-height: 30px;
+	      	padding-top: 24px;
+	      	padding-bottom: 8px;
+      	}
+		.about-box .ca{
+		   margin-top: 358px;
+		}
+		.copyright {
+		    margin: 0 auto;
+		    padding: 50px 0 50px 0;
+		    text-align: center;
+		    width: 100%;
+		}
+		.about-logo{
+			position: absolute;
+			width: 326px;
+			height: 238px;
+			left: 50%;
+			top:110px;
+			margin-left: -163px;
+			text-align: center;
+		}
+		.about-logo i{
+			font-size: 201px;
+		}

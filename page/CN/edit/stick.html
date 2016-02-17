@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>标签置顶设置</title>
+	<link rel="stylesheet" href="/font/iconfont.css">   
+	<link rel="stylesheet" href="/css/header.css">
+	<link rel="stylesheet" href="/js/ArtJS/ui/art.dialog.css">
+	<link rel="stylesheet" type="text/css" href="/css/edit/editor-shop.css">
+	<style type="text/css">
+		.box_choice{
+			margin-bottom:20px;
+			position:relative;
+			clear:both;
+			min-height:50px;
+			background: #f0f0f0;
+			line-height:50px;
+		}
+		.box_choice dd{
+			padding-left:10px;
+		}
+		.box_choice dd.liwu{
+			position:absolute;
+			left:0;
+			top:0;
+			z-index:1000;
+		}
+		.box_choice dl {
+		    margin-top: 12px;
+		    float: left;
+		}
+		.box_choice ul li {
+		    float: left;
+		    width: 110px;
+		    position: relative;
+		    margin-left:0;
+		    margin-right:0;
+		    margin-bottom:0;
+		}
+		.box_choice ul li > a {
+		    color: #333;
+		    font-size: 12px;
+		    height: 47px;
+		    display: block;
+		}
+		.box_choice ul li a.active tt{
+			border-bottom:2px solid #333;
+		}
+		.box_choice dd.liwu a {
+		    width: inherit;
+		    float: none;
+		    padding-right: 0;
+		    height: 50px;
+		    line-height: 50px;
+		    text-align:center;
+		}
+		.box_choice dd.liwu a tt{
+		    cursor:pointer;
+		}
+		.box_choice ul li >div a {
+		    display: block;
+		    color: #96a1ac;
+		    font-size: 12px;
+		    line-height: 40px;
+		    margin: 0;
+		    margin-top:-6px;
+		}
+		.box_choice ul li >div{
+		    -webkit-transition-property: opacity, -webkit-transform;
+		    -moz-transition-property: opacity, -webkit-transform;
+		    -ms-transition-property: opacity, -webkit-transform;
+		    -o-transition-property: opacity, -webkit-transform;
+		    transition-property: opacity, -webkit-transform;
+		    -webkit-transition-duration: .15s;
+		    -moz-transition-duration: .15s;
+		    -ms-transition-duration: .15s;
+		    -o-transition-duration: .15s;
+		    transition-duration: .15s;
+		    -webkit-transition-timing-function: ease-out;
+		    -moz-transition-timing-function: ease-out;
+		    -ms-transition-timing-function: ease-out;
+		    -o-transition-timing-function: ease-out;
+		    transition-timing-function: ease-out;
+		    -webkit-transform: scale(0.9);
+		    opacity: 0;
+		    pointer-events: none;
+		    display: none \9;
+		    visibility: hidden;
+		    background:#333;
+		    position:absolute;
+		    top:42px;
+		    left:0;
+		    width:100%;
+		}
+		.box_choice ul li:hover a{
+			background:#fff;
+		}
+		.box_choice ul li:hover >div {
+		    opacity: 1;
+		    -webkit-transform: scale(1);
+		    pointer-events: all;
+		    display: block \9;
+		    visibility: visible;
+		}
+	</style>
+</head>
+<body>
+	<section class="section-warp" ng-app="stickCtr">
+		<!-- 头部start -->
+		<!-- <div modheaderfull></div> -->
+		<!-- <div class="head">
+			<div class="container">
+				<div class="logo">
+					<img src="/images/edit/logo.png">
+				</div>
+				<div class="info">
+					<span class="label">欢迎：</span>
+					<span class="user">登录者ID</span>
+				</div>
+			</div>
+		</div> -->
+		<div editor-header></div>
+		<!-- 头部 end -->
+		<nav class="nav-box">
+			<dl id="shopClass" class="box_choice"> 
+			   <dd class="clearfix liwu us-w"> 
+			    <div class="mune-L clearfix"> 
+			     <ul id="navDom"> 
+			     </ul>
+			    </div>
+			   </dd>
+			</dl>
+		</nav>
+		<div class="nav-mune">
+		当前分类: <font id="bigClass"></font> ><font id="smallClass"></font>
+		</div>
+		<div class="shop-box">
+			<ul id="boxDom" class="stick" style="position:relative;">
+			</ul>
+		</div>
+	</section>
+</body>
+<script src="/js/config.js"></script>
+<script src="/js/ArtJS/lib/jquery-2.1.4.min.js"></script>
+<script src="/js/ArtJS/ArtJS.js"></script>
+<script src="/js/ArtJS/plug-in-unit.js"></script>
+<script src="/js/init.js"></script>
+<script src="/js/ArtJS/lib/angular.min.js"></script>
+<script src="/module/editor/header.js"></script>
+<script src="/js/ArtJS/ui/art.dialog.js"></script>
+<script src="/js/edit/main.js"></script>
+<script src="/js/edit/stick.js"></script>
+</html>
+<div class="span">
+	<div class="eye"></div>
+	<div class="bottom"></div>
+</div>
+<style type="text/css">
+.span{
+    width: 100px;
+    background: #59488b;
+    vertical-align: middle;
+    border-radius: 50px;
+    margin:0 auto;
+    position:fixed;
+    left:50%;
+    bottom:0;
+    height:100px;
+    margin-left:-70px;
+    display:none;
+}
+.eye {
+    width: 20px;
+    height: 20px;
+    background-color: #fff;
+    border-radius: 50%;
+    box-shadow: 30px 0px 0px 0px rgba(255,255,255,0.8);
+    position: relative;
+    margin: 16px 26px;
+}
+.eye:after{
+    background-color: #333;
+    width: 10px;
+    height: 10px;
+    box-shadow: 30px 0px 0px 0px #333;
+    border-radius: 50%;
+    left: 9px;
+    top: 8px;
+    position: absolute;
+    content: "";
+    -webkit-animation: eyeball .5s linear infinite alternate;
+       -moz-animation: eyeball .5s linear infinite alternate;
+            animation: eyeball .5s linear infinite alternate;
+}
+.bottom {
+    width: 60px;
+    height: 30px;
+    border-radius: 0 0 50px 50px;
+    border: 1px solid #fff;
+    border-top: 0;
+    margin: 0 auto;
+    }
+@-webkit-keyframes eyeball{
+    0%{left: 9px;}
+    100%{left: 1px;}
+}
+@-moz-keyframes eyeball{
+    0%{left: 9px;}
+    100%{left: 1px;}
+}
+@keyframes eyeball{
+    0%{left: 9px;}
+    100%{left: 1px;}
+}
+		</style>

@@ -1,0 +1,99 @@
+<link rel="stylesheet" href="/css/art-details.css" type="text/css" />
+<link rel="stylesheet" type="text/css" href="/css/media-queries.css">
+<div id="art-details" class="pro-panle" style="display: none;" ng-controller="art-details-ctr">
+	<div class="pro-f-y"></div>
+	<div class="pro-f-box">
+		<div ng-click="closeArtDetails();" class="pro-f-box-close iconfont">&#xe60e;</div>
+		<div class="pro_show_box" id="suggestshow">
+			<div class="pro_view p_bg02">
+				<span class="iconfont icon-report" ng-click="showReport(artworkId,'Artwork');"></span>
+				<div class="img_big">
+					<span class="ib-box">
+						<img src="{{img_url}}{{getArtworkDetail.artsUri}}?imageView2/2/w/600/q/90">
+					</span>
+				</div>
+				<ul class="ib-pre">
+					<li>
+						<img src="{{img_url}}{{getArtworkDetail.artsUri}}?imageView2/2/w/600/q/90">
+					</li>
+				</ul>
+			</div>
+			<div class="exhibition-booth">
+				<h1 class="title" ng-if="getArtworkDetail.artsTitle!=''" ng-bind="getArtworkDetail.artsTitle"></h1>
+				<div class="user-box">
+					<div class="user-box-con">
+						<!-- <div class="user">
+							<a class="photo" style="background-image:url({{img_url}}{{getArtworkDetail.authorHead}});background-size:cover;" target="_blank" href="user/user-gallery.html?proprietorId={{getArtworkDetail.authorId}}"></a>
+							<div>
+								<span ng-bind="LANGUAGE_NOW.goods.author">作者</span>
+								<b ng-bind="getArtworkDetail.authorName"></b>
+							</div>
+						</div> -->
+						<div class="user">
+							<a class="photo" style="background-image:url({{img_url}}{{getArtworkDetail.artsMemberInfoVo.memberHead}});background-size:cover;" target="_blank" href="/user/user-gallery.html?proprietorId={{getArtworkDetail.artsMemberInfoVo.memberId}}"></a>
+							<div>
+								<!-- <span ng-bind="LANGUAGE_NOW.goods.collectors">收藏者</span> -->
+								<b ng-bind="getArtworkDetail.artsMemberInfoVo.memberName"></b>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="btn-box" ng-if="getArtworkDetail.releaseStatus!=0">
+					<a class="btn border-black" ng-click="artShear($event);">
+						<i class="iconfont icon-share"></i><span ng-bind="LANGUAGE_NOW.goods.share"><!-- 分 享 --></span>
+					</a>
+					<a class="btn" ng-click="ArtAddCat()"><i class="iconfont icon-cart"></i><span ng-bind="getArtworkDetail.sellStatusStr"><!-- 购买 --></span></a>
+				</div>
+				<span class="find">
+				</span>
+			</div>
+			 
+			<div class="author-panle">
+				<span class="introduction" ng-if="getArtworkDetail.artsDescp!=''" ng-bind="getArtworkDetail.artsDescp"></span>
+			</div>
+
+			<div class="container" ng-show="artsTopicInfoVos.pageItems.length>0">
+				<h1 class="tip-title" ng-bind="LANGUAGE_NOW.goods.relatedSp"><!-- 相关灯丝圈 --></h1>
+				<div class="art_box_p">
+					<ul class="art_box clearfix">
+						<li ng-repeat="arts in artsTopicInfoVos.pageItems">
+							<div class="art_img" style="background-image: url({{arts.topicUri}}?imageView2/1/w/320/h/180/q/90);"><a target="_blank" href="detail.html?id={{arts.topicId}}"></a></div>
+							<div class="text">
+								<span class="user">
+									<a target="_blank" href="/user/user-gallery.html?proprietorId=453">
+										<b>
+											<img src="/images/tips01.png" loads data-url="{{img_url}}{{arts.topicOwnerHead}}">
+										</b>
+										<!-- {{arts.topicOwnerName}} -->
+									</a>
+								</span>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="container" ng-if="artsGoodsVos.pageItems.length>0 || processArtsSvg.length>0">
+				<h1 class="tip-title" ng-bind="LANGUAGE_NOW.goods.relatedPr"><!-- 相关商品 --></h1>
+				<ul id="nn" class="art_box clearfix">
+					<li ng-repeat="goodvos in artsGoodsVos.pageItems" masonry data-masonryId="#nn" data-types="img">
+						<div class="art_img" ng-click="suchGoods($event,goodvos,1)">
+							<img src="/images/humb-img-sr.png" loads data-url="{{img_url}}{{goodvos.uri}}?imageView2/2/w/320/q/90">
+						</div>
+						<!-- <div class="text">
+							<h2 class="special">
+								<a ng-bind="goodvos.goodsName">
+									&nbsp;
+								</a>
+							</h2>
+						</div> -->
+					</li>
+					<li ng-repeat="svglist in processArtsSvg" masonry data-masonryId="#nn" data-types="svg">
+						<div class="art_img" ng-bind-html="svglist.svgContent | trustHtml" ng-click="suchGoods($event,svglist,2)">
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+    <report></report>
+</div>

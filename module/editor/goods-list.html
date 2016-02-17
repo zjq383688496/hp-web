@@ -1,0 +1,117 @@
+<!-- <button class="get-btn btn" type="button" ng-click="editorGoods.getGoodsListData()">获取待审核数据</button> -->
+<button class="get-btn btn" type="button" ng-if="editorGoods.noGoodsListData" ng-click="editorGoods.getGoodsListData()">获取待审核数据</button>
+
+<div ng-if="editorGoods.goodsList.length>0">
+<div class="mult-box" ng-if="editorGoods.editorMultiCheck">
+	<span><input type="checkbox" ng-model="editorGoods.isAllChecked" class="check" ng-change="checkAll(editorGoods.isAllChecked)">&nbsp;&nbsp;全选</span><button type="button" ng-class="{true:'btn',false:'btn noCheck'}[editorGoods.isGoodsChecked]" ng-click="editorGoods.multiVerifyGoods()">批量审核</button>
+</div>
+<input ng-model="editorGoods.goodIndex" type="hidden">
+<ul ng-repeat="flow in [0,1,2]" ng-class="{0: 'item-list first', 1: 'item-list',2:'item-list last'}[flow]">
+			<li ng-repeat="item in editorGoods.goodsList track by item.id" ng-if="$index%3==flow" ng-class="{true: 'item first', false: 'item'}[$index%3==0]" directive-finished style="{{item.noData?'visibility:hidden':''}}">
+				<span class="check-box" ng-if="editorGoods.editorMultiCheck"><input type="checkbox" ng-model="item.isChecked" class="check" ng-change="singleCheck(item)">&nbsp;&nbsp;选中</span>
+				<span class="flag" ng-if="item.editStatus!=null&&item.editStatus!=''" ng-bind="{30:'待审核',31:'小编提交',32:'副主编提交',33:'审核通过',40:'被恢复',50:'被退回'}[item.editStatus]">被退回</span>
+				<div class="item-box">
+				<i class="btn-del" ng-click="delGoods($index)">×</i>
+				<div class="img-box img-loading">
+				<!-- /images/img-loading_1x.gif -->
+					<img data-src="{{imgUrl+item.imagePath+qnProduct}}" id="img_box_{{$index}}" alt="{{item.goodsName}}">
+				</div>
+				<ul class="thumbnail" ng-if="editorGoods.goodsThumbnail&&item.detailsImage">
+					<li ng-class="{0:'first'}[$index]" ng-repeat="img in item.detailsImage.split(',') track by $index" ng-click="loadAdvert(item.detailsImage)"><img data-src="{{imgUrl+img+qnIcon}}" alt=""></li>
+					<!-- <li ng-click="loadAdvert()"><img data-src="/images/humb-img-sr.png" alt=""></li>
+					<li ng-click="loadAdvert()"><img data-src="/images/humb-img-sr.png" alt=""></li>
+					<li ng-click="loadAdvert()"><img data-src="/images/humb-img-sr.png" alt=""></li> -->
+				</ul>
+				<h3 class="title">
+					<span class="label">标题：</span>
+					<span ng-bind="item.goodsName"></span>
+				</h3>
+				<div class="copyright">
+					<span><input type="checkbox" class="check" ng-model="item.versionProblem" ng-true-value="1" ng-false-value="0"><em>版权问题</em></span>
+					<span  ng-if="editorGoods.setBoutique"><input type="checkbox" class="check"><em>设为精品</em></span>
+				</div>
+				<div class="btns">
+					<a class="btn-down" href="javascript:void(0)" ng-click="saveImage(imgUrl+item.imagePath)">下载</a>
+					<a class="btn-up" href="javascript:void(0)" ng-click="uploadPic(item,$index)">上传</a>
+					<!-- <a class="btn-modify" ng-href="/page/{{LANG.NAME}}/edit/modifyDerivative.html" target="_blank">修改衍生品属性</a> -->
+				</div>
+
+				<div class="stars">
+					<span>图片星级评定</span>
+					<div id="stars_{{item.id}}" class="stars-box">
+						<a class="iconfont icon-star{{item.starNumber>0? ' s-active': ''}}" ng-click="pictureStar(item.id,1);"></a>
+						<a class="iconfont icon-star{{item.starNumber>1? ' s-active': ''}}" ng-click="pictureStar(item.id,2);"></a>
+						<a class="iconfont icon-star{{item.starNumber>2? ' s-active': ''}}" ng-click="pictureStar(item.id,3);"></a>
+					</div>
+				</div>
+				
+				<div class="tags">
+					<dl class="tag" ng-repeat="type in typeList track by $index" ng-if="type.id==105" ng-class="{true:'tag noSelect',false:'tag'}[item.mediaActive]">
+						<dt ng-bind="type.typeName+':'"></dt>
+						<dd ng-repeat="liTag in type.children" ng-bind="liTag.typeName" ng-class="{true:'active',false:''}[loadLiTag(item,item.typeIds,type.id,liTag.id)]" ng-click="tagClick(item,type,liTag.id)"></dd>
+					</dl>
+					<dl class="tag" ng-repeat="type in typeList track by $index" ng-if="type.id==465" ng-class="{true:'tag noSelect',false:'tag'}[item.languageActive]">
+						<dt ng-bind="type.typeName+':'"></dt>
+						<dd ng-repeat="liTag in type.children" ng-bind="liTag.typeName" ng-class="{true:'active',false:''}[loadLiTag(item,item.typeIds,type.id,liTag.id)]" ng-click="tagClick(item,type,liTag.id)"></dd>
+					</dl>
+					<dl class="tag" ng-repeat="type in typeList track by $index" ng-if="type.id==2" ng-class="{true:'tag noSelect',false:'tag'}[item.bigTagActive]">
+						<dt ng-bind="type.typeName+':'"></dt>
+						<dd ng-repeat="liTag in type.children track by $index" ng-class="{true:'active',false:''}[loadLiTag(item,item.typeIds,type.id,liTag.id)]" ng-click="tagClick(item,type,liTag.id,liTag,$index)">
+							<span ng-bind="liTag.typeName"></span>
+							<span style="color:red;font-size:10px;" ng-bind="liTag.childTypes"></span>							
+						</dd>
+					</dl>
+					<div ng-repeat="type in typeList track by $index" ng-if="type.id==2" >
+					<dl class="tag" ng-init="editorGoods.initItemChild(item,type.children)" ng-repeat="liTag in type.children track by $index" ng-show="item.typeChilds[$index].childShow" style="border:1px solid green;">
+						<dt ng-bind="liTag.typeName+':'"></dt>
+						<dd ng-repeat="secTag in liTag.children" ng-class="{true:'active',false:''}[loadLiTag(item,item.typeIds,'sec',secTag.id)]" ng-click="tagClick(item,{id:'sec'},secTag.id,liTag)" ng-bind="secTag.typeName"></dd>
+					</dl>
+					</div>
+					<!--热词-->
+					<!-- <dl class="tag" ng-class="{true:'tag noSelect',false:'tag'}[item.hotWordActive]">
+						<dt>热词：</dt>
+						<dd ng-repeat="hot in item.hotWordsList" ng-bind="hot.hotname" ng-class="{true:'active',false:''}[loadLiTag(item,item.hotWordIds,'reci',hot.code)]" ng-click="tagClick(item,{'id':'reci'},hot.code)"></dd>
+					</dl> -->
+					<!--作者标签-->
+					<dl class="tag nohover">
+						<dt>作者标签：</dt>
+						<dd ng-repeat="liTag in item.editorLabels.split(',')" ng-bind="liTag"></dd>
+					</dl>
+					<div class="normal">
+						<h3>小编标签：</h3>
+						<div class="tag-box">
+							<span ng-repeat="tag in item.labels.split(',') track by $index">{{tag}}<i class="ico-del" ng-click="deleteTag($event,item,tag)">×</i></span>
+							<input type="text" class="txt-tag" ng-model="item.tagContent" placeholder="添加相关标签，用逗号或回车分隔" ng-keyup="addTag($event,item,'keyup')" ng-blur="addTag($event,item,'blur')">
+						</div>
+						<h4><span class="label">标签评分：</span><span ng-bind="loadTagScore(item)">100</span></h4>
+					</div>
+					<div class="desc">
+						<h3>作者描述：</h3>
+						<p><span data-ng-bind-html="editorGoods.trustAsHtml(item.description)">作者描述作者描述作者描述作者描述作者描述作者描述作者描述作者描述作者描述作者描述作者描述作者描述作者描述作者描述作者描述作者...</span><a href="javascript:void(0)" ng-click="showFullText(item.description)">[查看全文]</a></p>
+						<h4><span class="label">编辑人：</span><span ng-bind="item.editorName">编辑人名</span></h4>
+						<h4><span class="label">作者：</span><span ng-bind="item.userName">作者名</span></h4>
+						<h4><span class="label">国家：</span><span ng-bind="item.userAbbr">CN</span></h4>
+					</div>
+				</div>
+
+				<div class="btns">
+					<a class="btn-down" href="javascript:void(0)" ng-click="submitGoods(item,$index)">提交</a>
+					<a class="btn-up" ng-if="editorGoods.editorNormal" href="javascript:void(0)" ng-click="verifyNoPass(item.goodsCode,$index)">审核不通过</a>
+					<a class="btn-up" ng-if="editorGoods.editorSub" href="javascript:void(0)" ng-click="returnNormal(item.goodsCode,$index)">退回小编</a>
+					<a class="btn-up" href="javascript:void(0)" ng-if="editorGoods.editorChief" ng-click="returnSub(item.goodsCode,$index)">退回副主编</a>
+				</div>
+				</div>
+			</li>
+		</ul>
+<div class="mult-box" ng-if="editorGoods.editorMultiCheck">
+	<span><input type="checkbox" ng-model="editorGoods.isAllChecked" class="check" ng-change="checkAll(editorGoods.isAllChecked)">&nbsp;&nbsp;全选</span><button type="button" ng-class="{true:'btn',false:'btn noCheck'}[editorGoods.isGoodsChecked]" ng-click="editorGoods.multiVerifyGoods()">批量审核</button>
+</div>
+</div>
+
+<div class="{{loading}}"></div>
+
+<div class="noData" ng-if="editorGoods.noGoodsListDataShowTxt&&!editorGoods.noGoodsListData">
+	未查询到相关数据
+</div>
+
+<div class="pager-box" data-ng-bind-html="editorGoods.pagerResult" ng-if="editorGoods.isPager&&editorGoods.goodsList.length>0"></div>

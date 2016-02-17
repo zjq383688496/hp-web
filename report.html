@@ -1,0 +1,24 @@
+<link rel="stylesheet" type="text/css" href="/font/iconfont.css"/>
+<link rel="stylesheet" type="text/css" href="/css/report.css">
+<!--举报-->
+<div class="report">
+    <span class="report-close iconfont icon-close-b" ng-click="closeReport();"></span>
+    <div class="title">
+        为什么举报这个艺术品？
+    </div>
+    <ul class="list">
+        <li ng-class="reports.id==reportThis.id?'active':''" ng-repeat="reports in reportList">
+            <label class="iconfont" ng-click="changeRoport(reports)">
+                <font ng-bind="reports.content"></font>
+            </label>
+
+            <textarea ng-if="reports.id==13" class="text" placeholder="" ng-model="reports.contents"></textarea>
+        </li>
+    </ul>
+    <a class="report-btn" ng-click="postReport();">
+        提交
+    </a>
+
+    <div class="loader">
+    </div>
+</div>

@@ -2,7 +2,7 @@
 <html ng-app="gallery">
     <head lang="en">
         <meta charset="UTF-8">
-        <title>gallery</title>
+        <title></title>
             <link rel="stylesheet" href="/font/iconfont.css">
             <link rel="stylesheet" href="/css/header.css">
             <link rel="stylesheet" href="/css/user/gallery.css">
@@ -11,45 +11,66 @@
     <div modheaderfull></div>
     <div moduserhead></div>
     <div class="container media">
-        <ul class="art-box a-imageload" style="display:none">
-            <li class="update fileInput" id="btn-uploader" style="display:none" ng-if='cooid==id'>
-                <span id="pickfiles" class="iconfont icon-add"></span>
-                <i>上传作品</i>
-                <div id = "_uploadFormDiv">
-                    <form method="post" id="uploadSaveInfo" action="/goodsSite/artsOperate/uploadArtwork"></form>
+        <!-- left-nav -->
+        <div class="ga-nav-left">
+            <div class="ga-box">
+                <dl>
+                    <dd><span class="active" ng-bind="SHOPMANAGE"></span></dd>
+                    <dd ng-bind="imgmanage" style="display: none;"></dd>
+                </dl>
+            </div>
+        </div>
+        <div class="ga-right" style="display:none">
+            <div class="shop-nav">
+                <div class="p1">
+                    <span>全部商品</span><em class="e"></em>
+                    <p class="p2" style="display:none">
+                        <span class="active" dataType="">全部商品</span>
+                        <span dataType="1">已发布</span>
+                        <span dataType="0">未发布</span>
+                    </p>
                 </div>
-            </li>
-            <li data-index="{{$index}}" ng-repeat="gallery in galleryItems" class="gallery">
-                <div class="art-img">
-                    <span ng-click="openGallery(gallery)" class="art-span img-loading">
-                        <img data-src="{{imgUrl}}{{gallery.uri}}{{qnProduct}}">
-                    </span>
-                    <div class="push-delete" id="copy-box" onclick="event.stopPropagation()" ng-if='cooid==id'>
-                        <span>
-                            <a target="_blank" href="/goods-release.html?artId={{gallery.esId}}">发布商品</a>
-                        </span>
-                        <span>
-                            <a href="javascript:;" ng-click="artCopyright(gallery.id,gallery.uri,gallery.copyrightStatus,gallery.copyrightNumber,gallery.imageId)" class="copy">版权保护</a>
-                        </span>
-                        <span>
-                            <a class="delete_d" id="{{gallery.id}}" ng-click="delUserArts(gallery.id)" href="javascript:;">删除</a>
+            </div>
+            <ul class="gallery-box a-imageload" style="display:none">
+                <li class="update fileInput" id="btn-uploader" style="display:none" ng-if='cooid==id'>
+                    <span id="pickfiles" class="iconfont icon-iconfontadd"></span>
+                    <i ng-bind="worksup"></i>
+                    <em ng-bind="worksrestrict"></em>
+                    <div id = "_uploadFormDiv">
+                        <!-- <form method="post" id="uploadSaveInfo" action="/goodsSite/original/upload"></form> -->
+                        <form method="post" id="uploadSaveInfo" action="/goodsSite/personCenter/uploadOriginal"></form>
+                    </div>
+                </li>
+                <div class="data-not">
+                    <img src="/images/img-404.png" style="margin:0 auto;opacity:1">
+                    <p>{{LANG.TEXT.T108}}</p>
+                </div>
+                <li data-index="{{$index}}" ng-repeat="gallery in galleryItems" class="{{cooid==id?'gallery':'one'}}" data-in="in_{{gallery.id}}ock">
+                    <div class="art-img" ng-click="ugoodsInfo(gallery)">
+                        <span class="art-span img-loading">
+                            <img data-src="{{imgUrl}}{{gallery.imagePath}}{{qnProduct}}">
                         </span>
                     </div>
-                </div>
-                <div class="text">
-                    <h2><a ng-click="openArtDeatils('{{gallery.uri}}')" title="{{gallery.nickname}}{{artworkFrom}}" class="des"><font ng-bind="gallery.nickname"></font>的艺术品<font ng-bind="artworkFrom"></font></a></h2>
-                </div>
-            </li>
-        </ul>
+                    <div class="text" ng-if="cooid==id">
+                        <!-- <h2><a ng-click="openArtDeatils('{{gallery.uri}}')" title="{{gallery.nickname}}{{artworkFrom}}" class="des"><font ng-bind="gallery.nickname"></font>的艺术品<font ng-bind="artworkFrom"></font></a></h2> -->
+                        <a href="/page/CN/goods/goods-release.html?artId={{gallery.esId}}" ng-if="gallery.release==false" class="pushd" ng-bind="PUSHSHOP"></a>
+                        <a href="/page/CN/goods/goods-release.html?artId={{gallery.esId}}" ng-if="gallery.release==true" ng-bind="MSHOP"></a>
+                        <a href="javascript:;" ng-click="artCopyright(gallery.id,gallery.imagePath,gallery.copyrightStatus,gallery.copyrightNumber,gallery.id)" ng-bind="COPYRIGHT"></a>
+                        <a ng-click="delUserArts(gallery,$index)" ng-if="gallery.release==false" ng-bind="DELIMG"></a>
+                        <a ng-click="delUserArts(gallery,$index)" ng-if="gallery.release==true" ng-bind="DELIMGSHOP"></a>
+                    </div>
+                </li>
+            </ul>
+        </div>
     </div>
     <div class="up-img-warp" id="show_uploadImg">
         <table width="100%" border="0">
             <thead>
                 <tr>
-                    <th width="200">名称</th>
-                    <th width="110">大小</th>
-                    <th width="250">进度</th>
-                    <th width="106">操作</th>
+                    <th width="200" ng-bind="LANG.TEXT.T092"></th>
+                    <th width="110" ng-bind="LANG.TEXT.T093"></th>
+                    <th width="250" ng-bind="LANG.TEXT.T094"></th>
+                    <th width="106" ng-bind="LANG.TEXT.T095"></th>
                 </tr>
             </thead>
             <tbody id="fsUploadProgress">
@@ -67,6 +88,7 @@
     <script src="/js/ArtJS/lib/angular.min.js"></script>
     <script src="/module/mod-header-full.js"></script>
     <script src="/module/mod-user-head.js"></script>
+    <script src="/module/mod-user-share.js"></script>
     <script src="/js/user/headPortrait.js"></script>
     <script src="/module/mod-user-copyright.js"></script>
     <script src="/js/user/gallery.js"></script>

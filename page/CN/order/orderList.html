@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html ng-app="orderList">
+<head lang="en">
+	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<title>我的订单</title>
+	<link rel="stylesheet" href="/font/iconfont.css">
+    <link rel="stylesheet" type="text/css" href="/css/header.css">
+	<link type="text/css" href="/css/user/orderlist.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="/css/media-queries.css">
+<body ng-controller="orderListCtr">
+<!-- 头部开始 -->
+<div modheaderfull></div>
+<!-- 头部结束 -->
+
+<div id="wrapper">
+	<div id="inwrapper">
+		<div class="container set_area">
+			<h2 class="ptit" ng-bind="LANGUAGE_NOW.nav.order"></h2>
+			<div class="wrap">
+				<div class="tabmenu2">
+					<ul class="tab pngFix">
+						<li class="tbbg01"><a class="active" onclick="ORDERLIST.get.getList(-1, this);" ng-bind="LANGUAGE_NOW.title.orderAll"> (<i id="orderConAll">0</i>)</a></li>
+						<li class="tbbg02"><a onclick="ORDERLIST.get.getList(1, this);" ng-bind="LANGUAGE_NOW.title.orderPr"> (<i id="orderCon1">0</i>)</a></li>
+						<li class="tbbg03"><a onclick="ORDERLIST.get.getList(3, this);" ng-bind="LANGUAGE_NOW.title.orderDe"> (<i id="orderCon3">0</i>)</a></li>
+						<li class="tbbg04"><a onclick="ORDERLIST.get.getList(8, this);" ng-bind="LANGUAGE_NOW.title.orderFi"> (<i id="orderCon8">0</i>)</a></li>
+					</ul>
+				</div>
+				<!--数据列表-->
+				<div id="conOrderList">
+					<div id="orerListOut" class="order ncu-table-style">
+						<ul>
+							<li class="w350" ng-bind="LANGUAGE_NOW.title.goods"></li>
+							<li class="w120" ng-bind="LANGUAGE_NOW.title.price"></li>
+							<li class="w120" ng-bind="LANGUAGE_NOW.title.count"></li>
+							<li class="w160" ng-bind="LANGUAGE_NOW.title.totalSub"></li>
+							<li class="w250" ng-bind="LANGUAGE_NOW.title.Status"></li>
+						</ul>
+
+						<div id="orderList"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!--引入新的文件-->
+<script src="/js/config.js"></script>
+<script src="/js/ArtJS/lib/jquery-2.1.4.min.js"></script>
+<script src="/js/ArtJS/ArtJS.js"></script>
+<script src="/js/init.js"></script>
+<script src="/js/ArtJS/lib/angular.min.js"></script>
+<script src="/module/mod-header-full.js"></script>
+<script src="/js/old/nvarchar.js"></script>
+<script src="/js/old/main.js"></script>
+<script src="/js/old/user/orderList.js"></script>
+<script src="/js/order/orderList.js"></script>
+<!--
+<script src="/drift/dist/js/jquery.js"></script>
+<script src="/drift/script/ArtJS/ArtJS.js"></script>
+<script src="/drift/script/ArtJS/lib/angular.min.js"></script>
+<script src="/drift/script/mod-header-full.js"></script>
+<script src="/drift/dist/js/user/orderList.js"></script>
+<script src="/drift/dist/js/nvarchar.js"></script>
+<script src="/drift/dist/js/main.js"></script>-->
+</body>
+</html>

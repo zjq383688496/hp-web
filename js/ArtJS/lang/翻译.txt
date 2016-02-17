@@ -1,0 +1,313 @@
+﻿// --------------------------------
+// LANG 中文版本
+// --------------------------------
+
+CONFIG.LOCAL = 'CN';
+;LANG = {
+	NAME: 'CN',
+	CALENDAR: {
+		CLOSE:        '关闭',            Close
+		CLOSETIPS:    '关闭浮层',        Close the layer
+		LOADING:      '正在加载中……',  Loading
+		LOADINGERROR: '加载失败',        Loading failed
+		CONFIRM:      '确认',            Confirm
+		CANCEL:       '取消',            Cancel
+		ALERT:        '提醒',            Remind
+		ALERTTITLE:   '消息提示',        Enter notice 
+		CONFIRMTITLE: '确认提示',        Confirm notice 
+		PROMPTTITLE:  '输入提示',        Enter notice
+		YEAR:         '年',              Year
+		MONTH:        '月',              Month
+		TODAY:        '今天',            Today
+		CLEAR:        '清空'             Clear 
+	},
+	TYPE: {
+		SHOP:      '商城',             Mall      
+		COMMUNITY: '圈子',             Community
+		GOODS:     '商品',             Products
+		ARTWORK:   '收藏品',           Collection
+		ARTIST:    '艺术家',           Artist
+		DIY:       'DIY'               DIY
+	},
+	GLOBAL: {
+		LOGIN:     '登录',             Login
+		REG:       '注册',             Register
+		OUT:       '退出',             Logout
+		SHARE:     '分享',             Share
+	},
+	PAGE: {
+		LIKE:      '喜欢',             Like
+		FANS:      '粉丝',             Fans
+		FOLLOW:    '关注',             Follow
+		SHOP:      '专卖店',           Store
+		COMMUNITY: '圈子',             Community
+		CART:      '购物车',           Cart
+		ADDRESS:   '地址管理',         Address management
+		ORDER:     '我的订单',         My order
+		ORDERINFO: '订单详情',         Order details
+		CHECKOUT:  '结算',             Check out
+		PAY:       '支付'              Pay
+	},
+	TITLE: {
+		ACCOUNT:    '账号',            Account
+		NAME:       '姓名',            Name
+		EMAIL:      '邮箱',            Email
+		PASSWD:     '密码',            Password
+		CHECKCODE:  '验证码',          Security code
+		PASSWDOLD:  '旧密码',          Old password
+		PASSWDNEW:  '新密码',          New password
+		REGIONAL:   '地区',            Region
+		ABOUT:      '我的简介',        My profile
+		SHOPNAME:   '专卖店名',        Store name
+		SEX:        '性别',            Gender
+		MALE:       '男',              Male
+		FEMALE:     '女',              Female
+		SECRECY:    '保密',            Secrecy
+		CONTACT:    '联系电话',        Contact number
+		ZIP:        '邮编',            Post code
+		ADDRESSADD: '添加地址'         Add address
+	}, 
+	BUTTON: {
+		CART:       '购物车',          Cart 
+		CARTADD:    '加入购物车',      Add to cart
+		ENTER:      '确定',            Confirm
+		CANCEL:     '取消',            Cancel
+		EDIT:       '编辑',            Edit
+		DEL:        '删除',            Delete
+		DELSEL:     '删除所选',        Delete selected
+		SAVE:       '保存',            Save
+		INFOEDIT:   '编辑资料',        Edit profile
+		PASSWDED:   '修改密码',        Change password
+		ICONED:     '修改头像',        Change profile photo
+		DEFAULT:    '设为默认',        Set as default
+		ADDRESSADD: '添加新的收货地址',  Add new address
+		SHOPPING:   '继续购物',         Continue shopping
+		PAY:        '支付',             Pay
+		FOLLOW:     '关注',             Follow
+		FOLLOWING:  '已关注',           Followed
+		WORKSUP:    '上传作品',         Upload artwork
+		IMAGEUP:    '上传图片',         Upload photo
+		VIDEOUP:    '上传视频',         Upload video
+		UPDATERE:   '重新上传',         Reupload
+		UPDATEING:  '上传中',           Uploading
+		GOODSALL:   '全部商品',         All goods
+		BLOGPUB:    '发布博客',         Release blog
+		EVENTPUB:   '发布活动',         Post event
+		GOODSPUB:   '发布商品',         Release products
+		WORKSPUB:   '发布作品',         Release artwork
+		SALEPUB:    '公开出售',         Offer for sale
+		SALEPRICE:  '询价出售',         Auction 
+		PUBLISH:    '发布',             Release
+		DRAFT:      '保存为草稿',       Save the draft
+		PREVIEW:    '预览',             Preview
+		IMAGEADD:   '添加图片',         Add picture
+		IMAGECHG:   '更换图片',         Change picture
+		GOODSADD1:  '添加商品',         Add products
+		GOODSADD2:  '添加相关商品',     Add related products
+		WITHDRAW:   '申请提现',         Withdraw
+		SEARCH:     '查询',             Search
+		ORDERINFO:  '订单详细',         Order details
+		ORDERALL:   '全部订单',         All orders
+		ORDERNOW:   '正在生产',         Producing
+		ORDERDEV:   '正在配送',         Delivering
+		ORDEREND:   '订单完成',         Order completed
+		COPYLINK:   '复制链接',         Copy URL
+		COPYSUS:    '复制成功',         Copy sucessfully
+		DOW2D:      '下载二维码',       Download QR code
+		SALEOUT:    '已售罄',           Sold out
+		SALEOFF:    '非卖品',           Not for sale
+		COPYRIGHT:  '版权保护',         Copyright protection
+		SUBMIT:     '提交',             Submit
+		COMMENT:    '评论',             Comment
+		LIKE:       '喜欢',             Like
+		THIRDADD:   '添加一个三级分类',  Add first classification
+		LOOK:       '随便逛逛',         Visit
+		CLICK:      '点击',             Click
+		CHECKCODE:  '发送验证码到邮箱', Send security code to email
+		NEXT:       '下一步',           Next step
+		PASSWDET:   '确认密码'          Confirm password
+	}, 
+	PLACEHOLDER: {
+		NAME:    '2-30 个字符',         2-30 characters
+		PASSWD:  '密码 6-16 字符',                  Password 6-16 characters
+		SEARCH:  '搜索艺术品、艺术家或文章',         Search artworks,artists or articles
+		STREET:  '请填写省（州）/城市/地区/街道地址', Please fill in the province(state)/city/region/street
+		TAG:     '添加相关标签，用逗号或回车分隔',    Please add relevant tags and use","or "Enter" to separate each word
+		COMMENT: '您对这篇文章的评价',               Your comment
+		EMAIL:   '你的电子邮箱'                      Your email address
+	},
+	USER: {
+		REMEMBER: '记住密码',                        Remember password
+		FORGOT:   '忘记密码'                         Forgot password
+	},
+	NAV: {
+		HOME:     '首　　页',                      Home page
+		ORDER:    '我的订单',                      My orders
+		ADDRESS:  '收货地址',                      Delivery address
+		BLOG:     '发布博客',                      Release blog
+		WITHDRAW: '提　　现',                      Withdraw
+		ABOUT:    '关于我们',                      About us
+		CONTACT:  '联系我们',                      Contact us
+		PROTOCOL: '用户条款',                      Customer service
+		EDITOR:   '编辑页面',                      Editing
+		LOGOUT:   '退　　出'                       Logout
+	},
+	CHECK: {
+		C001: '上传地址不能为空！',               Uploading destination can not be blank 
+		C002: '文件类型不合法,只支持',            File format is not accepted, please provide
+		C003: '评论内容不能为空',                 Comment can not be blank
+		C004: '请输入您的登录邮箱',               Please enter your login mailbox 
+		C005: '请输入验证码',                     Please enter the security code
+		C006: '*验证码错误',                      Incorrect security code
+		C007: '请输入密码: 6-20位，可包含字母、数字', Please enter password: 6-20 characters, including characters and numbers   
+		C008: '6-20位，可包含字母、数字',         6-20 characters, including characters and numbers
+		C009: '姓名不能为空!',                     Name is required
+		C010: '请填写正确的姓名!',                 Please fill in correct name
+		C011: '手机不能为空!',                     Phone number can not be empty
+		C012: '请填写正确的手机号!',               Please fill in correct phone number
+		C013: '地址不能为空!',                     Address can not be blank
+		C014: '请填写正确的地址!',                 Please fill in correct address
+		C015: '标题不能为空!',                     Title can not be blank
+		C016: '内容不能为空!',                     Content can not be blank
+		C017: '封面图不能为空!',                   Please choose one cover image
+		C018: '确定要删除吗?',                     Are you sure to delete?
+		C019: '', 
+		C020: '',
+		C021: '',
+		C022: '',
+		C023: '',
+		C024: '',
+		C025: '',
+		C026: '',
+		C027: '',
+		C028: '',
+		C029: '',
+		C030: ''
+	},
+	ALERT: {
+		A001: '上传成功',                       Uploading succeed                        
+		A002: '上传失败',                       Uploading failed
+		A003: '发布成功',                       Successful published
+		A004: '发布失败',                       Publish failed
+		A005: '保存草稿成功',                   Save to draft
+		A006: '修改成功',                       Edit succeed 
+		A007: '加入购物车成功',                 Added to the chart
+		A008: '加入购物车失败',                 Failed to add into the chart
+		A009: 'sorry！当前商品暂时不能购买',    Sorry, the product is not avaliable for sale     
+		A010: '我们正在核实是否有类似作品',     Verifying the copyright
+		A011: '您版权正在申请中',               Copyright protection is processing
+		A012: '此图片已受版权保护',             This picture is been protected
+		A013: '创建订单成功',                   Order created
+		A014: '订单创建成功!',                  Order created
+		A015: '订单创建失败!',                  Failed to create the order
+		A016: '',
+		A017: '',
+		A018: '',
+		A019: '',
+		A020: ''
+	},
+	TEXT: {
+		T001: '商品',     Product
+		T002: '明细',     Details
+		T003: '数量',     Quantity
+		T004: '单价',     Price
+		T005: '总计',     In total
+		T006: '总价',     Total price
+		T007: '运费',     Delivery charge
+		T008: '或',       or
+		T009: '宽',       Width 
+		T010: '高',       Height
+		T011: '清空选择',  Clear selection
+		T012: '状态',      Status
+		T013: '订单编号',  Order number
+		T014: '爱心公益',  Charity project
+		T015: '活动赛事',  Events/Contests
+		T016: '格式',      Format
+		T017: '冻结金额',   Value on-hold
+		T018: '可提现金额', Amount available to withdraw
+		T019: '累计收入',   Accumulated income
+		T020: '您产生的分成需要经过14天退换货期之后才能转为可提现金额',Funds require 14days before it is available for withdraw
+		T021: '对账单', Statement of account
+		T022: '日期',   Date
+		T023: '信息截止昨天晚上 ( 字改成“信息每24小时更新一次” ) ',Information is updated every 24hours
+		T024: '查询时间',                                         Search period
+		T025: '收入',                                             Income
+		T026: '账户余额',                                         Account Balance
+		T027: '请输入正文',                                       Please enter text here
+		T028: '请提供能证明您是原作者的信息',                     Please provide supporting document to prove your origionality
+		T029: '证明信息',                                         Supporting information
+		T030: '证明图片',                                         Supporting image
+		T031: '提示',                                             Notice
+		T032: '视频体积小于100 MB，mp4格式',                      Video volume is less than 100 MB, mp4 format  
+		T033: '相 关 商 品',                                      Related products
+		T034: '正面',                                             Front
+		T035: '反面',                                             Back
+		T036: '作者',                                             Artist
+		T037: '收藏者',                                           Collector
+		T038: '相关博客',                                         Related blogs
+		T039: '和朋友分享这个商品',                               Share this product
+		T040: '尺码',                                             Size
+		T041: '衣宽',                                             Width
+		T042: '衣长',                                             Length
+		T043: '购买咨询',                                         Purchasing advice
+		T044: '至',                                               to 
+		T045: '修改您的收入比例',                                 Reset the markup
+		T046: '供货价',                                           Supply price
+		T047: '您的收入',        Your income                   
+		T048: '售价',            Saling price
+		T049: '博客',            Blog
+		T050: '活动',            Events
+		T051: '一级分类',        First classification    
+		T052: '二级分类',        Secondary classification 
+		T053: '三级分类(商品颜色或尺寸)', Third classification
+		T054: '库存',                    Stocks
+		T055: '图片',                    Picture
+		T056: '您的购物车里空空的，去看看心仪的商品吧',  Your shopping cart is still empty. Let's take a look
+		T057: '推荐',             Recommend
+		T058: '需付款',           Waiting for payment
+		T059: '支付方式',         Payment method
+		T060: '件',               Pices
+		T061: '相关商品',         Related products
+		T062: '选择',             Select
+		T063: '标签',             Tag
+		T064: '点击灯泡评分',     Click the bulb to mark
+		T065: '添加相关标签，用逗号或回车分隔', Add related tags, use "," or "Enter" to seperate each word
+		T066: '最近使用', Latest use
+		T067: '只差一步', One more step
+		T068: '确认您文章的呈现样式', Please make sure your article is presented as 
+		T069: '封面图宽度不能小于540像素  格式:jpg, png',   Cover image width can not be smaller than 540 pixel    Supported format: Jpg, Png
+		T070: '的艺术品',   artworks
+		T071: '您的作品是什么类型', Your artwork belongs to
+		T072: '标题', Title
+		T073: '描述', Description
+		T074: '吸引人的简介能让更多人发现您的作品',  Interesting introduction can attract more visitors
+		T075: '原作', Original artwork
+		T076: '艺术原作',  Original artwork
+		T077: '作品含有限制级内容 如：裸露或色情，攻击或歧视，暴力画面',   Artwork contains X-rated content such as: Nudity or porpornography, attacks or discrimination abd violent depicts
+		T078: '原作尺寸',  Size of original artwork 
+		T079: '原作价格',  Price of original artwork
+		T080: '文章', Article
+		T080: '活动', Activity
+		T081: '细节图',  Product details
+		T082: '我们正在核实是否有类似作品', Verifying the originality
+		T083: '离开此页面，您填写的信息不会保存 确定离开吗？',  Leaving this page the information will not be saved, are you sure to leave?
+		T084: '销售衍生品您可以编辑衍生品套版的位置或大小', You can edit the place and size of the artwork
+		T085: '艺术品销售佣金10%（市场最低）',  The commission for selling an artwork is 10% (the lowest in the market) 
+		T086: '衍生品收入归原作购买者', The income of selling a deviate products all belongs to the original artist
+		T087: '艺术灯买家遍布全球37个国家，跨国销售成本会自动加到作品价格中由买家承担',  Creative mall is opening to 37 countries around the world, international transaction cost is automatically added in the selling price which is assumed by the consumer
+		T088: '卖家只需负责把作品运到您当地艺术灯仓库，其余物流由艺术灯提供', Artist only needs to put his artworks in the nearest Creative Mall artwork warehouse, Creative Mall will take care of the logistics
+		T089: '更多信息，请阅读', Read to learn more
+		T090: '《原作销售须知》',  Notice to Sell the Original Artworks
+		T091: '全球最大的艺术品电商', World's largest artworks store
+		T092: '',
+		T093: '',
+		T094: '',
+		T095: '',
+		T096: '',
+		T097: '',
+		T098: '',
+		T099: '',
+		T100: ''
+	}
+};
+$( 'body').addClass('lang_' + CONFIG.LOCAL);

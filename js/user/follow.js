@@ -9,11 +9,8 @@ followApp.controller('followCtr', function ($scope, $http, $timeout) {
 			}
 			var status = true;
 			var scrollStatus = true;
-
 			$scope.cooid =ArtJS.cookie.get("User_id");
-
-        	$scope.id =request('uid');
-
+        	$scope.id = request('uid');
 			$scope.DATA = {
 				pageSize: 16,
 				pageNo: 1,
@@ -23,11 +20,13 @@ followApp.controller('followCtr', function ($scope, $http, $timeout) {
 			};
 			$scope.imgUrl    = ArtJS.server.image;
 			$scope.qnIcon = '?imageView2/1/format/jpg/w/60/h/60/q/50';
-			$scope.qnProduct = '?imageView2/1/format/jpg/w/172/h/172/q/50';
+			$scope.qnProduct = '?imageView2/1/format/jpg/w/150/h/150/q/50';
 			$scope.LANG      = LANG;
 			$scope.followItems = [];
 
+			$('.a-follow').addClass('active');
 			$scope.getFollowFollows = function (callback, error) {
+				$('.data-not').hide();
 				status = true;
 				$scope.followItems = [];
 				$scope.DATA.pageNo = 1;
@@ -43,6 +42,7 @@ followApp.controller('followCtr', function ($scope, $http, $timeout) {
 					}
 					if (typeof(callback) === 'function') callback();
 				}, function () {
+					 if (!$scope.followItems.length) $('.data-not').show();
 					 if (typeof(error) === 'function') error();
 				});
 			}

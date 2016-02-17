@@ -1,0 +1,95 @@
+
+
+.art-box li {
+    width:320px;
+    height:450px;
+}
+.art-box .art-img {
+    width:320px;
+    height:320px;
+}
+.art-box .art-img img{
+    width:320px;
+    height:320px;
+}
+
+.wrapper{
+    text-align: center;
+}
+.box-menu {
+    /* position: absolute;
+    top: 17px;
+    right: 250px;
+    min-width: 270px;
+    height: 36px;
+    overflow: hidden;
+    margin: 0 auto; */
+    /*margin: 0 auto;*/
+    display: inline-block;
+    margin: 20px auto 0;
+}
+.box-menu li.hover, .box-menu li:hover {
+    border-bottom: 2px solid #000;
+    cursor: pointer;
+}
+.box-menu li {
+   /*  float: left;
+   margin: 0 16px;
+   font-size: 14px; */
+   display: inline-block;
+}
+.box-menu li a:hover, .box-menu li a:active, .box-menu li a:visited {
+    border: 0;
+    color: #000;
+}
+.box-menu li a {
+    width: 82px;
+    height: 32px;
+    color: #666;
+    text-align: center;
+    z-index: 10;
+    display: block;
+    overflow: hidden;
+}
+
+#search.box-menu li {
+    margin: 0 30px;
+    white-space: nowrap;
+}
+#search.box-menu {
+    /* position: static;
+    right: inherit;
+    left: inherit;
+    overflow: inherit;
+    width: auto!important;
+    display: inline-block; */
+}
+.circle.art-box li{
+    position:relative;
+}
+.circle.art-box li h2.special {
+    bottom:50px;
+}
+.circle.art-box li {
+    height: 400px;
+}
+.circle.art-box li h2.special {
+    position: absolute;
+    bottom:80px;
+    left: 0;
+    width: 100%;
+    padding: 10px;
+    line-height: 24px;
+    font-size: 18px;
+    color: #fff;
+    text-align: left;
+    box-sizing: border-box;
+    background: -webkit-gradient(linear, 0 0, 0 100%, from(rgba(0,0,0,0)), to( rgba(0,0,0,.5)));
+    background: -moz-linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,.5));
+    margin: 0;
+}
+.circle.art-box li h2.special a {
+    color: #fff;
+    text-overflow: initial;
+    white-space: normal;
+}

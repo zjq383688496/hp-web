@@ -37,6 +37,22 @@ headIcon.directive("upfileimg", ['$http','$timeout',function($http,$timeout,$sco
                                     proofImageUri.push("imgsrv/" + el.key);
                                     $("#up-file-div").removeAttr('style');
                                      $(element).parent().find("#up-file").append("<span><img data-src='" + "imgsrv/" + el.key + "' src='" + imgSrc + "?imageView2/1/w/96/h/96/q/90' /></span>");
+                                }else if(mark ==19){//用户封面
+                                    $('.u-mark').attr("style", "background-image:url(" + imgSrc + "?imageView2/1/w/1000/h/300/q/90)");
+                                    $('.u-cover').fadeOut();
+                                    $('.cover-mark').remove();
+                                    $http.get("/memberSite/userAttach_q/editCover?" + $.param({
+                                        //memberId: ArtJS.cookie.get('User_id'),
+                                        cover: el.key//"imgsrv/"+
+                                    })).success(function (rspon) {});
+                                }else if(mark ==20){//专卖店封面
+                                    $('.store-bg p').attr("style", "background-image:url(" + imgSrc + "?imageView2/1/w/850/h/240/q/90)");
+                                    $http.get("/memberSite/userAttach_q/editBanner?" + $.param({
+                                        //memberId: ArtJS.cookie.get('User_id'),
+                                        banner: el.key//"imgsrv/"+
+                                    })).success(function (rspon) {
+                                        ArtJS.cookie.set("uBanner",el.key);
+                                    });
                                 }else {
                                     $("#uplad_avater").attr("style", "background-image:url(" + imgSrc + "?imageView2/1/w/60/h/60/q/90)");
                                     $(".user-icon").attr("style", "background-image:url(" + imgSrc + "?imageView2/2/w/24/q/90)");
@@ -46,7 +62,11 @@ headIcon.directive("upfileimg", ['$http','$timeout',function($http,$timeout,$sco
                                     $http.get("/memberSite/members/editMemberInfo?" + $.param({
                                         memberId: ArtJS.cookie.get('User_id'),
                                         imageUrl: el.key//"imgsrv/"+
-                                    })).success(function (rspon) {});
+                                    })).success(function (rspon) {
+                                        $('.thumb-box').fadeOut();
+                                        $('.userInformation-thumb em').fadeIn();
+                                        //$('body,.userInformation-thumb').removeAttr('style');
+                                    });
                                 }
                             },
                             ferror: function () {
@@ -57,6 +77,20 @@ headIcon.directive("upfileimg", ['$http','$timeout',function($http,$timeout,$sco
                                 });
                             },
                             progress: function (el, p) {
+                                $('#coverPar').show();
+                                $('#sUp input,.cover-up input,.box-span input').css({
+                                    'display':'none'
+                                });
+                                $('#gaProgress em,#coverPar em').css({
+                                    'width':p+'%'
+                                });
+                                if(p ==100){ 
+                                    $('.ga-cover-editor').fadeOut();
+                                    $('.cover-mark').remove();
+                                    $('#gaProgress em,body').removeAttr('style');
+                                    $('#sUp input,.cover-up input,.box-span input').removeAttr('style');
+                                    $('#coverPar').hide();
+                                }
                             }
                         });
                     }, 100);

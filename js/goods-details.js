@@ -1,102 +1,130 @@
-var shopApp = angular.module('goodsDetails', []);
-shopApp.controller('goodsDetailsCtr', function ($scope, $http, $timeout) {
+window.GoodsDetail = {
+	init: function () {
+		this._isIframe = location.href != parent.window.location.href;
+		//$('.a-number').inputNumber();
+		this.isIframeInit();
+	},
+	// 如果是iframe
+	isIframeInit: function () {
+		var href  = location.href;
+		var body  = $('body');
+		if (this._isIframe) {
+			this._idP = href.getQueryValue('p');
+			this._idF = href.getQueryValue('f');
+			$('.iframe-goods-detail-mask').remove();
+			body.append('<div id="iframeGoodsDetailMask" class="iframe-goods-detail-mask" onclick="parent.ArtJS && parent.ArtJS.goods.close();"></div>');
+			body.addClass('isIframe');
+		}
+		body.show();
+	}
+}
+GoodsDetail.init();
+
+var goodsDetailsApp = GoodsDetail._isIframe? angular.module('goodsDetails', []): angular.module('goodsDetails', ['modHeaderFull']);
+goodsDetailsApp.controller('goodsDetailsCtr', function ($scope, $http, $timeout) {
 	ArtJS.load(['header'], function () {
 		$timeout(function () {
+			$scope.LANG = LANG;
 			var API = {
-				detail:    '/goodsSite/goods/getGoodsDetail?',			// 获取商品
-				category:  '/goodsSite/goods/getGoodsFourCategory?'		// 获取尺码
+				detail:  '/goodsSite/goodsDetails/info?',			// 获取商品
+				like:    '/goodsSite/goods/like/{goodsId}/{type}',	// 喜欢
+				related: '/goodsSite/goodsDetails/relatedGoods?'	// 获取相关衍生品
 			}
-			var getstatus = true;
+			var getstatus    = true;
 			var scrollStatus = true;
-			var imgL = '?imageView2/2/format/jpg/w/';
-			$scope.goodsIds      = location.href.getQueryValue('goodsIds');
-			$scope.imgUrl        = ArtJS.server.image;
-			$scope.qn40          = imgL + '40/q/90';
-			$scope.qn50          = imgL + '50/q/90';
-			$scope.qn240         = imgL + '240/q/60';
-			$scope.qn270         = imgL + '270/q/60';
-			$scope.qn320         = imgL + '320/q/60';
-			$scope.LANG          = LANG;
+			var $customPanle=$(".custom-panle");
 
-			$scope.dialogBuyStatus    = false;	// 判断购买模块展现
-			$scope.dialogReportStatus = false;	// 判断举报模块展现
-			$scope.dialogShareStatus  = false;	// 判断分享模块展现
+			$scope.goodsIds  = location.href.getQueryValue('goodsIds');
+			$scope.oId       = location.href.getQueryValue('goodsIds');
 
-			//
-			$scope.detail     = {};		// 当前商品详情
-			$scope.sizeDetail = {};		// 当前商品筛选尺码
-			$scope.colorItem  = {};		// 当前选中的颜色
-			$scope.typeItem   = {sellPrice: 0};		// 当前选中的类型
-			$scope.sizeItem   = {sellPrice: 0};		// 当前选中的尺码
-			$scope.goodsImg   = {};		// 当前商品正反面图 (正, 反, 当前选中面)
-
-			$scope.goodsAmount  = 1;	// 数量
-
-			//
+			// 获取参数(商品||相关衍生品)
 			$scope.DATA = {
-				goodsIds:   $scope.goodsIds,
-				loadSource: 1,
-				abbr:       LANG.NAME
-			};
-			$scope.sizeDATA = {
 				abbr: LANG.NAME
 			};
-			// 初始化获取数据
-			$scope.getGoodsDetail = function (callback) {
+			$scope.relatedDATA = {
+				clientType: 'web',
+				abbr: LANG.NAME
+			};
+
+			$scope.imgUrl = ArtJS.server.image;
+			$scope.qn20   = '?imageView2/2/format/jpg/w/20/q/50';
+			$scope.qn50   = '?imageView2/2/format/jpg/w/50/q/50';
+			$scope.qn270  = '?imageView2/2/format/jpg/w/270/q/90';
+			$scope.qn355  = '?imageView2/2/format/jpg/w/355/q/90';
+			
+			// 
+			GoodsDetail.scopeShare = function () {
+				// 如果是iframe
+				if (this._isIframe) {
+					parent.scopeArr['goodsDetails'] = $scope;
+					parent.scopeArr['goodsDetails'].window = window;
+				}
+			}
+			GoodsDetail.scopeShare();
+
+			// 数据初始化
+			$scope.dataInit = function () {
+				// 颜色类型选其一
+				$scope.colorItem    = [];	// 当前商品颜色
+				$scope.typeItem     = [];	// 当前商品类型
+
+				$scope.sizeItem     = [];	// 当前商品尺码
+				$scope.previewItem  = [];	// 当前商品预览
+				$scope.relatedGoods = [];	// 相关衍生品
+				$scope.detail       = null;	// 商品详情
+				$scope.nowInfo      = null;	// 当前商品详情
+				$scope.imgs         = {};	// 当前商品图片
+				$scope.amount       = 1;	// 商品数量
+
+				$scope.customArr={          //自定义商品宽高数组
+					width:0,
+					height:0,
+					sq:0,
+					price:0
+				}
+			}
+
+			// 初始化关闭
+			$scope.getDetails = function () {
+				getstatus = true;
+				$scope.DATA.goodsId = $scope.goodsIds;
+				$scope.dataInit();
 				$scope.getData(function () {
 					// 一次性执行函数
 					if (scrollStatus) {
 						scrollStatus = false;
-						$scope.goodsAmount = 1;
 						ArtJS.page.ui.imageLoad.init(100);
 					}
-					$('html, body').animate({scrollTop: 0}, 200);
-					GoodsDetail.isIframe();
-					$scope.getCategory();
-					//console.log($scope.detail.ifHasWidthHeight);
-					if (typeof(callback) === 'function') callback();
+					$scope.share();
+					$('html, body').animate({scrollTop: 0}, 0);
+					$scope.getRelatedGoods();
+					//if (typeof(callback) === 'function') callback();
 				}, function () {
 					//if (typeof(error) === 'function') error();
 				});
 			}
-			// 获取详情数据
+			
+			// 获取数据
 			$scope.getData = function (callback, error) {
 				if (getstatus) {
 					getstatus = false;
 					$http.get(API.detail + ArtJS.json.toUrl($scope.DATA)).
 					success(function (data) {
 						if (data.code === CONFIG.CODE_SUCCESS) {
-							var data          = data.result;
-							var pageItems     = data.suggestGoods;
-							var threeCategory = data.threeCategoryInfo;
-							$scope.detail     = data;
-							$scope.goodsImg   = {
-								uri       : data.uri,
-								backImguri: data.backImguri || ''
-							}
-							$scope.sizeDATA.artsId       = data.artsId;
-							$scope.sizeDATA.categoryName = data.goodsName;
-							if (threeCategory.length) {
-								for (var i = 0; i < threeCategory.length; i++) {
-									var category = threeCategory[i];
-									if (category.id == data.id) {
-										$scope.colorItem                  = category;
-										$scope.sizeDATA.categoryId        = category.categoryId;
-										$scope.sizeDATA.threeCategoryName = category.categoryName;
-										//console.log(category);
-										break;
-									}
-								}
-							}
-							if (pageItems.length) {
-								$timeout(function () {
-									if (typeof(callback) === 'function') callback();
-								});
-							} else if (typeof(error) === 'function') error();
+							var detail = $scope.detail  = data.result;
+							var def    = detail.defaultSkuInfo;
+							var sku    = detail.goodsSkuInfos;
+							$scope.oId = location.href.getQueryValue('goodsIds');
+							$scope.relatedDATA.originalId = $scope.originalId = detail.originalId;
+							$scope.nowSku(def);
+							$scope.imgInit(def);
+							$scope.colorOrTypeInit(sku);
+							//console.log(detail);
+							getstatus = true;
+							if (typeof(callback) === 'function') callback();
 						} else {
 							if (typeof(error) === 'function') error();
 						}
-						getstatus = true;
 					}).
 					error(function (data) {
 						getstatus = true;
@@ -104,142 +132,268 @@ shopApp.controller('goodsDetailsCtr', function ($scope, $http, $timeout) {
 					});
 				}
 			}
-			// 获取尺码
-			var getCategoryStatus = true;
-			$scope.getCategory = function () {
+
+			// 获取相关衍生品
+			$scope.getRelatedGoods = function (callback, error) {
 				if (getstatus) {
-					$scope.typeItem   = {sellPrice: 0};
-					$scope.sizeItem   = {sellPrice: 0};
-					getCategoryStatus = false;
-					$http.get(API.category + ArtJS.json.toUrl($scope.sizeDATA)).
+					getstatus = false;
+					$http.get(API.related + ArtJS.json.toUrl($scope.relatedDATA)).
 					success(function (data) {
 						if (data.code === CONFIG.CODE_SUCCESS) {
-							var data         = $scope.sizeDetail = data.result;
-							var property     = data.propertyInfos;		// 类型
-							var fourCategory = data.fourCategoryInfo;	// 尺码
-							//$scope.detail.ifHasWidthHeight = false;
-							if (!$scope.detail.ifHasWidthHeight) {
-								property     = fourCategory;
-								fourCategory = [];
-							}
-							$scope.goodsAmount = 1;
-							// 类型初始化
-							if (property.length) {
-								var hasTypeItem = false;
-								for (var i = 0; i < property.length; i++) {
-									var item = property[i];
-									if ($scope.detail.ifHasWidthHeight? item.categoryId == $scope.colorItem.parentCategoryId: item.id == $scope.detail.id) {
-										$scope.typeItem = item;
-										hasTypeItem = true;
-										break;
-									}
-								}
-								if (!hasTypeItem) $scope.sizeItem = property[0];
-							}
-							// 类型初始化
-							if (fourCategory.length) {
-								var hasSizeItem = false;
-								for (var i = 0; i < fourCategory.length; i++) {
-									var item = fourCategory[i];
-									if (item.id == $scope.detail.id) {
-										$scope.sizeItem = item;
-										hasSizeItem = true;
-										break;
-									}
-								}
-								if (!hasSizeItem) $scope.sizeItem = fourCategory[0];
-							}
+							$scope.relatedGoods = data.result;
 							$timeout(function () {
-								ArtJS.page.ui.center('.dialog-buy');
+								$(window).scroll();
 							});
+							console.log(data.result);
 						} else {
-							// error
+							if (typeof(error) === 'function') error();
 						}
-						getCategoryStatus = true;
 					}).
 					error(function (data) {
-						getCategoryStatus = true;
-						// error
+						getstatus = true;
+						if (typeof(error) === 'function') error();
 					});
 				}
 			}
-			// 选择颜色
-			$scope.selectColor = function (item, goodsIds) {
-				if (goodsIds != $scope.goodsIds) {
-					$scope.goodsIds = goodsIds;
-					$scope.goodsImg = {
-						uri       : item.uri,
-						backImguri: item.backImguri || ''
+
+			// 正反面图
+			$scope.imgInit = function (item) {
+				$scope.imgs.imagePath     = item.imagePath;
+				$scope.imgs.backImagePath = item.backImagePath;
+			}
+
+			// 判断颜色/类型
+			$scope.colorOrTypeInit = function (items) {
+				var len = items.length;
+				if (len) {
+					var val = items[0].skuValue || items[0].skuName;
+					if (val) {
+						if (val.startWith('#')) {
+							$scope.colorItem = items;
+							$scope.filterColor(items);
+						} else {
+							$scope.typeItem = items;
+							$scope.filterType(items);
+						}
+					} else {
+						//$scope.imgs.imagePath = $scope.detail.originalPath;
+						$scope.imgs.imagePath = $scope.nowInfo.imagePath;
+						console.log($scope.imgs);
 					}
-					$scope.colorItem                  = item;
-					$scope.sizeDATA.categoryId        = item.categoryId;
-					$scope.sizeDATA.threeCategoryName = item.categoryName;
+				}
+			}
+
+			// 筛选颜色
+			$scope.filterColor = function (items) {
+				var len = items.length;
+				for (var i = 0; i < len; i++) {
+					var item = items[i];
+					if (item.goodsId === $scope.goodsIds) {
+						$scope.selectColor(item);
+						break;
+					}
+				}
+			}
+
+			// 筛选尺码
+			$scope.filterSize = function (items) {
+				var len = items.length;
+				if (len) {
+					for (var i = 0; i < len; i++) {
+						var item = items[i];
+						if (item.goodsId === $scope.goodsIds) {
+							$scope.selectSize(item);
+							break;
+						}
+					}
+				}
+			}
+
+			// 筛选类型
+			$scope.filterType = function (items) {
+				var len = items.length;
+				for (var i = 0; i < len; i++) {
+					var item = items[i];
+					if (item.goodsId === $scope.goodsIds) {
+						$scope.selectType(item);
+						break;
+					}
+				}
+			}
+
+			// 筛选预览
+			$scope.filterPreview = function (items) {
+				var len = items.length;
+				if (len) {
+					for (var i = 0; i < len; i++) {
+						var item = items[i];
+						if (item.goodsId === $scope.goodsIds) {
+							$scope.selectPreview(item);
+							break;
+						}
+					}
+				}
+			}
+
+			// 当前选择商品
+			$scope.nowSku = function (item) {
+				if (!$scope.nowInfo || item.goodsId != $scope.nowInfo.goodsId) {
+					$scope.nowInfo  = item;
+					$scope.goodsIds = item.goodsId;
+					//$scope.urlChange(item.goodsId);
+					console.log(item);
+				}
+			}
+
+			// 选择颜色
+			$scope.selectColor = function (item) {
+				//if (!$scope.nowColor || item.goodsId != $scope.nowColor.goodsId) {
+					$scope.amount   = 1;
+					$scope.nowColor = item;
+					$scope.imgInit(item);
+					$scope.goodsIds = item.goodsId;
+					$scope.sizeItem = item.childSkuInfoVos || [];
+					if (!$scope.sizeItem.length) $scope.goodsIds = item.goodsId;
+					$scope.filterSize($scope.sizeItem);
 					//console.log(item);
-					$scope.getCategory();
-				}
+				//}
 			}
-			// 选择类型
-			$scope.selectType = function (item, categoryId) {
-				if (categoryId != $scope.typeItem.categoryId) {
-					$scope.typeItem = item;
-					$scope.goodsAmount = 1;
-				}
-			}
+
 			// 选择尺码
-			$scope.selectSize = function (item, id) {
-				if (id != $scope.sizeItem.id) {
-					$scope.sizeItem = item;
-					$scope.goodsAmount = 1;
-				}
+			$scope.selectSize = function (item) {
+				$scope.nowSku(item);
 			}
-			// 选择图片面
-			$scope.selectPlant = function (img) {
-				if (img != $scope.goodsImg.nowImguri) $scope.goodsImg.nowImguri = img;
+
+			// 选择类型
+			$scope.selectType = function (item) {
+				//if (!$scope.nowType || item.goodsId != $scope.nowType.goodsId) {
+					$scope.amount   = 1;
+					$scope.nowType  = item;
+					$scope.imgInit(item);
+					$scope.goodsIds = item.goodsId;
+					$scope.previewItem = item.childSkuInfoVos || [];
+					if (!$scope.previewItem.length) $scope.goodsIds = item.goodsId;
+					$scope.filterPreview($scope.previewItem);
+					//console.log(item);
+				//}
 			}
-			// 选择相关商品
-			$scope.selectGoods = function (id) {
-				if ($scope.goodsIds != id) {
-					$scope.goodsIds = $scope.DATA.goodsIds = id;
-					history.replaceState(null, '商品详情', 'goods-details.html' + location.search.refQueryValue('goodsIds', id));
-					$scope.getGoodsDetail();
-				}
+
+			// 选择预览
+			$scope.selectPreview = function (item) {
+				$scope.nowSku(item);
 			}
+
 			// 数量变化
 			$scope.amountChange = function (num) {
-				$scope.goodsAmount = ~~($scope.goodsAmount) + num;
-				$scope.goodsAmount = $scope.goodsAmount < 1? 1: $scope.goodsAmount;
-				$scope.goodsAmount = $scope.goodsAmount > 999? 999: $scope.goodsAmount;
+				$scope.amount = ~~($scope.amount) + num;
+				$scope.amount = $scope.amount < 1? 1: $scope.amount;
+				$scope.amount = $scope.amount > 999? 999: $scope.amount;
 			}
+
+			// 选择商品
+			$scope.selectGoods = function (goodsId) {
+				$scope.goodsIds = goodsId;
+				$scope.urlChange(goodsId);
+				$scope.getDetails();
+			}
+
+			// url变化
+			$scope.urlChange = function (goodsId) {
+				history.replaceState(null, '商品详情', 'goods-details.html' + location.search.refQueryValue('goodsIds', goodsId));
+				//$scope.share(goodsId);
+			}
+
 			// 添加购物车
 			$scope.addCart = function (e) {
-				var item = $scope.detail.ifHasWidthHeight? $scope.sizeItem: $scope.typeItem;
 				// 参数说明
-				// 1: event  2: 商品详情  3: 选中的尺码详情  4: 商品数量
-				ArtJS.cart.add(e, $scope.detail, item, $scope.goodsAmount);
+				var color = $scope.nowColor? $scope.nowColor.skuValue: '#29a4e2';
+				// 1: event  2: goodsType  3: 选中的尺码详情  4: 商品数量  5: 颜色  6: 商品ID
+				ArtJS.cart.add(e, $scope.detail.goodsType, $scope.nowInfo, $scope.amount, color, $scope.oId);
 			}
 
-			window.GoodsDetail = {
-				init: function () {
-					this._isIframe = location.href != parent.window.location.href;
-					$scope.getGoodsDetail();
-					$('.a-number').inputNumber();
-					this.isIframe();
-				},
-				// 如果是iframe
-				isIframe: function () {
-					if (this._isIframe) {
-						var href  = location.href;
-						this._idP = href.getQueryValue('p');
-						this._idF = href.getQueryValue('f');
-						$('body').append('<div id="iframeGoodsDetailMask" class="iframe-goods-detail-mask" onclick="parent.ArtJS && parent.ArtJS.goods.close();"></div>');
-						parent.scopeArr['goodsDetails'] = $scope;
-						parent.scopeArr['goodsDetails'].window = window;
+			// 喜欢
+			var likestatus = true;
+			$scope.artsLike = function (id, item) {
+				ArtJS.login.pop(function (o) {
+					likestatus = false;
+					var data = {
+						goodsId: id,
+						type:    item.light? 2: 1
 					}
-				}
+					$http.get(API.like.substitute(data)).
+					success(function (data) {
+						if (data.code === CONFIG.CODE_SUCCESS) {
+							item.lightTotal = data.result;
+							item.light = item.light? false: true;
+						}
+						likestatus = true;
+					}).
+					error(function () {
+						likestatus = true;
+					});
+				});
 			}
-			GoodsDetail.init();
 
-			ArtJS.share.init({ parent: '.d-top' });
+			//点击编辑
+			var artsdiyHref;
+			$scope.edit = function(e){
+				ArtJS.login.pop(function () {
+					ArtJS.page.header.refreshUserInfo();
+					$scope.artsdiyHref=artsdiyHref="/artsdiy/index.html?id="+$scope.nowInfo.goodsId;
+					
+					if($scope.nowInfo.customFlg==1){
+					//自定义商品
+						$scope.customArr.width=$scope.nowInfo.minPrintWidth;
+						$scope.customArr.height=$scope.nowInfo.minPrintHeight;
+						$scope.customReckon();
+
+						$customPanle.fadeIn();
+					}else{
+					//非自定义商品
+						window.open($scope.artsdiyHref);
+					}
+				});
+			}
+
+			// 宽高改变时计算
+			var customTime;
+			$scope.customReckon = function (type) {
+				$timeout.cancel(customTime);
+				customTime   = $timeout(function () {
+					var w    = $scope.customArr.width;
+					var h    = $scope.customArr.height;
+					var iarr = angular.copy($scope.nowInfo);
+					var bar  = iarr.maxPrintWidth/iarr.maxPrintHeight;
+					if (w < iarr.minPrintWidth || isNaN(w)) {
+						w = iarr.minPrintWidth;
+					} else if (w > iarr.maxPrintWidth) {
+						w = iarr.maxPrintWidth;
+					}
+					if (h < iarr.minPrintHeight || isNaN(h)) {
+						h = iarr.minPrintHeight;
+					} else if (h > iarr.maxPrintHeight) {
+						h = iarr.maxPrintHeight;
+					}
+					$scope.customArr.width  = parseFloat(w);
+					$scope.customArr.height = parseFloat(h);
+					$scope.customArr.sq     = parseFloat((w*h)/10000).toFixed(4);
+					$scope.customArr.price  = parseFloat($scope.customArr.sq*$scope.nowInfo.sellPrice).toFixed(2);
+					$scope.artsdiyHref      = artsdiyHref + '&width=' + w + '&height=' + h;
+				}, 700);
+			}
+			$scope.getDetails();
+
+			$scope.share = function () {
+				$('.d-top>.util-share').remove();
+				var URL  = location.origin + location.pathname + '?' + 'goodsIds=' + $scope.oId;
+				var MURL = URL.replace('/goods-details', '/details/goods-details').replace('www.', 'm.');
+				ArtJS.share.init({
+					parent: '.d-top',
+					url:  URL,
+					murl: MURL,
+					text: $scope.detail.goodsName
+				});
+			}
 
 			scopeArr['goodsDetails'] = $scope;
 		});

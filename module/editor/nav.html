@@ -1,0 +1,18 @@
+<!-- 导航start -->
+	<div class="nav container">
+		<!-- <h2 class="title">主分类</h2> -->
+		<ul class="tab">
+			<li ng-repeat="item in nav.navList track by $index" data-code="{{item.code}}" ng-class="{true: 'active', false: ''}[nav.active==item.code]" ng-bind="item.name" ng-click="navJump(item.href)"></li>
+			<!-- <li data-code="workList">原作</li>
+			<li data-code="blogList">博客</li>
+			<li data-code="goodList">第三方商品</li> -->
+		</ul>
+
+		<div class="right-act">
+			<a ng-href="{{actions.topSetUrl}}" ng-if="actions.topSet" target="_blank">置顶设置</a>
+			<a ng-href="{{actions.boutiqueLibUrl}}" ng-if="actions.boutiqueLib" target="_blank">精品库</a>
+			<a ng-href="{{actions.noeditUrl}}" ng-if="actions.noedit" target="_blank">查看所有未处理数据</a>
+			<a ng-href="{{actions.recycleUrl}}" ng-if="actions.recycle" target="_blank">回收站</a>
+		</div>
+	</div>
+	<!-- 导航end -->

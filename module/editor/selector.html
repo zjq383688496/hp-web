@@ -1,0 +1,63 @@
+
+   <!-- 筛选器start -->
+	<div class="selector container">
+		<dl ng-repeat="type in typeList track by $index">
+			<dt class="title" ng-bind="type.typeName+':'"></dt>
+			<dd ng-class="{true: 'active', false: ''}[type.typeActive=='']" ng-click="typeClick(type)">不限</dd>
+			<dd ng-repeat="item in type.children" ng-bind="item.typeName" ng-class="{true: 'active', false: ''}[type.typeActive==item.id]" ng-click="typeClick(type,item)"></dd>
+		</dl>
+		<div class="search-box">
+			<input type="text" class="search" placeholder="作者姓名" ng-model="searchCondition.keyword" ng-keyup="editorGoods.searchGoodsList($event)">
+			<button class="search-btn" type="button" ng-click="editorGoods.searchGoodsList()">搜索</button>
+
+			<select class="select" ng-if="navSelector.subSelector" ng-model="searchCondition.associateId" ng-options="subEditor.userId as subEditor.nickName for subEditor in navSelector.subEditorList" ng-change="editorGoods.getNoramlEditors()">
+				<!-- <option value="" selected>全部副主编</option> -->
+				<!-- <option value="2">副主编1</option>
+				<option value="2">副主编2</option>
+				<option value="2">副主编3</option> -->
+			</select>
+			<select class="select" ng-if="navSelector.dataStatusSelector" ng-model="searchCondition.chiefVerify" ng-options="chiefVerifyStatus.value as chiefVerifyStatus.name for chiefVerifyStatus in navSelector.chiefVerifyStatusList" ng-change="editorGoods.searchGoodsList()">
+				<!-- <option value="0" selected>全部</option>
+				<option value="1">已审核数据</option>
+				<option value="2">未审核数据</option> -->
+			</select>
+		</div>
+
+		<div class="search-box">
+			<select class="select" ng-if="navSelector.subSelector2" ng-model="searchCondition.associateId" ng-options="subEditor.userId as subEditor.nickName for subEditor in navSelector.subEditorList" ng-change="editorGoods.getNoramlEditors()">
+				<!-- <option value="" selected>全部副主编</option> -->
+				<!-- <option value="2">副主编1</option>
+				<option value="2">副主编2</option>
+				<option value="2">副主编3</option> -->
+			</select>
+			<select class="select" ng-if="navSelector.normalSelector2" ng-model="searchCondition.editorId" ng-options="normalEditor.userId as normalEditor.nickName for normalEditor in navSelector.normalEditorList" ng-change="editorGoods.searchGoodsList()">
+				<!-- <option value="1" selected>全部小编</option> -->
+				<!--<option value="2">小编1</option>
+				<option value="2">小编2</option>
+				<option value="2">小编3</option> -->
+			</select>
+			<select class="select" ng-if="navSelector.dataStatusSelector2" ng-model="searchCondition.chiefVerify" ng-options="chiefVerifyStatus.value as chiefVerifyStatus.name for chiefVerifyStatus in navSelector.chiefVerifyStatusList" ng-change="editorGoods.searchGoodsList()">
+				<!-- <option value="0" selected>全部</option>
+				<option value="1">已审核数据</option>
+				<option value="2">未审核数据</option> -->
+			</select>
+		</div>
+
+		<div class="search-box">
+			<select class="select" ng-model="searchCondition.orderByType" ng-options="order.id as order.name for order in navSelector.orderByTypes" ng-change="editorGoods.searchGoodsList()">
+				<!-- <option value="1" selected>按更新时间倒序</option> -->
+				<!-- <option value="1" selected="1">按更新时间倒序</option>
+				<option value="2">按更新时间升序</option> -->
+			</select>
+			<select class="select" ng-if="navSelector.normalSelector" ng-model="searchCondition.editorId" ng-options="normalEditor.userId as normalEditor.nickName for normalEditor in navSelector.normalEditorList" ng-change="editorGoods.searchGoodsList()">
+				<!-- <option value="" selected>全部小编</option> -->
+				<!--<option value="2">小编1</option>
+				<option value="2">小编2</option>
+				<option value="2">小编3</option> -->
+			</select>
+			<span ng-bind="'查询数量'+recordsNumber"></span>
+
+			<a href="#" class="derivative-btn" ng-if="navSelector.derivativeBtn">管理相关衍生品</a>
+		</div>
+	</div>
+<!-- 筛选器end -->

@@ -1,0 +1,115 @@
+/*5.7*/
+.tandc {
+    background: url(/images/T&C.png) no-repeat center;
+    height: 425px;
+    margin-bottom: 36px
+}
+.tan-cn {
+    background: url(/images/Pro-img-cn.png) no-repeat center;
+    height: 425px;
+    margin-bottom: 36px
+}
+.tan-us {
+    background: url(/images/Pro-img-us.png) no-repeat center;
+    height: 425px;
+    margin-bottom: 36px
+}
+#tAndc01 h2 {
+    font-size: 24px
+}
+#tAndc01 h2.cn{
+    font-size: 18px;
+}
+#tAndc01, #tAndc02, #tAndc03, #tAndc04, #tAndc05, #tAndc06, #tAndc07, #tAndc08, #tAndc09, #tAndc010, #tAndc011 {
+    font-family: "Times New Roman";
+    color: #666666;
+    font-size: 14px;
+}
+
+#tAndc06 h2, #tAndc010 h2, #tAndc011 h2 {
+    font-size: 24px;
+    color: #666666;
+    margin-top: 30px;
+}
+
+#tAndc01 p, #tAndc02 p, #tAndc03 p, #tAndc04 p, #tAndc05 p, #tAndc06 p, #tAndc07 p, #tAndc08 p, #tAndc09 p, #tAndc010 p, #tAndc011 p {
+    line-height: 24px;
+}
+
+#tAndc02 h2, #tAndc03 h2, #tAndc04 h2, #tAndc05 h2{
+    margin-top: 26px;
+    font-size: 18px;
+    color: #666666
+}
+
+#tAndc06 h2,#tAndc07 h2, #tAndc08 h2, #tAndc09 h2 {
+    font-size: 18px;
+    color: #666666;
+    margin: 30px 0;
+}
+
+.out_w {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 774px;
+    float: left;
+    padding-right: 16px
+}
+
+.out_right a {
+    text-decoration: none;
+    color: #666666;
+    padding-left: 12px;
+    line-height: 24px;
+    display: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    font-family: "Times New Roman";
+}
+.out_right.cn a{
+    font-weight: normal;
+    line-height: 30px;
+}
+.out_right p.m {
+    padding-left: 4px
+}
+
+.out_right p.m a {
+    font-weight: normal;
+    font-family: "Times New Roman";
+}
+
+.out_right {
+    position: relative;
+    top: 18px;
+    right: 0;
+    width: 210px;
+    height: 300px;
+    float: left;
+}
+
+#out_right {
+    position: relative;
+    top: 0;
+    right: 0;
+    border: 1px solid #dddddd;
+    width: 208px;
+    height: 300px;
+    background: #f3f6fa;
+    border-radius: 3px;
+}
+.out_w.cn h2{
+    margin-bottom: 36px;
+}
+.out_w.cn #tAndc01 p, .out_w.cn #tAndc02 p, .out_w.cn #tAndc03 p, .out_w.cn #tAndc04 p, .out_w.cn #tAndc05 p, .out_w.cn #tAndc06 p, .out_w.cn #tAndc07 p, .out_w.cn #tAndc08 p, .out_w.cn #tAndc09 p, .out_w.cn #tAndc010 p, .out_w.cn #tAndc011 p {
+    line-height: 30px;
+}
+.copyright {
+    width: 1000px;
+    margin: 0 auto;
+    padding: 20px 0;
+    text-align: center;
+    border-top: 1px solid #ddd;
+    margin-top: 50px;
+}

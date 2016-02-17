@@ -6,6 +6,7 @@
 }
 body {
   font-family: "Helvetica Neue", Helvetica, "Hiragino Sans GB", "Microsoft YaHei", Arial, sans-serif;
+  color: #333333;
 }
 ul,
 li {
@@ -32,6 +33,7 @@ input[type=password] {
   border-radius: 2px;
   font-size: 16px;
   -webkit-transition: all ease 0.2s;
+  -moz-transition: all ease 0.2s;
   transition: all ease 0.2s;
 }
 input[type=text].err,
@@ -44,6 +46,14 @@ input[type=password]:focus {
   border: 1px solid #0af;
   box-shadow: inset 0 0 10px rgba(0, 170, 255, 0.4);
 }
+input[type=number] {
+  -moz-appearance: textfield;
+}
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+  -webkit-appearance: none !important;
+  margin: 0;
+}
 .clearfix:before,
 .clearfix:after {
   content: '';
@@ -52,15 +62,74 @@ input[type=password]:focus {
 .clearfix:after {
   clear: both;
 }
+.loading {
+  position: relative;
+}
+.loading:after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  display: block;
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
+  width: 32px;
+  height: 32px;
+  box-sizing: border-box;
+  border-radius: 100%;
+  border: 3px solid rgba(0, 0, 0, 0.1);
+  border-top-color: #6cf;
+  border-right-color: #6cf;
+  -webkit-animation: rotate-inf 1.6s ease infinite;
+  -moz-animation: rotate-inf 1.6s ease infinite;
+  animation: rotate-inf 1.6s ease infinite;
+}
+@-webkit-keyframes rotate-inf {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(720deg);
+    transform: rotate(720deg);
+  }
+}
+@-moz-keyframes rotate-inf {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(720deg);
+    transform: rotate(720deg);
+  }
+}
+@keyframes rotate-inf {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(720deg);
+    transform: rotate(720deg);
+  }
+}
 .img-loading {
-  background-color: #f0f0f0;
+  background-size: cover;
+  background-image: url("/images/img-loading_1x.gif");
+  background-image: -webkit-image-set(url("/images/img-loading_1x.gif") 1x, url("/images/img-loading_2x.gif") 2x);
+  background-repeat: no-repeat;
 }
 .user-icon {
   display: block;
   background: url(/images/avatar_default.png) center no-repeat;
   background-size: cover;
   border-radius: 100%;
+  overflow: hidden;
   -webkit-transition: all ease 0.2s;
+  -moz-transition: all ease 0.2s;
   transition: all ease 0.2s;
 }
 .a-imageload img {
@@ -68,6 +137,7 @@ input[type=password]:focus {
   transform: scale(0.9);
   opacity: 0;
   -webkit-transition: all ease 0.3s;
+  -moz-transition: all ease 0.3s;
   transition: all ease 0.3s;
   -webkit-backface-visibility: hidden;
 }
@@ -75,6 +145,141 @@ input[type=password]:focus {
   -webkit-transform: scale(1);
   transform: scale(1);
   opacity: 1;
+}
+.iframe-goods-detail,
+.iframe-goods-detail-mask {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.iframe-goods-detail {
+  min-width: 900px;
+  z-index: -2;
+  opacity: 0;
+  -webkit-transition: 0.3s;
+  -moz-transition: 0.3s;
+  transition: 0.3s;
+}
+.iframe-goods-detail iframe {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+.iframe-goods-detail.show {
+  z-index: 10;
+  opacity: 1;
+  visibility: visible;
+}
+.iframe-goods-detail.hide {
+  z-index: -2;
+  opacity: 0;
+}
+.iframe-goods-detail .a-shopping {
+  position: fixed;
+  z-index: 1;
+  width: 50px;
+  height: 50px;
+}
+.iframe-goods-detail .a-shopping i {
+  display: block;
+  width: 50px;
+  height: 50px;
+  background-size: cover;
+}
+.iframe-goods-detail .a-shopping b {
+  position: absolute;
+  bottom: 2px;
+  opacity: 0;
+  display: block;
+  width: 100%;
+  color: #ffc456;
+  font-size: 20px;
+  text-align: center;
+  -webkit-animation: number-add 2s ease 2.2s;
+  -moz-animation: number-add 2s ease 2.2s;
+  animation: number-add 2s ease 2.2s;
+}
+@-webkit-keyframes number-add {
+  0% {
+    opacity: 0;
+    bottom: 10px;
+  }
+  20% {
+    opacity: 1;
+    bottom: 32px;
+  }
+  80% {
+    opacity: 1;
+    bottom: 32px;
+  }
+  100% {
+    opacity: 0;
+    bottom: 54px;
+  }
+}
+@-moz-keyframes number-add {
+  0% {
+    opacity: 0;
+    bottom: 10px;
+  }
+  20% {
+    opacity: 1;
+    bottom: 32px;
+  }
+  80% {
+    opacity: 1;
+    bottom: 32px;
+  }
+  100% {
+    opacity: 0;
+    bottom: 54px;
+  }
+}
+@keyframes number-add {
+  0% {
+    opacity: 0;
+    bottom: 10px;
+  }
+  20% {
+    opacity: 1;
+    bottom: 32px;
+  }
+  80% {
+    opacity: 1;
+    bottom: 32px;
+  }
+  100% {
+    opacity: 0;
+    bottom: 54px;
+  }
+}
+.iframe-goods-detail .a-shopping div {
+  width: 50px;
+  height: 50px;
+  opacity: 1;
+}
+.iframe-goods-detail .a-shopping.fly-to-shopping-cart {
+  position: fixed;
+  z-index: 1;
+  top: 10px !important;
+  right: 30px !important;
+  -webkit-transition: top cubic-bezier(.3, 1.1, .9, 1.1) 1.2s, right linear 1.2s;
+  -moz-transition: top cubic-bezier(.3, 1.1, .9, 1.1) 1.2s, right linear 1.2s;
+  transition: top cubic-bezier(.3, 1.1, .9, 1.1) 1.2s, right linear 1.2s;
+}
+.iframe-goods-detail .a-shopping.fly-to-shopping-cart div {
+  opacity: 0;
+  -webkit-transition: opacity linear .3s 2.1s;
+  -moz-transition: opacity linear .3s 2.1s;
+  transition: opacity linear .3s 2.1s;
+}
+.iframe-goods-detail-mask {
+  z-index: 0;
+  background-color: rgba(255, 255, 255, 0.2);
 }
 .info {
   height: 100%;
@@ -155,6 +360,7 @@ input[type=password]:focus {
   background: #45aaf2;
   border-radius: 3px;
   -webkit-transition: all ease 0.5s;
+  -moz-transition: all ease 0.5s;
   transition: all ease 0.5s;
   text-align: center;
   font-size: 15.5px;
@@ -257,6 +463,9 @@ input[type=password]:focus {
   margin-right: 20px;
   margin-left: 3px;
   cursor: pointer;
+  -webkit-transition: all ease 0.3s;
+  -moz-transition: all ease 0.3s;
+  transition: all ease 0.3s;
 }
 .info-data li div.info-input label i {
   width: 16px;
@@ -292,6 +501,7 @@ input[type=password]:focus {
   background: #45aaf2;
   border-radius: 3px;
   -webkit-transition: all ease 0.5s;
+  -moz-transition: all ease 0.5s;
   transition: all ease 0.5s;
   text-align: center;
   font-size: 15.5px;
@@ -322,6 +532,7 @@ input[type=password]:focus {
   background: #45aaf2;
   border-radius: 3px;
   -webkit-transition: all ease 0.5s;
+  -moz-transition: all ease 0.5s;
   transition: all ease 0.5s;
   text-align: center;
   font-size: 15.5px;
@@ -427,6 +638,7 @@ input[type=password]:focus {
   background: #45aaf2;
   border-radius: 3px;
   -webkit-transition: all ease 0.5s;
+  -moz-transition: all ease 0.5s;
   transition: all ease 0.5s;
   text-align: center;
   font-size: 15.5px;

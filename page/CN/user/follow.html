@@ -2,7 +2,7 @@
 <html ng-app="follow">
     <head lang="en">
         <meta charset="UTF-8">
-        <title>follow</title>
+        <title></title>
             <link rel="stylesheet" href="/font/iconfont.css">
             <link rel="stylesheet" href="/css/header.css">
             <link rel="stylesheet" href="/css/user/fans.css">
@@ -12,14 +12,13 @@
     <div moduserhead></div>
     <!--list-->
     <div class="container media" ng-controller="followCtr">
-        <div class="fans-warp art-box a-imageload" ng-repeat="follow in followItems" id="s">
+        <div class="fans-nav-left" id="fansFollow">
+            <span><a href="/page/CN/user/fans.html" ng-bind="LANG.PAGE.FANS"></a></span>
+            <span class="f"><a class="active" href="/page/CN/user/follow.html" ng-bind="LANG.PAGE.FOLLOW"></a></span>
+        </div>
+        <div class="fans-nav-right">
+            <div class="fans-warp art-box a-imageload" ng-repeat="follow in followItems" id="s">
             <div class="icon-bnt">
-                <div class="{{follow.isFollowed?'bnt active':'bnt'}}">
-                    <i class="iconfont icon-check"></i>
-                    <span ng-if='cooid!=id' ng-bind='follow.isFollowed==true?"已关注":"关注"'></span>
-
-                    <a href="javascript:;" ng-if='cooid==id' artistsId="{{follow.artistsId}}" code="{{follow.isFollowed?'1':'0'}}" class="" ng-click="ngFollow($event)" ng-bind='follow.isFollowed==true?"已关注":"关注"'></a>
-                </div>
                 <div class="icon">
                     <a href="/page/CN/user/gallery.html?uid={{follow.uId}}">
                         <img src="{{imgUrl}}{{follow.artistsHead}}{{qnIcon}}">
@@ -28,19 +27,31 @@
                 <div class="name">
                     <a href="/page/CN/user/gallery.html?uid={{follow.uId}}" ng-bind="follow.artistsName"></a>
                     <span>
-                        <font ng-bind="follow.artworkCount"></font>圈子·<font ng-bind="follow.fansCount"></font>粉丝
+                        <font ng-bind="follow.artworkCount"></font><font ng-bind="LANG.PAGE.COMMUNITY"></font>·<font ng-bind="follow.fansCount"></font><font ng-bind="LANG.PAGE.FANS"></font>
                     </span>
                 </div>
+                <div class="{{follow.isFollowed?'bnt active':'bnt'}}">
+                    <i class="iconfont icon-check"></i>
+                    <span ng-if='cooid!=id' ng-bind='follow.isFollowed==true?LANG.BUTTON.FOLLOWING:LANG.PAGE.FOLLOW'></span>
+
+                    <a href="javascript:;" ng-if='cooid==id' artistsId="{{follow.artistsId}}" code="{{follow.isFollowed?'1':'0'}}" class="" ng-click="ngFollow($event)" ng-bind='follow.isFollowed==true?LANG.BUTTON.FOLLOWING:LANG.PAGE.FOLLOW'></a>
+                </div>
             </div>
+            <div class="bor-m"><span></span></div>
             <div class="fans-list">
                 <ul>
                     <li >
-                        <span class="art-span img-loading" data-index="{{$index}}" ng-repeat="image in follow.artsUrl">
+                        <span class="art-span img-loading" data-index="{{$index}}" ng-if="$index < 3" ng-repeat="image in follow.artsUrl">
                             <img data-src="{{imgUrl}}{{image}}{{qnProduct}}">
                         </span>
                     </li>
                 </ul>
             </div>
+        </div>
+        <div class="data-not">
+            <img src="/images/img-404.png" style="margin:0 auto;">
+            <p>{{LANG.TEXT.T108}}</p>
+        </div>
         </div>
     </div>
     <!-- JS -->
@@ -52,6 +63,7 @@
     <script src="/js/ArtJS/lib/angular.min.js"></script>
     <script src="/module/mod-header-full.js"></script>
     <script src="/module/mod-user-head.js"></script>
+    <script src="/module/mod-user-share.js"></script>
     <script src="/js/user/headPortrait.js"></script>
     <script src="/js/user/follow.js"></script>
 </body>

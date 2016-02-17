@@ -2,7 +2,7 @@
 <html ng-app="shops">
     <head lang="en">
         <meta charset="UTF-8">
-        <title>shop</title>
+        <title></title>
             <link rel="stylesheet" href="/font/iconfont.css">
             <link rel="stylesheet" href="/css/header.css">
             <link rel="stylesheet" href="/css/user/shop.css">
@@ -13,7 +13,7 @@
     <!--list-->
     <div class="container media" ng-controller="shopCtr">
         <!-- nav -->
-        <ul class="like-nav" id="search" placeholder="Search Artwork, Blogs, Artist">
+        <!-- <ul class="like-nav" id="search" placeholder="Search Artwork, Blogs, Artist">
             <li>
                 <a href="">灯丝圈</a>
             </li>
@@ -21,33 +21,47 @@
                 <a href="">商店</a>
             </li>
             <!--<li><a href="/user/user-like-artwork.html" ng-bind="navThree"></a></li>-->
-        </ul>
-        <ul class="art-box a-imageload">
-            <li data-index="{{$index}}" ng-repeat="ushop in ushopItems" class="gallery">
-                <div class="art-img">
-                    <span class="art-span img-loading">
-                        <img src="{{imgUrl}}{{ushop.uri}}{{qnProduct}}" class="a-imageshow">
-                    </span>
-                </div>
-                <div class="text">
-                    <h2>
-                        <span class="user">
-                            <a href="/page/CN/user/gallery.html?uid={{ushop.uId}}">
-                                <b><img class="a-imageshow" src="{{imgUrl}}{{ushop.picture}}{{qnIcon}}" /></b><font ng-bind="ushop.customerName"></font></a>
+        <!-- </ul> -->
+        <div class="shop-nav-left">
+            <dl>
+                <dt ng-bind="uName"></dt>
+                <dd ng-repeat="uClass in uClassShop" ng-if="$index >0"><span ng-bind="uClass.typeName" ng-click="uShop(uClass,$event)"></span></dd>
+            </dl>
+        </div>
+        <div class="shop-nav-right" style="display:none">
+            <ul class="art-shop-box a-imageload" style="display:none">
+                <li data-index="{{$index}}" ng-repeat="ushop in ushopItems" class="gallery" data-in="in_{{ushop.goodsId}}op">
+                    <div class="art-img" ng-click="ugoodsInfo(ushop)">
+                        <span class="art-span img-loading">
+                            <img src="{{imgUrl}}{{ushop.imagePath}}{{qnProduct}}" class="a-imageshow">
                         </span>
-                    </h2>
-                </div>
-                <div class="light-price">
-                    <span><!--  ng-class="like.light?'ico-likes':''"  -->
-                        <b class="iconfont icon-bulb"></b>
-                        <i ng-bind="ushop.collectionNumber">2</i>
-                    </span>
-                    <span>
-                        <font ng-bind="ushop.currencySymbol"></font>&nbsp;<font ng-bind="ushop.collectionNumber"></font>
-                    </span>
-                </div>
-            </li>
-        </ul>
+                    </div>
+                    <div class="text">
+                        <h2>
+                            <span class="shop-title" ng-bind="ushop.goodsName"></span>
+                            <span class="user">
+                                <a href="/page/CN/user/gallery.html?uid={{ushop.uId}}">
+                                    <b><img class="a-imageshow" src="{{imgUrl}}{{ushop.createUserImage}}{{qnIcon}}" /></b><font ng-bind="ushop.createUserName"></font></a>
+                            </span>
+                        </h2>
+                    </div>
+                    <div class="light-price">
+                        <span><!--  ng-class="like.light?'ico-likes':''"  -->
+                            <b type="{{ushop.type}}" ng-click="getLikeArts(ushop)" class="iconfont icon-icon" ng-if="cooid==id"></b>
+                            <b ng-if="cooid!=id" class="iconfont icon-icon"></b>
+                            <i ng-bind="ushop.likeCount"></i>
+                        </span>
+                        <span>
+                            <font ng-bind="ushop.sympay"></font>&nbsp;<font ng-bind="ushop.sellPrice"></font>
+                        </span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="data-not">
+            <img src="/images/img-404.png" style="margin:0 auto;">
+            <p>{{LANG.TEXT.T108}}</p>
+        </div>
     </div>
     <!-- JS -->
     <script src="/js/config.js"></script>
@@ -58,6 +72,7 @@
     <script src="/js/ArtJS/lib/angular.min.js"></script>
     <script src="/module/mod-header-full.js"></script>
     <script src="/module/mod-user-head.js"></script>
+    <script src="/module/mod-user-share.js"></script>
     <script src="/js/user/headPortrait.js"></script>
     <script src="/js/user/shop.js"></script>
 </body>

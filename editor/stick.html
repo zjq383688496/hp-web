@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>置顶精品</title>
+    <link rel="stylesheet" type="text/css" href="/css/editor/public.css">
+    <link rel="stylesheet" type="text/css" href="/css/editor/editor.css">
+    <link type="text/css" href="/font/iconfont.css" rel="stylesheet">
+    <script src="/js/config.js"></script>
+    <script src="/js/editor/jquery.js"></script>
+    <script src="/js/ArtJS/ArtJS.js"></script>
+    <script src="/js/editor/editor-html.js"></script>
+    <script src="/js/editor/main.js"></script>
+    <script src="/js/editor/editor-stick.js"></script>
+</head>
+<body>
+<input type="hidden" value="" id="countryType"/>
+<input type="hidden" name="stopFlg" id="stopFlg" value="1"/>
+<div class="wrapper">
+    <!--小编导航-->
+    <div class="topic_logo">
+        <a href="/"><img src="/css/editor/cmallLogo.png"></a>
+    </div>
+    <!--导航结束-->
+    <div class="clear"></div>
+    <div class="editor-nav">
+        <a class="by-date" flag="1" href="/editor/new-up.html">新上传<i></i></a>
+        <a class="by-date" flag="2" href="/editor/inspect-tag.html">标签检查<i></i></a>
+        <a class="by-date active" flag="3" href="/editor/stick.html" id="zhiding">置顶精品<i></i></a>
+        <a class="by-date" flag="4" href="/editor/editor-index.html" id="eIndex">编辑首页<i></i></a>
+        <!-- <a class="by-date" flag="6" href="/editor/old-works.html" id="oldArt">艺术品编辑<i></i></a> -->
+        <a class="by-date Trash" flag="5" href="/editor/recycle-bin.html">回收站<i></i> </a>
+    </div>
+    <ul class="box-menu" id="box-menu">
+        <li class="current" indexTag="5"><a href="javascript:;" data-mark="2" data-classify="3">艺术品</a></li>
+        <li indexTag="2"><a href="javascript:;" data-mark="3" data-classify="2">衍生品</a></li>
+        <li indexTag="1"><a href="javascript:;" data-mark="1" data-classify="1">灯丝圈</a></li>
+    </ul>
+    <!--导航结束-->
+    <!--搜索Start-->
+    <div class="e-search">
+        <!--<form name="myform" id="queryForm" method="get">-->
+          <input type="text" class="intxt" id="intxt" datacode="1" name="searchVal" placeholder="搜索艺术品、艺术家或文章" /><input type="button" id="e-search" value="搜索">
+        <!--</form>-->
+    </div>
+    <!--筛选开始-->
+    <div class="box_choice clearfix">
+        <div class="box_choice_find">
+            <div id="stick-classify" class="wrapper">
+                <dl class="right">
+                    <dt ontouchend="mouseout(this)" ontouchstart="hover(this)" sname="兴趣" class="shopSx" id="pid_id_4"><font></font><span>兴趣</span></dt>
+                    <dd class="fenlei-special" id="fenleiSpecial">
+                    </dd>
+                </dl>
+                <dl id="shopClass">
+
+                </dl>
+            </div>
+        </div>
+    </div>
+    <!--筛选结束-->
+    <div class="clear"></div>
+    <!--排序-->
+    <div class="mune-select clearfix">
+        <div id="m-s">
+            <a href="javascript:;" id="selectxb">按更新时间倒序</a>
+            <ul>
+                <li id="2">按更新时间倒序</li>
+                <li id="1">按更新时间正序</li>
+            </ul>
+        </div>
+        <div class="ysp-top" style="display: none">
+            <a href="javascript:;" id="selectTop">根据置顶排序</a>
+            <ul>
+                <li id="top">根据置顶排序</li>
+                <li id="updatedate">根据实际排序</li>
+            </ul>
+        </div>
+        <!--<span id="showCount">查询数量:<i></i></span>-->
+    </div>
+</div>
+<!--衍生品-->
+<div class="container media">
+    <ul class="art_box clearfix" id="container"  data-works="1">
+
+    </ul>
+    <div align="center" class="loadshowcss" style="display:block"><img src="/css/editor/loading.gif"></div>
+</div>
+</body>
+</html>

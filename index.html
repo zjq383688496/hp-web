@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html ng-app="shop">
+	<head>
+		<meta charset="utf-8">
+		<title>艺术品</title>
+		<link rel="stylesheet" href="/font/iconfont.css">
+		<link rel="stylesheet" href="/css/header.css">
+		<link rel="stylesheet" href="/css/home.css">
+	</head>
+<body>
+
+<div modheaderfull></div>
+
+<div modhometag></div>
+
+<!-- container -->
+<div class="container shop-content" ng-controller="shopCtr">
+	<div class="home-side">
+
+		<!-- mod-home-side start -->
+		<div id="modHomeSide" class="mod-home-side">
+			<div id="modHomeSideContent" class="mod-home-side-content">
+				<!-- interest -->
+				<dl id="sortInterest" class="sort-side">
+					<dt class="shopSx"><span ng-bind="sortInterest.typeName"></span></dt>
+					<dd>
+						<a id="interest_{{interest.id}}" ng-repeat="interest in sortInterest.children" data-pid="{{interest.id}}" ng-click="tagGetIndexMarket(this, 3);"><b><i class="iconfont icon-check"></i></b><span ng-bind="interest.typeName"></span></a>
+					</dd>
+				</dl>
+			</div>
+		</div>
+		<!-- mod-home-side end -->
+
+	</div>
+
+	<div class="home-goods">
+
+		<div class="home-banner" ng-show="haveBanner">
+			<ul class="banner-img">
+				<li class="img" ng-repeat="item in banner">
+					<a><img src="{{imgUrl}}{{item.imgUrl}}{{qn850}}"></a>
+				</li>
+			</ul>
+		</div>
+
+		<ul class="art-box a-imageload">
+			<li data-index="{{$index}}" ng-repeat="item in pageItems">
+				<a class="art-img img-loading" ng-click="goodsInfo(item.goodsId);"><img data-src="{{imgUrl}}{{item.imagePath}}{{qnProduct}}"></a>
+				<div class="art-info">
+					<p class="art-title" title="{{item.goodsName}}" ng-bind="item.goodsName"></p>
+					<a class="art-user" data-user="{{item.createUserName}}" href="/page/{{LANG.NAME}}/user/gallery.html?uid={{item.createUserId}}"><b class="img-loading"><img data-src="{{imgUrl}}{{item.createUserImage}}{{qnIcon}}"></b></a>
+					<p class="art-ctr">
+						<span><a class="iconfont icon-icon{{item.light == true? ' art-light': ''}}" ng-click="artsLike(this);"></a><i ng-bind="item.likeCount"></i></span>
+						<span>{{item.currencySymbol}}{{item.sellPrice}}</span>
+					</p>
+				</div>
+			</li>
+		</ul>
+		<div class="{{loading}}"></div>
+		<div class="data-not" ng-bind="LANG.TEXT.T108"></div>
+	</div>
+</div>
+
+<!-- JS -->
+<script src="/js/config.js"></script>
+<script src="/js/ArtJS/lib/jquery-2.1.4.min.js"></script>
+<script src="/js/ArtJS/ArtJS.js"></script>
+<script src="/js/init.js"></script>
+<script src="/js/ArtJS/lib/angular.min.js"></script>
+<script src="/module/mod-header-full.js"></script>
+<script src="/module/mod-home-tag.js"></script>
+<script src="/js/shop.js"></script>
+<script src="/js/interests.js"></script>
+
+</body>
+</html>

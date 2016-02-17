@@ -1,0 +1,387 @@
+img {display: block;}
+em, i {font-style: normal;}
+
+/* .container {
+	width: 100%;
+} */
+#inwrapper {
+	margin: 0 auto;
+	padding: 40px 0;
+	width: 1000px;
+}
+
+.main {
+	margin: 0 auto;
+	width: 1000px;
+}
+
+.set_area h2.ptit {
+	color: #7f7f7f;
+	font-size: 18px;
+	line-height: 40px;
+	margin-bottom: 0 !important;
+	padding: 1px 0 0 5px;
+}
+h1, h2, h3, h4, h5, h6 {
+	font-weight: normal;
+	margin: 0;
+	padding: 0;
+}
+.wrap {
+	font-size: 12px;
+}
+
+.tabmenu2 {
+	display: block;
+	height: 90px;
+	margin-bottom: 15px;
+	padding-bottom: 2px;
+	position: relative;
+	width: 100%;
+}
+
+.tabmenu2 .tab {
+	height: 90px;
+	width: 100%;
+}
+.tabmenu2 .tab li {
+	float: left;
+	margin-right: -1px;
+}
+.tabmenu2 .tab li a {
+	display: inline-block;
+	width: 147px;
+	height: 30px;
+	color: #7f7f7f;
+	padding-top: 60px;
+	text-align: center;
+	font-size: 14px;
+}
+.tabmenu2 .tab li a,
+.order dd .state .order-s {
+	background: url(../../images/user_icon.png) no-repeat;
+}
+.order dd .state .order-s {
+	display: inline-block;
+	width: 147px;
+	height: 20px;
+	line-height: 20px;
+	text-align: center;
+	padding-top: 40px;
+	color: #7f7f7f;
+}
+.order dd .state .order-s-1{ background-position: -148px -515px;}
+.order dd .state .order-s-1:after {content: '生产中';}
+.order dd .state .order-s-3{ background-position: -300px -515px;}
+.order dd .state .order-s-3:after {content: '配送中';}
+.order dd .state .order-s-8{ background-position: -445px -515px;}
+.order dd .state .order-s-8:after {content: '订单完成';}
+
+.tabmenu2 .tab li a:hover,
+.tabmenu2 .tab li a.active {
+	color: #6cf;
+}
+.tabmenu2 .tab li.tbbg01 a {background-position: -10px -500px;}
+.tabmenu2 .tab li.tbbg01 a:hover,
+.tabmenu2 .tab li.tbbg01 a.active {background-position: -12px -594px;}
+
+.tabmenu2 .tab li.tbbg02 a {background-position: -150px -500px;}
+.tabmenu2 .tab li.tbbg02 a:hover,
+.tabmenu2 .tab li.tbbg02 a.active {background-position: -152px -594px;}
+.tabmenu2 .tab li.tbbg03 a {background-position: -300px -500px;}
+.tabmenu2 .tab li.tbbg03 a:hover,
+.tabmenu2 .tab li.tbbg03 a.active {background-position: -302px -594px;}
+.tabmenu2 .tab li.tbbg04 a {background-position: -450px -500px;}
+.tabmenu2 .tab li.tbbg04 a:hover,
+.tabmenu2 .tab li.tbbg04 a.active {background-position: -452px -594px;}
+
+.w120,
+.order dd .price,
+.order dd .count {
+	width: 120px;
+}
+.w160,
+.order dd .total {
+	width: 160px;
+}
+.w250,
+.order dd .state {
+	width: 250px;
+}
+.w350 {
+	width: 350px;
+}
+
+.order {
+
+}
+.order ul,
+.order dl {
+	background: #f6f7f8;
+	overflow: hidden;
+}
+.order dl {
+	color: #7f7f7f;
+}
+.order ul li {
+	float: left;
+	display: block;
+	height: 32px;
+	line-height: 32px;
+	text-align: center;
+	font-weight: 700;
+	color: #5f718b;
+}
+.order dl {
+	margin-top: 15px;
+	color: #777;
+}
+.order dl:nth-child(1) {
+	margin-top: 20px;
+}
+.order dt {
+	height: 36px;
+	line-height: 36px;
+	padding: 0 20px;
+}
+.order dt span {
+	float: left;
+	margin-right: 20px;
+}
+.order dt a {
+	float: right;
+}
+.order dd {
+	font-size: 14px;
+}
+.order dd>div {
+	vertical-align: middle;
+	display: table-cell;
+}
+.order dd .info {
+	width: 590px;
+}
+.order dd .info .img {
+	width: 140px;
+}
+.order dd .info img {
+	width: 100px;
+	height: 100px;
+	margin: 0 auto;
+	background: url(../../images/humb-img-sr.png) center no-repeat;
+	background-size: cover;
+}
+.order dd .text {
+	width: 210px;
+}
+.order dd .text p {
+	margin-top: 10px;
+}
+.order dd .text p:first-child {
+	margin-top: 0;
+}
+.order dd .price,
+.order dd .count {
+	text-align: center;
+}
+.order p,
+.order b,
+.order em {
+	display: block;
+}
+.order dd .list {
+	height: 100px;
+	padding: 12px 0;
+	border-top: 1px solid #fff;
+}
+.order dd .list:first-child {
+	border-top: 0;
+}
+.order dd .list>div {
+	vertical-align: top;
+	display: table-cell;
+}
+.order dd .total,
+.order dd .state {
+	text-align: center;
+	box-sizing: border-box;
+}
+.order dd .total b {
+	font-size: 18px;
+	font-weight: 100;
+}
+.order dd .total em {
+	color: #69c;
+}
+.order dd .total p {
+	margin-top: 10px;
+	color: #999;
+}
+.order dd .state {
+	padding: 0 15px;
+}
+.order dd .address {
+	text-align: left;
+}
+.order dd .address span {
+	color: #6cf;
+}
+
+
+
+/*订单详情*/
+
+.order-s-box {
+	background-color: #f7ffff;
+	border: 1px solid #d6f1ff;
+	display: inline;
+	float: left;
+	font-size: 14px;
+	height: 258px;
+	margin-bottom: 10px;
+	padding: 10px;
+	width: 543px;
+}
+
+.order-s-box .order-status-01 .os-t {
+	color: #6cf;
+	float: left;
+	line-height: 238px;
+	width: 100px;
+}
+.order-ship-box {
+	background-color: #f7ffff;
+	border: 1px solid #d6f1ff;
+	display: inline;
+	float: right;
+	height: 258px;
+	margin-bottom: 10px;
+	padding: 10px;
+	width: 403px;
+}
+.order-ship-box li {
+	color: #7f7f7f;
+	font-size: 14px;
+	line-height: 26px;
+	padding-left: 32px;
+}
+.order-ship-box li.os-info {
+	background:url(../../images/user_icon.png) no-repeat -575px -750px;
+	margin-bottom: 50px;
+}
+.order-ship-box li.os-ship {
+	background: url(../../images/user_icon.png) no-repeat -575px -870px;
+}
+.order-ship-box li.os-ship span.spa-r{
+	float: right;
+}
+.order-ship-box li.os-ship i {
+	color: #6cf;
+	font-style: normal;
+}
+/*相关产品*/
+.ncu-order-view {
+	background: #fff;
+	border-radius: 4px;
+	font-size: 12px;
+	overflow: hidden;
+}
+.ncu-order-view dl {
+	color: #808080;
+	font-size: 14px;
+	width: 100%;
+}
+.ncu-order-view dt {
+	width: 100%;
+	height: 30px;
+	line-height: 30px;
+	text-indent: 10px;
+	font-weight: 700;
+}
+.ncu-order-view dd {
+	display: block;
+	width: 100%;
+	overflow: hidden;
+	background-color: #f6f7f8;
+}
+.ncu-order-view dd>div {
+	float: left;
+	height: 100px;
+	padding: 12px 0;
+}
+.ncu-order-view dd .img {
+	width: 130px;
+}
+.goods-pic-small {
+	width: 100px;
+	height: 100px;
+	margin: 0 auto;
+	background: url(../../images/humb-img-sr.png) center no-repeat;
+	background-size: cover;
+}
+.goods-pic-small img {
+	width: 100px;
+	height: 100px;
+}
+.ncu-order-view dd .info {
+	width: 480px;
+}
+.ncu-order-view dd .info p {
+	margin-top: 10px;
+}
+.ncu-order-view dd .info p:first-child {
+	margin-top: 0;
+}
+.ncu-order-view dd .price,
+.ncu-order-view dd .count,
+.ncu-order-view dd .total {
+	width: 130px;
+	line-height: 100px;
+	color: #6cf;
+	font-size: 16px;
+	text-align: center;
+}
+
+/*订单状态*/
+.order-s-box .order-status {overflow: hidden;}
+.order-s-box .order-status .os-t {
+	 float: left;
+	 width: 100px;
+	 line-height: 258px;
+	 color: #6cf;
+}
+.order-s-box .order-status i {
+	float: left;
+	display: block;
+	width: 65px;
+	height: 258px;
+	background: url(../../images/user_icon.png) no-repeat;
+}
+.order-s-box .order-status .os-i{
+	float: left;
+	width: 350px;
+	height: 258px;
+}
+.order-s-box .order-status p {
+	line-height: 50px;
+	margin-top: 50px;
+	color: #7f7f7f;
+}
+.order-s-box .order-status p:first-child {
+	margin-top: 0;
+}
+
+/*正在生产 order-status-1*/
+.order-s-box .order-status-1 i {background-position: 0 -760px;}
+.order-s-box .order-status-1 p:nth-child(1) {color: #6cf;}
+/*正在配送 order-status-2*/
+.order-s-box .order-status-3 i {background-position: -100px -760px;}
+.order-s-box .order-status-3 p:nth-last-child(n+2) {color: #6cf;}
+/*订单完成 order-status-3*/
+.order-s-box .order-status-8 i {background-position: -200px -760px;}
+.order-s-box .order-status-8 p {color: #6cf;}
+
+.clear {
+	clear: both;
+	font-size: 0;
+}

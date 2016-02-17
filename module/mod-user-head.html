@@ -1,79 +1,134 @@
 <div ng-controller="userInfoController">
 	<!-- user info  -->
+	<!-- <div modusershare></div> -->
     <div class="userInformation">
-        <div class="userInformation-thumb" upfileimg>
-            <span style="background-image:url({{imgUrl}}{{userinfo.imageUrl}}{{qnIcon}})" id="uplad_avater">
+	    <!-- beijing -->
+		<div class="u-mark" style="background-image:url({{imgUrl}}{{uCover}}?imageView2/1/format/jpg/w/1000/h/300/q/90)">
+			<a class="u-editor" ng-click="coverFun()" ng-bind="COVEREIDT"></a>
+			<em class="iconfont icon-close-b" id="shaClose"></em>
+		</div>
+        <div class="userInformation-thumb">
+            <span style="background-image:url({{imgUrl}}{{userinfo.imageUrl}}{{qnIcon}})" id="uplad_avater" data-pic="{{userinfo.imageUrl}}">
             </span>
-            <input type="file" title="修改头像" name="fileDemo" class="fileDemo" accept="image/jpeg,image/gif,image/png">
+            <em ng-click="thumbFun()" class="em-editor" ng-bind="uedit"></em>
+        </div>
+        <div class="thumb-box" upfileimg>
+        	<i class="iconfont icon-close-b"></i>
+        	<div class="box-span">
+        		<!-- <span>删除现有头像</span> -->
+	        	<span ng-bind="ICONED"></span>
+	        	<input type="file" name="fileDemo" title="{{ICONED}}" class="fileDemo" accept="image/jpeg,image/gif,image/png">
+	        	<p><font ng-bind="LANG.TEXT.T096"></font><br/><font ng-bind="LANG.TEXT.T097"></font></p>
+        	</div>
         </div>
         <div class="userInformation-Bar">
             <div class="pos">
                 <div class="userInformation-Bar-l" ng-if='cooid!=id'>
                     <span style="background-image:url({{imgUrl}}{{userinfo.imageUrl}}{{qnIcon}})"></span>
                     <i><tt ng-bind="userinfo.nikeName"></tt>
-                        <font ng-bind="userinfo.nikeName">gallery</font>
+                        <font ng-bind="userinfo.nikeName"></font>
                         专卖店
                     </i>
                 </div>
                 <div class="userInformation-Bar-r">
-                    <a href="/page/CN/user/info.html" ng-if='cooid==id'>编辑</a>
-                    <a href="javascript:;" ng-if='cooid!=id'>关注</a>
-                    <a class="other-share" ng-if='cooid!=id'>
-                        <i class="iconfont icon-share"></i>
-                        分享
+                    <a href="/page/CN/user/info.html" ng-if='cooid==id' ng-bind="uedit"></a>
+                    <a href="javascript:;" ng-if='cooid!=id' ng-click="hUserFollow($event,usernav)" ng-bind='userinfo.isFollowed==true?ufollowing:uFollow' code="{{fans.isFollowed?'1':'0'}}"></a>
+                    <a class="other-share" ng-click="ShearUser($event)">
+                        <i class="iconfont icon-paper-plane"></i>
+                        <font ng-bind="ushare"></font>
                     </a>
                 </div>
             </div>
+            
         </div>
-        <h1 class="userInformation-name" ng-bind="userinfo.nikeName"></h1>
+        <div class="userInformation-name">
+        	<a href="/page/CN/user/fans.html?uid={{USER_ID}}" class="a-fans">
+                <font ng-bind="usernav.followers"></font>
+                <br>
+                <span ng-bind="uFans"></span>
+            </a>
+        	<h1 ng-bind="userinfo.nikeName"></h1>
+        	<a href="/page/CN/user/follow.html?uid={{USER_ID}}" class="a-follow">
+                <font ng-bind="usernav.follow"></font>
+                <br>
+                <span ng-bind="uFollow"></span>
+            </a>
+        </div>
         <div class="userInformation-links-etc">
             <span class="iconfont icon-global"></span>
             <font ng-bind="userinfo.location"></font>
         </div>
-        <div class="userInformation-introduce" ng-bind="userinfo.description">
-            
+        <div id="eWrap" class="userInformation-introduce">
+        	<span ng-bind="userinfo.description"></span>
         </div>
+        <p class="p-more"><em ng-bind="umore"></em></p>
     </div>
     <!--user nav-->
 	<div class="user-nav-box">
 	    <div class="user-nav">
 	        <ul>
-	            <li>
-	                <a href="">
+	        	<li id="nav06">
+	        		<a href="/page/CN/user/gallery.html">
+	                    <span ng-bind="ushopmanage"></span>
+	                    <!-- <font ng-bind="usernav.gallery"></font> -->
+	                </a>
+	        	</li>
+	            <li id="nav01">
+	                <a href="/page/CN/user/shop.html">
+	                    <span ng-bind="uLike"></span>
 	                    <font ng-bind="usernav.like"></font>
-	                    <br>
-	                    <span>喜欢</span>
 	                </a>
 	            </li>
-	            <li>
+	            <!-- <li id="nav02">
 	                <a href="/page/CN/user/fans.html">
 	                    <font ng-bind="usernav.followers"></font>
 	                    <br>
-	                    <span>粉丝</span>
+	                    <span ng-bind="ufans"></span>
 	                </a>
 	            </li>
-	            <li>
+	            <li id="nav03">
 	                <a href="/page/CN/user/follow.html">
 	                    <font ng-bind="usernav.follow"></font>
 	                    <br>
-	                    <span>关注</span>
+	                    <span ng-bind="ufollow"></span>
+	                </a>
+	            </li> -->
+	            <li id="nav04">
+	                <a href="/page/CN/user/store.html">
+	                    <span ng-bind="ustore"></span>
+	                    <font ng-bind="usernav.gallery" id="a04"></font>
 	                </a>
 	            </li>
-	            <li>
-	                <a href="/page/CN/user/gallery.html">
-	                    <font ng-bind="usernav.gallery"></font>
-	                    <br>
-	                    <span>专卖店</span>
-	                </a>
-	            </li>
-	            <li>
+	            <!-- <li id="nav05">
 	                <a href="">
+	                    <span ng-bind="uCommunity"></span>
 	                    <font ng-bind="usernav.topic"></font>
-	                    <br>
-	                    <span>圈子</span>
 	                </a>
-	            </li>
+	            </li> -->
 	        </ul>
 	    </div>
 	</div>
+	<!-- 封面更换 -->
+	<div class="u-cover">
+		<div class="u-close">
+			<font ng-bind="LANG.TEXT.T098"></font>
+			<i class="iconfont icon-close-b"></i>
+		</div>
+		<ul id="coverList">
+			<li class="cover-up" upfileimg>
+				<i class="iconfont icon-photo"></i>
+				<font ng-bind="LANG.TEXT.T099"></font>
+				<input type="file" name="fileDemo" title="封面" mark="19" class="fileDemo" accept="image/jpeg,image/gif,image/png">
+				<div id="coverPar">
+					<div><em></em></div>
+				</div>
+			</li>
+			<li><span data-cover="1"><img src="http://img.61gequ.com/allimg/2013-01/2167-130125161156.jpg"/></span></li>
+			<li><span data-cover="2"><img src="http://img.61gequ.com/allimg/2013-01/2167-130125161156.jpg"/></span></li>
+			<li><span data-cover="3"><img src="http://img.61gequ.com/allimg/2013-01/2167-130125161156.jpg"/></span></li>
+			<li><span data-cover="4"><img src="http://img.61gequ.com/allimg/2013-01/2167-130125161156.jpg"/></span></li>
+			<li><span data-cover="5"><img src="http://img.61gequ.com/allimg/2013-01/2167-130125161156.jpg"/></span></li>
+		</ul>
+	</div>
 </div>
+<div modusershare></div>

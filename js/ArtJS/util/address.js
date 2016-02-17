@@ -1,4 +1,4 @@
-﻿var HOST_URL = 'http://www.artbulb.com/';
+﻿var HOST_URL = ArtJS.server.art;
 if (!ArtJS.login.checkUserStatus()) location.href = '/';
 var API_URL = HOST_URL + 'memberSite/';
 var API = {

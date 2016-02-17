@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html ng-app="normalEditor">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="p:domain_verify" content="eb2b9d076f41193f56c07370e5ec96ea"/>
+	<title>小编</title>
+	<link rel="stylesheet" href="/font/iconfont.css">
+	<link rel="stylesheet" href="/css/header.css">
+	<link rel="stylesheet" href="/css/edit/normal.css">
+	<link rel="stylesheet" href="/js/ArtJS/ui/art.dialog.css">
+	<link rel="stylesheet" href="/js/ArtJS/ui/slider.css">
+</head>
+<body class="edit" ng-controller="normalContoller">
+	<!-- 头部start -->
+	<!-- <div modheaderfull></div> -->
+	<!-- <div class="head">
+		<div class="container">
+			<div class="logo">
+				<img src="/images/edit/logo.png">
+			</div>
+			<div class="info">
+				<span class="label">欢迎：</span>
+				<span class="user">登录者ID</span>
+			</div>
+		</div>
+	</div> -->
+	<div editor-header></div>
+	<!-- 头部 end -->
+	<!-- 导航start -->
+	<!-- <div class="nav container">
+		<h2 class="title">主分类</h2>
+		<ul class="tab">
+			<li data-code="goodList" class="active">图片</li>
+			<li data-code="workList">原作</li>
+			<li data-code="blogList">博客</li>
+			<li data-code="goodList">第三方商品</li>
+		</ul>
+		
+		<div class="right-act">
+		<a href="#" class="recycle" >查看所有未处理数据</a>
+		<a href="#" class="recycle" >回收站</a>
+		</div>
+	</div> -->
+	<!-- 导航end -->
+	<div editor-nav></div>
+   <!-- 筛选器start -->
+   
+	<!-- <div class="selector container">
+		<dl>
+			<dt class="title">媒介：</dt>
+			<dd class="active">不限</dd>
+			<dd>油画</dd>
+			<dd>绘画</dd>
+			<dd>版画</dd>
+			<dd>水墨</dd>
+			<dd>综合材料</dd>
+			<dd>雕塑装置</dd>
+			<dd>插画</dd>
+			<dd>摄影</dd>
+			<dd>影视</dd>
+			<dd>动漫</dd>
+			<dd>游戏</dd>
+			<dd>设计</dd>
+			<dd>手工艺</dd>
+			<dd>创意商品</dd>
+		</dl>
+		<dl>
+			<dt class="title">语言：</dt>
+			<dd>不限</dd>
+			<dd>英语</dd>
+			<dd class="active">汉语</dd>
+			<dd>意大利语</dd>
+			<dd>西班牙语</dd>
+			<dd>德语</dd>
+			<dd>法语</dd>
+			<dd>日语</dd>
+			<dd>韩语</dd>
+			<dd>俄语</dd>
+			<dd>阿拉伯语</dd>
+			<dd>葡萄牙语</dd>
+			<dd>越南语</dd>
+		</dl>
+		<dl>
+			<dt class="title">主题：</dt>
+			<dd>不限</dd>
+			<dd>风景</dd>
+			<dd <dd class="active">幽默</dd>
+			<dd>可爱</dd>
+			<dd>励志</dd>
+			<dd>爱情</dd>
+			<dd>极客</dd>
+			<dd>音乐</dd>
+			<dd>复古</dd>
+			<dd>人物</dd>
+			<dd>儿童</dd>
+			<dd>动物</dd>
+			<dd>大自然</dd>
+			<dd>美食</dd>
+			<dd>宗教</dd>
+			<dd>科幻</dd>
+			<dd>商业</dd>
+			<dd>运动</dd>
+			<dd>机械</dd>
+			<dd>文字</dd>
+			<dd>抽象</dd>
+			<dd>其它</dd>
+		</dl>
+		<div class="search-box"><input type="text" class="search" placeholder="作者姓名"><button class="search-btn" type="button">作者姓名</button></div>
+
+		<div class="search-box">
+			<select name="" class="select">
+				<option value="1">按更新时间倒序</option>
+				<option value="2">按更新时间升序</option>
+			</select>
+			<span>查询数量20</span>
+		</div>
+	</div> -->
+
+	<div editor-selector></div>
+<!-- 筛选器end -->
+
+<!-- 产品列表 start -->
+	<div class="container tab-list goodList a-imageload">
+		<div class="{{loading}}"></div>
+
+		<div editor-goods-list></div>
+		<!-- <button class="btn" type="button">获取待审核数据</button> -->
+
+		<!-- <ul class="item-list">
+			<li class="item first">
+				<span class="flag">被退回</span>
+				<i class="btn-del">×</i>
+				<div class="img-box">
+					<img src="/images/img-loading_1x.gif" alt="">
+				</div>
+				<ul class="thumbnail">
+					<li class="first"><img src="/images/humb-img-sr.png" alt=""></li>
+					<li><img src="/images/humb-img-sr.png" alt=""></li>
+					<li><img src="/images/humb-img-sr.png" alt=""></li>
+					<li><img src="/images/humb-img-sr.png" alt=""></li>
+				</ul>
+				<h3 class="title">
+					<span class="label">标题：</span>
+					<span>标题标题标题标题标题标题标题标题标题标题标题标题标题标题</span>
+				</h3>
+				<div class="copyright">
+					<input type="checkbox" class="check"><span>版权问题</span>
+				</div>
+				<div class="btns">
+					<a class="btn-down" href="#">下载</a>
+					<a class="btn-up"href="#">上传</a>
+					<a class="btn-modify"href="#">修改衍生品属性</a>
+				</div>
+
+				<div class="tags">
+					<ul class="tag">
+						<li class="label first">语言：</li>
+						<li>综合</li>
+						<li>英语</li>
+						<li>韩语</li>
+						<li>意大利语</li>
+						<li class="active">西班牙语</li>
+						<li>德语</li>
+						<li>法语</li>
+						<li>日语</li>
+						<li>俄语</li>
+						<li>阿拉伯语</li>
+						<li>葡萄牙语</li>
+						<li>越南语</li>
+					</ul>
+					<ul class="tag">
+						<li class="label first">热词：</li>
+						<li>热词</li>
+						<li class="active">热词</li>
+						<li>热词</li>
+						<li>热词</li>
+						<li>热词</li>
+						<li>热词</li>
+						<li>热词</li>
+						<li>热词</li>
+					</ul>
+					<ul class="tag">
+						<li class="label first">作者标签：</li>
+						<li class="active">热词</li>
+						<li>热词</li>
+						<li>热词</li>
+						<li>热词</li>
+						<li>热词</li>
+						<li>热词</li>
+						<li>热词</li>
+					</ul>
+					<div class="normal">
+						<h3>小编标签：</h3>
+						<div class="tag-box">
+							<span>标签<i class="ico-del">×</i></span>
+							<span>标签<i class="ico-del">×</i></span>
+							<span>标签<i class="ico-del">×</i></span>
+							<input type="text" class="txt-tag" placeholder="添加相关标签，用逗号或回车分隔">
+						</div>
+						<h4><span class="label">标签评分：</span><span>100</span></h4>
+					</div>
+					<div class="desc">
+						<h3>作者描述：</h3>
+						<p>作者描述作者描述作者描述作者描述作者描述作者描述作者描述作者描述作者描述作者描述作者描述作者描述作者描述作者描述作者描述作者...<a href="#">[查看全文]</a></p>
+						<h4><span class="label">编辑人：</span><span>编辑人名</span></h4>
+						<h4><span class="label">作者：</span><span>作者名</span></h4>
+						<h4><span class="label">国家：</span><span>CN</span></h4>
+					</div>
+				</div>
+
+				<div class="btns">
+					<a class="btn-down" href="#">提交</a>
+					<a class="btn-up"href="#">审核不通过</a>
+				</div>
+			</li>
+
+			<li class="item">
+				<div class="img-box">
+					<img src="/images/img-loading_1x.gif" alt="">
+				</div>
+				<ul class="thumbnail">
+					<li class="first"><img src="/images/humb-img-sr.png" alt=""></li>
+					<li><img src="/images/humb-img-sr.png" alt=""></li>
+					<li><img src="/images/humb-img-sr.png" alt=""></li>
+					<li><img src="/images/humb-img-sr.png" alt=""></li>
+				</ul>
+				<h3 class="title">
+					<span class="label">标题：</span>
+					<span>标题标题标题标题标题标题标题标题标题标题标题标题标题标题</span>
+				</h3>
+				<div class="copyright">
+					<input type="checkbox" class="check"><span>版权问题</span>
+				</div>
+				<div class="btns">
+					<a class="btn-down" href="#">下载</a>
+					<a class="btn-up"href="#">上传</a>
+					<a class="btn-modify"href="#">修改衍生品属性</a>
+				</div>
+
+				<div class="tags">
+					<ul class="tag">
+						<li class="label first">语言：</li>
+						<li>综合</li>
+						<li>英语</li>
+						<li>韩语</li>
+						<li>意大利语</li>
+						<li class="active">西班牙语</li>
+						<li>德语</li>
+						<li>法语</li>
+						<li>日语</li>
+						<li>俄语</li>
+						<li>阿拉伯语</li>
+						<li>葡萄牙语</li>
+						<li>越南语</li>
+					</ul>
+					<ul class="tag">
+						<li class="label first">热词：</li>
+						<li>热词</li>
+						<li class="active">热词</li>
+						<li>热词</li>
+						<li>热词</li>
+						<li>热词</li>
+						<li>热词</li>
+						<li>热词</li>
+						<li>热词</li>
+					</ul>
+					<ul class="tag">
+						<li class="label first">作者标签：</li>
+						<li class="active">热词</li>
+						<li>热词</li>
+						<li>热词</li>
+						<li>热词</li>
+						<li>热词</li>
+						<li>热词</li>
+						<li>热词</li>
+					</ul>
+					<div class="normal">
+						<h3>小编标签：</h3>
+						<div class="tag-box">
+							<span>标签标<i class="ico-del">×</i></span>
+							<span>标签标签<i class="ico-del">×</i></span>
+							<span>标签标签<i class="ico-del">×</i></span>
+							<input type="text" class="txt-tag" placeholder="添加相关标签，用逗号或回车分隔">
+						</div>
+						<h4><span class="label">标签评分：</span><span>100</span></h4>
+					</div>
+					<div class="desc">
+						<h3>作者描述：</h3>
+						<p>作者描述作者描述作者描述作者描述作者描述作者描述作者描述作者描述作者描述作者描述作者描述作者描述作者描述作者描述作者描述作者...<a href="#">[查看全文]</a></p>
+						<h4><span class="label">编辑人：</span><span>编辑人名</span></h4>
+						<h4><span class="label">作者：</span><span>作者名</span></h4>
+						<h4><span class="label">国家：</span><span>CN</span></h4>
+					</div>
+				</div>
+
+				<div class="btns">
+					<a class="btn-down" href="#">提交</a>
+					<a class="btn-up"href="#">审核不通过</a>
+				</div>
+			</li>
+
+			<li class="item">
+				<div class="img-box">
+					<img src="/images/img-loading_1x.gif" alt="">
+				</div>
+				<ul class="thumbnail">
+					<li class="first"><img src="/images/humb-img-sr.png" alt=""></li>
+					<li><img src="/images/humb-img-sr.png" alt=""></li>
+					<li><img src="/images/humb-img-sr.png" alt=""></li>
+					<li><img src="/images/humb-img-sr.png" alt=""></li>
+				</ul>
+				<h3 class="title">
+					<span class="label">标题：</span>
+					<span>标题标题标题标题标题标题标题标题标题标题标题标题标题标题</span>
+				</h3>
+				<div class="copyright">
+					<input type="checkbox" class="check"><span>版权问题</span>
+				</div>
+				<div class="btns">
+					<a class="btn-down" href="#">下载</a>
+					<a class="btn-up"href="#">上传</a>
+					<a class="btn-modify"href="#">修改衍生品属性</a>
+				</div>
+
+				<div class="tags">
+					<ul class="tag">
+						<li class="label first">语言：</li>
+						<li>综合</li>
+						<li>英语</li>
+						<li>韩语</li>
+						<li>意大利语</li>
+						<li class="active">西班牙语</li>
+						<li>德语</li>
+						<li>法语</li>
+						<li>日语</li>
+						<li>俄语</li>
+						<li>阿拉伯语</li>
+						<li>葡萄牙语</li>
+						<li>越南语</li>
+					</ul>
+					<ul class="tag">
+						<li class="label first">热词：</li>
+						<li>热词</li>
+						<li class="active">热词</li>
+						<li>热词</li>
+						<li>热词</li>
+						<li>热词</li>
+						<li>热词</li>
+						<li>热词</li>
+						<li>热词</li>
+					</ul>
+					<ul class="tag">
+						<li class="label first">作者标签：</li>
+						<li class="active">热词</li>
+						<li>热词</li>
+						<li>热词</li>
+						<li>热词</li>
+						<li>热词</li>
+						<li>热词</li>
+						<li>热词</li>
+					</ul>
+					<div class="normal">
+						<h3>小编标签：</h3>
+						<div class="tag-box">
+							<span>标签标<i class="ico-del">×</i></span>
+							<span>标签标签<i class="ico-del">×</i></span>
+							<span>标签标签<i class="ico-del">×</i></span>
+							<input type="text" class="txt-tag" placeholder="添加相关标签，用逗号或回车分隔">
+						</div>
+						<h4><span class="label">标签评分：</span><span>100</span></h4>
+					</div>
+					<div class="desc">
+						<h3>作者描述：</h3>
+						<p>作者描述作者描述作者描述作者描述作者描述作者描述作者描述作者描述作者描述作者描述作者描述作者描述作者描述作者描述作者描述作者...<a href="#">[查看全文]</a></p>
+						<h4><span class="label">编辑人：</span><span>编辑人名</span></h4>
+						<h4><span class="label">作者：</span><span>作者名</span></h4>
+						<h4><span class="label">国家：</span><span>CN</span></h4>
+					</div>
+				</div>
+
+				<div class="btns">
+					<a class="btn-down" href="#">提交</a>
+					<a class="btn-up"href="#">审核不通过</a>
+				</div>
+			</li>
+
+			<li class="item first">
+				<div class="img-box">
+					<img src="/images/img-loading_1x.gif" alt="">
+				</div>
+				<ul class="thumbnail">
+					<li class="first"><img src="/images/humb-img-sr.png" alt=""></li>
+					<li><img src="/images/humb-img-sr.png" alt=""></li>
+					<li><img src="/images/humb-img-sr.png" alt=""></li>
+					<li><img src="/images/humb-img-sr.png" alt=""></li>
+				</ul>
+				<h3 class="title">
+					<span class="label">标题：</span>
+					<span>标题标题标题标题标题标题标题标题标题标题标题标题标题标题</span>
+				</h3>
+				<div class="copyright">
+					<input type="checkbox" class="check"><span>版权问题</span>
+				</div>
+				<div class="btns">
+					<a class="btn-down" href="#">下载</a>
+					<a class="btn-up"href="#">上传</a>
+					<a class="btn-modify"href="#">修改衍生品属性</a>
+				</div>
+
+				<div class="tags">
+					<ul class="tag">
+						<li class="label first">语言：</li>
+						<li>综合</li>
+						<li>英语</li>
+						<li>韩语</li>
+						<li>意大利语</li>
+						<li class="active">西班牙语</li>
+						<li>德语</li>
+						<li>法语</li>
+						<li>日语</li>
+						<li>俄语</li>
+						<li>阿拉伯语</li>
+						<li>葡萄牙语</li>
+						<li>越南语</li>
+					</ul>
+					<ul class="tag">
+						<li class="label first">热词：</li>
+						<li>热词</li>
+						<li class="active">热词</li>
+						<li>热词</li>
+						<li>热词</li>
+						<li>热词</li>
+						<li>热词</li>
+						<li>热词</li>
+						<li>热词</li>
+					</ul>
+					<ul class="tag">
+						<li class="label first">作者标签：</li>
+						<li class="active">热词</li>
+						<li>热词</li>
+						<li>热词</li>
+						<li>热词</li>
+						<li>热词</li>
+						<li>热词</li>
+						<li>热词</li>
+					</ul>
+					<div class="normal">
+						<h3>小编标签：</h3>
+						<div class="tag-box">
+							<span>标签<i class="ico-del">×</i></span>
+							<span>标签<i class="ico-del">×</i></span>
+							<span>标签<i class="ico-del">×</i></span>
+							<input type="text" class="txt-tag" placeholder="添加相关标签，用逗号或回车分隔">
+						</div>
+						<h4><span class="label">标签评分：</span><span>100</span></h4>
+					</div>
+					<div class="desc">
+						<h3>作者描述：</h3>
+						<p>作者描述作者描述作者描述作者描述作者描述作者描述作者描述作者描述作者描述作者描述作者描述作者描述作者描述作者描述作者描述作者...<a href="#">[查看全文]</a></p>
+						<h4><span class="label">编辑人：</span><span>编辑人名</span></h4>
+						<h4><span class="label">作者：</span><span>作者名</span></h4>
+						<h4><span class="label">国家：</span><span>CN</span></h4>
+					</div>
+				</div>
+
+				<div class="btns">
+					<a class="btn-down" href="#">提交</a>
+					<a class="btn-up"href="#">审核不通过</a>
+				</div>
+			</li>
+
+			<li class="item">
+				<div class="img-box">
+					<img src="/images/img-loading_1x.gif" alt="">
+				</div>
+				<ul class="thumbnail">
+					<li class="first"><img src="/images/humb-img-sr.png" alt=""></li>
+					<li><img src="/images/humb-img-sr.png" alt=""></li>
+					<li><img src="/images/humb-img-sr.png" alt=""></li>
+					<li><img src="/images/humb-img-sr.png" alt=""></li>
+				</ul>
+				<h3 class="title">
+					<span class="label">标题：</span>
+					<span>标题标题标题标题标题标题标题标题标题标题标题标题标题标题</span>
+				</h3>
+				<div class="copyright">
+					<input type="checkbox" class="check"><span>版权问题</span>
+				</div>
+				<div class="btns">
+					<a class="btn-down" href="#">下载</a>
+					<a class="btn-up"href="#">上传</a>
+					<a class="btn-modify"href="#">修改衍生品属性</a>
+				</div>
+
+				<div class="tags">
+					<ul class="tag">
+						<li class="label first">语言：</li>
+						<li>综合</li>
+						<li>英语</li>
+						<li>韩语</li>
+						<li>意大利语</li>
+						<li class="active">西班牙语</li>
+						<li>德语</li>
+						<li>法语</li>
+						<li>日语</li>
+						<li>俄语</li>
+						<li>阿拉伯语</li>
+						<li>葡萄牙语</li>
+						<li>越南语</li>
+					</ul>
+					<ul class="tag">
+						<li class="label first">热词：</li>
+						<li>热词</li>
+						<li class="active">热词</li>
+						<li>热词</li>
+						<li>热词</li>
+						<li>热词</li>
+						<li>热词</li>
+						<li>热词</li>
+						<li>热词</li>
+					</ul>
+					<ul class="tag">
+						<li class="label first">作者标签：</li>
+						<li class="active">热词</li>
+						<li>热词</li>
+						<li>热词</li>
+						<li>热词</li>
+						<li>热词</li>
+						<li>热词</li>
+						<li>热词</li>
+					</ul>
+					<div class="normal">
+						<h3>小编标签：</h3>
+						<div class="tag-box">
+							<span>标签标<i class="ico-del">×</i></span>
+							<span>标签标签<i class="ico-del">×</i></span>
+							<span>标签标签<i class="ico-del">×</i></span>
+							<input type="text" class="txt-tag" placeholder="添加相关标签，用逗号或回车分隔">
+						</div>
+						<h4><span class="label">标签评分：</span><span>100</span></h4>
+					</div>
+					<div class="desc">
+						<h3>作者描述：</h3>
+						<p>作者描述作者描述作者描述作者描述作者描述作者描述作者描述作者描述作者描述作者描述作者描述作者描述作者描述作者描述作者描述作者...<a href="#">[查看全文]</a></p>
+						<h4><span class="label">编辑人：</span><span>编辑人名</span></h4>
+						<h4><span class="label">作者：</span><span>作者名</span></h4>
+						<h4><span class="label">国家：</span><span>CN</span></h4>
+					</div>
+				</div>
+
+				<div class="btns">
+					<a class="btn-down" href="#">提交</a>
+					<a class="btn-up"href="#">审核不通过</a>
+				</div>
+			</li>
+		</ul> -->
+
+	</div>
+
+	<div  class="container tab-list workList hide">
+		
+		<button class="btn" type="button">获取待审核数据</button>
+
+	</div>
+
+
+	<div class="container tab-list blogList hide">
+		
+		<button class="btn" type="button">获取待审核数据</button>
+
+	</div>
+
+	<div class="pager-box">
+		<ul class="pager">
+			<li class="prev disable">&lt;前页</li>
+			<li class="active">1</li>
+			<li>2</li>
+			<li>3</li>
+			<li>4</li>
+			<li>5</li>
+			<li>6</li>
+			<li>7</li>
+			<li>8</li>
+			<li>9</li>
+			<li class="disable">...</li>
+			<li>57</li>
+			<li>58</li>
+			<li class="next">&gt;后页</li>
+		</ul>
+	</div>
+
+
+	<!--
+	<div class="art-bg-cover">
+	</div>
+	<div class="art-img-preview">
+		<div class="art-img-head">
+				!-- <h3>Transfer error parameters,or expired</h3> --
+				<h3></h3>
+				<i class="ico-del">×</i>
+			</div>
+			<div class="art-img-body" id="sliderContainer">
+				<div class="art-img-prev">&lt;</div>
+				<div class="art-img-slider-box slider-box">
+					<ul class="art-img-slider" id="slider">
+						<li><img src="/images/img-loading_1x.gif" alt=""></li>
+						<li><img src="/images/img-loading_1x.gif" alt=""></li>
+						<li><img src="/images/img-loading_1x.gif" alt=""></li>
+						<li><img src="/images/img-loading_1x.gif" alt=""></li>
+					</ul>
+				</div>
+				<div class="art-img-next">&gt;</div>
+			</div>
+			!-- <div class="art-img-foot">
+				<button class="btn-cancel" type="button">Cancel</button>
+				<button class="btn-ok" type="button">Ok</button>
+			</div> --
+	</div>-->
+	<!--
+	<div class="art-dialog">
+			<div class="dia-head">
+				<h3>Transfer error parameters,or expired</h3>
+				<i class="ico-del">×</i>
+			</div>
+			<div class="dia-body">
+				Transfer error parameters. or page expired. Transfer error parameters. or page expired.Transfer error parameters. or page expired.
+			</div>
+			<div class="dia-foot">
+				<button class="btn-cancel" type="button">Cancel</button>
+				<button class="btn-ok" type="button">Ok</button>
+			</div>
+	</div>
+
+	<div class="art-toast">
+			<div class="toa-body">
+				<h3>Transfer error parameters,or expired</h3>
+				<i class="ico-del">×</i>
+			</div>
+	</div> -->
+
+<!-- 产品列表 end -->
+	<script src="/js/config.js"></script>
+	<script src="/js/ArtJS/lib/jquery-2.1.4.min.js"></script>
+	<script src="/js/ArtJS/ArtJS.js"></script>
+	<script src="/js/init.js"></script>
+	<script src="/js/ArtJS/lib/angular.min.js"></script>
+	<script src="/module/editor/header.js"></script>
+	<script src="/module/editor/nav.js"></script>
+	<script src="/module/editor/selector.js"></script>
+	<script src="/module/editor/goods-list.js"></script>
+	<script src="/js/ArtJS/ui/art.dialog.js"></script>
+	<script src="/js/ArtJS/ui/slider.js"></script>
+	<script src="/js/edit/normal.js"></script>
+</body>
+</html>

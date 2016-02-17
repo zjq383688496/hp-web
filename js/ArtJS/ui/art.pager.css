@@ -1,0 +1,29 @@
+/*分页控件样式 start*/
+.pager-box{
+	width:100%;
+	text-align:center;
+	margin-top:20px;
+	clear:both;
+}
+
+.pager-box .pager{
+	margin:0 auto;
+}
+
+.pager-box .pager li{
+	margin:5px 2px;
+	display: inline-block;
+}
+.pager-box .pager li a{
+	padding:5px 8px;
+	color:#1369bf;	
+}
+.pager-box .pager a.active,.pager-box .pager a:hover{
+	background:#169e09;
+	color:#fff;
+}
+.pager-box .pager li.disable a,.pager-box .pager li.disable a:hover{
+	background:none;
+	color:#aaa;
+}
+/*分页控件样式 end*/

@@ -159,11 +159,11 @@ gulp.task('revCollectorCss', function () {
 
 //验证js
 gulp.task("jshint",function(){
-	 // return gulp.src(config.jsSrc) //检测JS风格
+	 return gulp.src(config.jsSrc) //检测JS风格
     // .pipe(jshint({"undef": false,"unused": false}))
     // .pipe(jshint.reporter('default'))  //错误默认提示
     // .pipe(jshint.reporter(stylish))   //高亮提示
-    // .pipe(jshint.reporter('fail'));
+    .pipe(jshint.reporter('fail'));
 });
 //压缩js任务  /生成版本号
 gulp.task("jsmin",function(){
@@ -175,11 +175,12 @@ gulp.task("jsmin",function(){
 	}
 	console.log("jsmin's flag="+flag);
 	return gulp.src(config.jsSrc)
+	.pipe(plumber({errorHandler: notify.onError('Error: <%= error.message %>')}))//防止watch终止
 	.pipe(sourcemaps.init())//sourcemaps 初始化
-	.pipe(ngAnnotate())
-        .pipe(ngmin({dynamic: false}))  
-        .pipe(stripDebug())
-	.pipe(gulpif(flag,uglify()))
+	// .pipe(ngAnnotate())
+ //        .pipe(ngmin({dynamic: false}))  
+        // .pipe(stripDebug())
+	.pipe(gulpif(flag,uglify({mangle:false})))//mangle 跳过需要编译的参数
 	.pipe(sourcemaps.write("."))//在当前目录生成map文件 
 	.pipe(rev())
 	.pipe(gulp.dest(config.jsDest))//压缩之后的js文件输出目录
@@ -303,13 +304,27 @@ gulp.task("build",function(cb){
     return runSequence.apply([],sequence);
 });
 
+
+//语言版本发布任务
+gulp.task("lang",function(cb){
+	console.log("语言包发布任务");
+	// for(var i in config.langs){
+		// var lang=config.langs[i];
+		var lang={code:"US",name:"英语"};
+		// if(lang.code!=="CN"){
+			console.log("正在发布语种'"+lang.name+"'的文件到"+config.langHtmlDest+"/"+lang.code+"......");
+		return	gulp.src(config.langHtmlSrc).pipe(gulp.dest(config.langHtmlDest+"/"+lang.code));
+		// }
+	// }
+});
+
 //生产环境打包
 gulp.task("online",function(cb){
 	// gulp.start(["help","less","watch"]);
 	// console.log("default"+cb);
 	console.log("生产环境打包！");
 	config=new FileConfig("dist/online");
-	return runSequence("clean","csscp","less","delCssEmpty",["revFont","revImg","jshint","csslint"],["revCollectorCss"],["cssmin"],"jsmin","revCollectorJs",["htmlmin"],["revCollectorHtml"],"seo","zip","cleanRev")(cb);
+	return runSequence("gulp","clean","csscp","less","delCssEmpty",["revFont","revImg","jshint","csslint"],["revCollectorCss"],["cssmin"],"jsmin","revCollectorJs",["htmlmin"],["revCollectorHtml"],"seo","lang","zip","cleanRev")(cb);
 });
 
 //测试环境打包
@@ -319,7 +334,7 @@ gulp.task("test",function(cb){
 	// config.defaultEnv="dist/test";
 	console.log("测试环境打包！");
 	config=new FileConfig("dist/test")
-	return runSequence("clean","csscp","less","delCssEmpty",["revFont","revImg","jshint","csslint"],["revCollectorCss"],["cssmin"],"jsmin","revCollectorJs",["htmlmin"],["revCollectorHtml"],"seo","zip","cleanRev")(cb);
+	return runSequence("gulp","clean","csscp","less","delCssEmpty",["revFont","revImg","jshint","csslint"],["revCollectorCss"],["cssmin"],"jsmin","revCollectorJs",["htmlmin"],["revCollectorHtml"],"seo","lang","zip","cleanRev")(cb);
 });
 
 //开发环境打包
@@ -328,7 +343,7 @@ gulp.task("dev",function(cb){
 	// console.log("default"+cb);
 	console.log("开发环境打包！");
 	config=new FileConfig("dist/dev")
-	return runSequence("clean","csscp","less","delCssEmpty",["revFont","revImg","jshint","csslint"],["revCollectorCss"],["cssmin"],"jsmin","revCollectorJs",["htmlmin"],["revCollectorHtml"],"seo","zip","cleanRev")(cb);
+	return runSequence("gulp","clean","csscp","less","delCssEmpty",["revFont","revImg","jshint","csslint"],["revCollectorCss"],["cssmin"],"jsmin","revCollectorJs",["htmlmin"],["revCollectorHtml"],"seo","lang","zip","cleanRev")(cb);
 });
 
 //打包
@@ -336,6 +351,13 @@ gulp.task("zip",function(){
 	return gulp.src(config.zipSrc)
 		.pipe(zip(config.zipName))
 		.pipe(gulp.dest(config.defaultEnv)); 
+});
+
+//gulp 参数配置 
+gulp.task("gulp",function(){
+	gulp.src("gulp/gulp-rev-index.js").pipe(rename("index.js")).pipe(gulp.dest("node_modules/gulp-rev"));
+	gulp.src("gulp/gulp-rev-rev-path-index.js").pipe(rename("index.js")).pipe(gulp.dest("node_modules/gulp-rev/node_modules/rev-path"));
+	gulp.src("gulp/gulp-rev-collector-index.js").pipe(rename("index.js")).pipe(gulp.dest("node_modules/gulp-rev-collector"));
 });
 
 // gulp.task("live",["connectDev","watch"]);
@@ -373,8 +395,10 @@ gulp.task("help",function () {
   console.log("	gulp htmlmin			压缩html文件并在资源文件地址增加版本号");
   console.log("	gulp seo			seo配置文件复制任务");
   console.log("	gulp clean			清理文件目录");
+  console.log("	gulp gulp			替换修改过的插件内容");
   // console.log("	gulp cpEnvs			多环境复制");
   console.log("	gulp watch			文件监控打包(包括less,js,css,img,font,html的监控)");
+  console.log("	gulp lang			语言包发布任务");
   console.log("	gulp zip			文件打包");
   // console.log("	gulp server			测试server");
   console.log("	gulp online			生产环境打包");
@@ -383,86 +407,6 @@ gulp.task("help",function () {
   // console.log("	gulp -m <module>			部分模块打包（默认全部打包）");
 
 });
-
-// var path = require('path');//路径处理
-//  var gulpif  = require('gulp-if'),//if判断，用来区别生产环境还是开发环境的
-//   rev  = require('gulp-rev'),//加MD5后缀
-//   revReplace = require('gulp-rev-replace'),//替换引用的加了md5后缀的文件名，修改过，用来加cdn前缀
-//   addsrc = require('gulp-add-src'),//pipeline中途添加文件夹，这里没有用到
-//   del = require('del'),//也是个删除··· 
-//   vinylPaths = require('vinyl-paths'),//操作pipe中文件路径的，加md5的时候用到了
-//   runSequence = require('run-sequence');//控制task顺序
-
-
-// var gulpUtil={
-//  /*md5打包 */
-//   buildMd5: function () {
-
-//     var vp = vinylPaths(); 
-
-//     return gulp.src(path.join(basePath.production, '/**/{images,lib,styles}/**/*.*'))   
-
-//       .pipe(vp)
-
-//       .pipe(rev())
-
-//       .pipe(gulp.dest(basePath.production))
-
-//       .pipe(rev.manifest())
-
-//       .pipe(gulp.dest(basePath.production))
-
-//       .on('end',function () {
-
-//         var manifest = gulp.src(path.join(basePath.production, "/rev-manifest.json"));
-
-//         gulp.src(path.join(basePath.production, '/**/*.{css,html}'))
-
-//           .pipe(revReplace({
-
-//             manifest: manifest,
-
-//             prefix: function (f) {
-
-//               //cdn域名
-
-//               var cdns = ["s1","s2","s3","s4"];
-
-              
-
-//               var fileHashCode = teemoGulp.hashFnv32a(f);
-
-//               if(fileHashCode <0 ){
-
-//                 fileHashCode = 0;
-
-//               }
-
-//               var cdn = cdns[fileHashCode % cdns.length];
-
-//               return 'http://'+cdn+'.tm.sogoucdn.com/w/20141209'
-
-//             }
-
-//           }))
-
-//           .pipe(gulp.dest(basePath.production))
-
-//           .on('end',function () {
-
-//             del(vp.paths);
-
-//             del(path.join(basePath.production, "/rev-manifest.json"));
-
-//           })
-
-        
-
-//       })
-
-//   }
-// };
-
 
 //删除空文件
 function delEmptyFile(){

@@ -1,0 +1,206 @@
+/*兴趣*/
+/* 混合宏 */
+.interest {
+  width: 700px;
+  height: 610px;
+  background: #ffffff;
+  border: 1px solid #eff0f3;
+  box-shadow: 0 0 39px #d4dde7;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  margin-left: -350px;
+  margin-top: -305px;
+  border-radius: 6px;
+  z-index: 9999;
+}
+.interest .Shaer_colse_out {
+  height: 18px;
+  left: 0;
+  position: relative;
+  top: 0;
+}
+.interest .Shaer_colse_out i {
+  display: block;
+  font-size: 14px;
+  font-weight: bold;
+  color: #333333;
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+  text-align: center;
+  line-height: 18px;
+  -webkit-transition: all ease 0.5s;
+  -moz-transition: all ease 0.5s;
+  transition: all ease 0.5s;
+}
+.interest .Shaer_colse_out i:hover {
+  background: #7a8da0;
+  color: #fff;
+  border-radius: 50px;
+}
+.interest .Shaer_colse {
+  width: 16px;
+  height: 18px;
+  position: absolute;
+  right: 6px;
+  top: 2px;
+}
+.interest .Shaer_colse:hover {
+  cursor: pointer;
+}
+.interest .w-400 {
+  width: 400px;
+  height: 36px;
+  line-height: 36px;
+  border-bottom: 1px solid #eee;
+  text-align: center;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 18px;
+  color: #b5bac3;
+  padding-bottom: 5px;
+  padding-top: 12px;
+}
+.interest .w-tag {
+  width: 654px;
+  margin: 24px auto 0 auto;
+  position: relative;
+  top: 0;
+  left: 0;
+  margin-top: 24px;
+}
+.interest .w-tag ul {
+  width: 480px;
+  margin: 0 auto;
+}
+.interest .w-tag ul li {
+  overflow: hidden;
+  clear: both;
+  margin-bottom: 40px;
+  text-align: center;
+  line-height: 20px;
+}
+.interest .w-tag ul li span {
+  color: #000000;
+  font-size: 12px;
+  padding-top: 8px;
+  display: block;
+}
+.interest .w-tag ul li div.list-box {
+  min-height: 116px;
+  width: 100px;
+  margin: 0px 30px;
+  margin-left: 30px;
+  margin-right: 30px;
+  padding-bottom: 16px;
+  float: left;
+  overflow: hidden;
+  position: relative;
+  top: 0;
+  left: 0;
+}
+.interest .w-tag ul li div.list-box i {
+  width: 86px;
+  height: 86px;
+  display: block;
+  border-radius: 50%;
+  border: 3px solid #fff;
+  background-repeat: no-repeat;
+}
+.interest .w-tag ul li div.list-box em {
+  background: #343434;
+  color: #fff;
+  font-weight: bold;
+  width: 21px;
+  height: 21px;
+  border-radius: 50%;
+  border: 3px solid #fff;
+  position: absolute;
+  right: 14px;
+  bottom: 42px;
+  -webkit-transition-property: opacity, -webkit-transform;
+  -moz-transition-property: opacity, -webkit-transform;
+  -ms-transition-property: opacity, -webkit-transform;
+  -o-transition-property: opacity, -webkit-transform;
+  transition-property: opacity, -webkit-transform;
+  -webkit-transition-duration: 0.15s;
+  -moz-transition-duration: 0.15s;
+  -ms-transition-duration: 0.15s;
+  -o-transition-duration: 0.15s;
+  transition-duration: 0.15s;
+  -webkit-transition-timing-function: ease-out;
+  -moz-transition-timing-function: ease-out;
+  -ms-transition-timing-function: ease-out;
+  -o-transition-timing-function: ease-out;
+  transition-timing-function: ease-out;
+  -webkit-transform: scale(0.9);
+  opacity: 0;
+}
+.interest .w-tag ul li div.list-box:hover i,
+.interest .w-tag ul li div.list-box.active i {
+  border: 3px solid #000000;
+  cursor: pointer;
+}
+.interest .w-tag ul li div.list-box:hover em,
+.interest .w-tag ul li div.list-box.active em {
+  opacity: 1;
+  -webkit-transform: scale(1);
+  pointer-events: all;
+  display: block\9;
+  visibility: visible;
+}
+.interest .w-but {
+  width: 230px;
+  height: 38px;
+  border-radius: 2px;
+  border: 1px solid #b4b4b4;
+  color: #b4b4b4;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  bottom: 10px;
+  left: 0;
+  background: #ffffff;
+}
+.interest .w-but #i-w-but {
+  display: block;
+  background: none;
+  border: 0;
+  width: 230px;
+  text-align: center;
+  line-height: 38px;
+  cursor: pointer;
+  color: #b4b4b4;
+}
+.interest .w-but.act {
+  border: 1px solid #000000;
+  color: #000000;
+}
+.interest .w-but.act #i-w-but {
+  color: #000000;
+}
+.interest .w-but font {
+  position: absolute;
+  top: -24px;
+  left: 0;
+  display: block;
+  width: 100%;
+  text-align: center;
+  font-size: 12px;
+}
+.interest-box {
+  background: #ffffff;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  opacity: 0.8;
+  position: fixed;
+  top: 0;
+  z-index: 9998;
+}

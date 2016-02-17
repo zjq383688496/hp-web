@@ -17,35 +17,57 @@
 	a {
 		.db;
 		.squ(40);
-		.lh(40);
+		.lh(36);
 		.mt(4);
 		.tc;
 		color: @white;
 		.br(0 4px 4px 0);
+		.tran;
 		&:nth-child(1) {
 			.mt(0);
 		}
 		i {
-			.fz(20);
+			.fz(24);
 			.fw(100);
 		}
 	}
-	.util-share-icon-wechat {
-		.bc(@wechat-32);
+	.util-share-ico-wechat,
+	.util-share-ico-qq,
+	.util-share-ico-sina-weibo {
+		.lh(24);
+		i {.fz(36);}
 	}
-	.util-share-icon-qq {
+	.util-share-ico-wechat {
+		.posr;
+		.bc(@wechat-32);
+		s {
+			.posa;
+			.squ(150);
+			.p(10px);
+			.bc(@white);
+			.hide;
+			opacity: 0;
+			z-index: -1;
+			.box-s(2px 2px 12px @sd-gray3);
+			.tran;
+		}
+		canvas {
+			.squ(150);
+		}
+	}
+	.util-share-ico-qq {
 		.bc(@qq-32);
 	}
-	.util-share-icon-sina-weibo {
+	.util-share-ico-sina-weibo {
 		.bc(@sina-32);
 	}
-	.util-share-icon-facebook {
+	.util-share-ico-facebook {
 		.bc(@facebook-32);
 	}
-	.util-share-icon-twitter {
+	.util-share-ico-twitter {
 		.bc(@twitter-32);
 	}
-	.util-share-icon-google {
+	.util-share-ico-google {
 		.bc(@google-32);
 	}
 }
@@ -53,4 +75,21 @@
 	left: 0;
 	top: 50%;
 	.tranY(-50%);
+	a:hover {
+		.box-s(0 2px 4px @sd-gray5);
+		.w(60);
+	}
+	.util-share-ico-wechat {
+		s {
+			left: 40px;
+		}
+		&:hover {
+			s {
+				.show;
+				opacity: 1;
+				z-index: 1;
+				left: 60px;
+			}
+		}
+	}
 }

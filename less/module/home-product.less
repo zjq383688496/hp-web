@@ -5,22 +5,26 @@
 
 // 商品
 .art-box {
-	.pt(20);
+	.pt(10);
 	.clearfix;
 	display: none;
 	li {
 		.fl;
-		.whb(270; 400);
-		.m(0 15px 20px);
+		.whb(270; 380);
+		.m(0 17px 20px 0);
+		.bor(1px solid @gray-high);
 		.oh;
 		.tran;
+		&:nth-child(3n) {
+			.mr;
+		}
 		&:hover {
-			.tranY(-12px);
-			.box-s(0 8px 30px @sd-gray2);
-			.art-img:after {
+			.tranY(-5px);
+			.box-s(0 6px 12px @sd-gray1);
+			/*.art-img:after {
 				.show;
 				.tranf(~"skewX(-24deg) @{tranX}(330px)");
-			}
+			}*/
 		}
 	}
 	.img270 () {
@@ -33,10 +37,11 @@
 	.art-img {
 		.posr;
 		.img270;
+		.oh;
 		img {
-			.img270;
+			.w(100%);
 		}
-		&:after {
+		/*&:after {
 			content: '';
 			.posa;
 			top: 0;
@@ -46,20 +51,29 @@
 			.hide;
 			.g-right(~"@{tran} 0%, @{white} 50%, @{tran} 100%");
 			.tranf(~"skewX(-24deg) @{tranX}(-125px)");
-		}
+		}*/
 	}
 	.art-info {
 		.tc;
 		.pt(20);
 	}
 	.art-title {
+		.p(0 10px);
 		.ellipsis;
 		.fz(14);
+		.fl;
+		clear: left;
+    	margin-bottom: 24px;
+	}
+	.art-price{
+		float:right;
+		padding:0 10px;
+    	//margin-bottom: 24px;
 	}
 	.art-user {
 		.db;
 		.th(20);
-		.mt(10);
+		//.mt(10);
 		cursor: pointer;
 		b {
 			display: inline-block;

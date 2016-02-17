@@ -5,6 +5,7 @@
 CONFIG.LOCAL = 'CN';
 ;LANG = {
 	NAME: 'CN',
+	LOGO: '创e商城',
 	CALENDAR: {
 		CLOSE:        '关闭',
 		CLOSETIPS:    '关闭浮层',
@@ -27,7 +28,9 @@ CONFIG.LOCAL = 'CN';
 		GOODS:     '商品',
 		ARTWORK:   '收藏品',
 		ARTIST:    '艺术家',
-		DIY:       'DIY'
+		DIY:       'DIY',
+		INTERESTS: '兴趣',
+		TYPE:      '分类'
 	},
 	GLOBAL: {
 		LOGIN:     '登录',
@@ -41,6 +44,8 @@ CONFIG.LOCAL = 'CN';
 		FOLLOW:    '关注',
 		SHOP:      '专卖店',
 		COMMUNITY: '圈子',
+		STORE:     '专卖店',
+		SHOPMANAGE:'店铺管理',
 		CART:      '购物车',
 		ADDRESS:   '地址管理',
 		ORDER:     '我的订单',
@@ -56,6 +61,8 @@ CONFIG.LOCAL = 'CN';
 		CHECKCODE:  '验证码',
 		PASSWDOLD:  '旧密码',
 		PASSWDNEW:  '新密码',
+		PASSDUAN:   '密码太短',
+		PASSPIPEI:  '密码不匹配',
 		REGIONAL:   '地区',
 		ABOUT:      '我的简介',
 		SHOPNAME:   '专卖店名',
@@ -78,7 +85,7 @@ CONFIG.LOCAL = 'CN';
 		SAVE:       '保存',
 		INFOEDIT:   '编辑资料',
 		PASSWDED:   '修改密码',
-		ICONED:     '修改头像',
+		ICONED:     '上传新头像',
 		DEFAULT:    '设为默认',
 		ADDRESSADD: '添加新的收货地址',
 		SHOPPING:   '继续购物',
@@ -125,7 +132,15 @@ CONFIG.LOCAL = 'CN';
 		CLICK:      '点击',
 		CHECKCODE:  '发送验证码到邮箱',
 		NEXT:       '下一步',
-		PASSWDET:   '确认密码'
+		PASSWDET:   '确认密码',
+		RESTRICT:   '支持jpg、png，最大300MB',
+		IMGMANAGE:  '图片管理',
+		GAMORE:     '查看完整介绍',
+		MSHOP:      '管理对应的商品',
+		COVEREIDT:  '编 辑 封 面',
+		PUSHSHOP:   '发布商品',
+		DELIMG:     '删除图片',
+		DELIMGSHOP: '删除图片和对应的商品'
 	},
 	PLACEHOLDER: {
 		NAME:    '2-30 个字符',
@@ -200,11 +215,11 @@ CONFIG.LOCAL = 'CN';
 		A013: '创建订单成功',
 		A014: '订单创建成功!',
 		A015: '订单创建失败!',
-		A016: '',
-		A017: '',
-		A018: '',
-		A019: '',
-		A020: ''
+		A016: '您申请版权保护的图片是您的原创作品',
+		A017: '现在起您可以享受版权保护',
+		A018: '您还剩余',
+		A019: '上传失败,请重新上传',
+		A020: '删除成功'
 	},
 	TEXT: {
 		T001: '商品',
@@ -299,15 +314,47 @@ CONFIG.LOCAL = 'CN';
 		T089: '更多信息，请阅读',
 		T090: '《原作销售须知》',
 		T091: '全球最大的艺术品电商',
-		T092: '',
-		T093: '',
-		T094: '',
-		T095: '',
-		T096: '',
-		T097: '',
-		T098: '',
-		T099: '',
-		T100: ''
+		T092: '名称',
+		T093: '大小',
+		T094: '进度',
+		T095: '操作',
+		T096: '支持JPG、PNG格式',
+		T097: '大于200 x 200 像素，小于700kb',
+		T098: '选择或上传您的店铺封面图片',
+		T099: '本机上传  建议尺寸1000 x 300 像素',
+		T100: '点击上传',
+		T101: '支持JPG,PNG格式',
+		T102: '尺寸850 x 240 像素，小于1MB',
+		T103: '电子邮箱',
+		T104: '昵称',
+		T106: '尺寸850 x 240 像素，小于1MB',
+		T107: '选择您的兴趣',
+		T108: 'Oh no，没有找到啊',
+		T109: '至少选择一种兴趣',
+		T110: '此作品对应的其它商品',
+		T111: '',
+		T112: '',
+		T113: '',
+		T114: '',
+		T115: '',
+		T116: '',
+		T117: '',
+		T118: '',
+		T119: ''
+	},
+	GOODS: {
+		COLOR:         '颜色',
+		SIZE:          '尺码',
+		MODEL:         '版型',
+		STUFF:         '面料',
+		CUSTOM_LENGTH: '尺寸',
+		BRAND:         '品牌',
+		VERSION:       '版本',
+		STYLE:         '风格',
+		COUNT:         '数量',
+		CHART:         '尺码助手',
+		ABOUT:         '关于设计',
+		SHOP:          '店铺'
 	}
 };
 $('body').addClass('lang_' + CONFIG.LOCAL);

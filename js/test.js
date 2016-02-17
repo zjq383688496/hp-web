@@ -1,14 +1,10 @@
 "use strict";
 
-var a = [];
+function bar() {
+  var x = arguments.length <= 0 || arguments[0] === undefined ? 2 : arguments[0];
+  var y = arguments.length <= 1 || arguments[1] === undefined ? x : arguments[1];
 
-var _loop = function _loop(i) {
-  a[i] = function () {
-    console.log(i);
-  };
-};
-
-for (var i = 0; i < 10; i++) {
-  _loop(i);
+  return [x, y];
 }
-a[6]();
+
+console.log(bar());

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html ng-app="payment">
+<head lang="en">
+	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<title>去付款</title>
+	<link rel="stylesheet" href="/font/iconfont.css">
+    <link rel="stylesheet" type="text/css" href="/css/header.css">
+	<link type="text/css" href="/css/user/cart.css" rel="stylesheet">
+	<link type="text/css" href="/css/user/address.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/css/media-queries.css">
+</head>
+<body ng-controller="paymentCtr">
+<!-- 头部开始 -->
+<div modheaderfull></div>
+<!-- 头部结束 -->
+
+<div id="wrapper">
+	<div id="cartNav" class="container_cart">
+		<div class="clearfix">
+			<div class="cart_step">
+				<ul class="step02">
+					<li class="first"><b>{{LANGUAGE_NOW.title.cart}}</b></li>
+					<li class="active"><b>{{LANGUAGE_NOW.title.checkout}}</b></li>
+					<li><b>{{LANGUAGE_NOW.title.pay}}</b></li>
+				</ul>
+			</div>
+			<!-- <div class="go_shopping">
+				<a href="/"><i></i>{{LANGUAGE_NOW.title.shopping}}</a>
+			</div> -->
+		</div>
+		<!-- 收货地址 -->
+		<div class="cart_checkout">
+			<div class="c_box">
+				<h1>{{LANGUAGE_NOW.address.address}}</h1>
+				<div class="in_c">
+					<div id="address_res" class="c_addr"></div>
+				</div>
+			</div>
+			<div class="c_box">
+				<h1>{{LANGUAGE_NOW.title.cart}}</h1>
+				<div class="od_list"></div>
+			</div>
+		</div>
+		<!-- 商品列表 -->
+		<table width="100%" cellspacing="0" cellpadding="0" border="0" class="order_tb2">
+			<thead>
+				<tr>
+					<th width="15%">{{LANGUAGE_NOW.title.goods}}</th>
+					<th width="24%">&nbsp;</th>
+					<th width="20%" align="left">{{LANGUAGE_NOW.title.details}}</th>
+					<th width="11%">{{LANGUAGE_NOW.title.count}}</th>
+					<th width="11%">{{LANGUAGE_NOW.title.price}}</th>
+					<th width="11%">{{LANGUAGE_NOW.title.totalSub}}</th>
+				</tr>
+			</thead>
+			<tbody id="order_tb"></tbody>
+			<tfoot>
+				<tr>
+					<td colspan="2"></td>
+					<td valign="top" align="center">
+						<span id="totalCount">1</span> 个
+					</td>
+					<td valign="top" align="left" colspan="2">
+						<p>{{LANGUAGE_NOW.title.total}}</p>
+						<p>{{LANGUAGE_NOW.title.shipment}}</p>
+						<div class="order_total">{{LANGUAGE_NOW.pay.payment}}</div>
+					</td>
+					<td align="right">
+						<p><i name="goodsCurrency"></i> <span id="totalGoods">0</span></p>
+						<p>+<i name="goodsCurrency"></i> <span id="totalShipment">0</span></p>
+						<p class="order_total"><i name="goodsCurrency"></i> <span id="totalPay">0</span></p>
+					</td>
+				</tr>
+			</tfoot>
+		</table>
+		<!-- 支付方式 -->
+		<div class="c_box2">
+			<h1>{{LANGUAGE_NOW.pay.payType}}</h1>
+			<ul id="payType" class="pay-type"></ul>
+		</div>
+		<div class="cart_go">
+			<div class="go_checkout">
+				<a onclick="ORDER.pay.submit(this);"><i></i>{{LANGUAGE_NOW.title.pay}}</a>
+			</div>
+			<div class="go_shopping">
+				<a href="/"><i></i>{{LANGUAGE_NOW.title.shopping}}</a>
+			</div>
+		</div>
+	</div>
+</div>
+<!--引入新的文件-->
+		<script src="/js/config.js"></script>
+		<script src="/js/ArtJS/lib/jquery-2.1.4.min.js"></script>
+		<script src="/js/ArtJS/ArtJS.js"></script>
+		<script src="/js/init.js"></script>
+		<script src="/js/ArtJS/lib/angular.min.js"></script>
+		<script src="/module/mod-header-full.js"></script>
+		<script src="/js/old/nvarchar.js"></script>
+		<script src="/js/old/main.js"></script>
+		<script src="/js/old/user/order.js"></script>
+		<script src="/js/order/payment.js"></script>
+<!--<script src="/drift/dist/js/jquery.js"></script>
+<script src="/drift/script/ArtJS/ArtJS.js"></script>
+<script src="/drift/script/ArtJS/lib/angular.min.js"></script>
+<script src="/drift/script/mod-header-full.js"></script>
+<script src="/drift/dist/js/user/order.js"></script>
+<script src="/drift/dist/js/nvarchar.js"></script>
+<script src="/drift/dist/js/main.js"></script>-->
+</body>
+</html>

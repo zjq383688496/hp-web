@@ -1,0 +1,87 @@
+.act::before, .act::after {
+    content: " ";
+    display: table;
+}
+.act::before, .act::after {
+    content: " ";
+    display: table;
+}
+.act::after {
+    clear: both;
+}
+.about-box{
+background: url(/images/cont-about_ch.png) no-repeat top center;
+width: 1004px;
+min-height: 412px;
+margin: 0 auto;
+clear: both;
+overflow:hidden;
+}
+.about-box h2{
+font-size: 45.5px;
+font-weight: normal;
+text-align: center;
+padding-top: 76px;
+padding-bottom: 10px;
+}
+.about-box .ca{
+   background: #fff url(/images/contact.png) no-repeat top center;
+   min-height: 419px;
+    width: 798px;
+    margin:0 auto;
+    margin-top: 370px;
+    position: relative;
+    top: 0;
+    left: 0;
+    border:1px solid #e8e8e8 ;
+    border-top: 0;
+    padding-bottom: 134px;
+}
+.copyright {
+    margin: 0 auto;
+    padding: 50px 0 50px 0;
+    text-align: center;
+    width: 100%;
+}
+.about-box ul{
+    width: 511px;
+    margin: 0 auto;
+}
+.sp-cont{
+    display: inherit;
+    text-align: center;
+    font-size: 20px;
+    color: #000000;
+    padding-bottom: 20px;
+}
+ul li{
+    color: #999;
+}
+ul .title{
+    font-size: 20px;
+    color: #999;
+    padding: 28px 0 16px 10px;
+    display: inherit;
+}
+ul .a-cont{
+   border-top:1px solid #e8e8e8;
+    padding-top: 8px;
+}
+ul .a-cont p{
+    padding-top: 24px;
+    padding-left: 120px;
+}
+ul .a-cont p span{
+    padding-left: 6px;
+    font-size: 18px;
+}
+.a-r{
+    position: absolute;
+    top: 32px;
+    right: 0px;
+    background: #f6f7f8;
+    width: 40px;
+    height: 800px;
+    transform: skewX(-5deg);
+    z-index: -1;
+}

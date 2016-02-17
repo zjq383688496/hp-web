@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>回收站-衍生品 ||回收站-原作</title>
+	<link rel="stylesheet" href="/css/edit/normal.css">
+	<link rel="stylesheet" type="text/css" href="/css/edit/editor-shop.css">
+</head>
+<body>
+	<section class="section-warp" ng-app="goodsEditor">
+		<!-- 头部start -->
+		<!-- <div modheaderfull></div> -->
+		<!-- <div class="head">
+			<div class="container">
+				<div class="logo">
+					<img src="/images/edit/logo.png">
+				</div>
+				<div class="info">
+					<span class="label">欢迎：</span>
+					<span class="user">登录者ID</span>
+				</div>
+			</div>
+		</div> -->
+		<div editor-header></div>
+		<!-- 头部 end -->
+		<div class="shop-box">
+			<div class="divPbnt">
+				<p>
+					<label for="all">
+						<input type="checkbox" onclick="CheckAll('selectAll',this)" value="on" id="all" name="chkall"/>&nbsp;&nbsp;选中全部
+					</label>
+				</p>
+				<p><input type="button" value="全部清除" class="clearVal" id="rClearVal" disabled="disabled" /></p>
+			</div>
+			<form name="form1" method="post" action="">
+				<ul id="boxDom" class="stick" style="position:relative;">
+				</ul>
+			</form>
+		</div>
+	</section>
+</body>
+<script src="/js/config.js"></script>
+<script src="/js/ArtJS/lib/jquery-2.1.4.min.js"></script>
+<script src="/js/ArtJS/ArtJS.js"></script>
+<script src="/js/ArtJS/plug-in-unit.js"></script>
+<script src="/js/init.js"></script>
+<script src="/js/ArtJS/lib/angular.min.js"></script>
+<script src="/module/editor/header.js"></script>
+<script src="/js/edit/main.js"></script>
+<script type="text/javascript">
+;var goodsEditor = angular.module('goodsEditor', ['editorHeaderApp']);
+	$(function(){
+		var statue = true;
+		var sajaxFag = true;
+		var sorFag = true;
+		var recy = {
+			API :{
+			 	personCenter: '/goodsSite/editor/image/listEditorRecover',//原作列表
+			 	clear: '/topicSocSite1/topic/top',
+			 	recall: '/topicSocSite2/topic/top',
+			 	pageNo:1,
+			 	recordsNumber : 0
+			 },
+			 init:function(){
+				  var rec =this;
+				  if(sorFag){
+				  	sorFag =false;
+				  	$.scroll({
+						callback: function () {
+							rec.recAjax.rAjaxList();
+						}
+				    });
+				    $.scrollLoad($('#boxDom'));
+				    $('body').scroll();
+				  }
+				  rec.rClearVal();//清除全部
+			 },
+			 getData :function(callback, error){
+				recy.API.pageNo =1;
+				recy.recAjax.rAjaxList(function () {
+					if(sorFag){
+					  	sorFag = false;
+					  	$.scroll({
+							callback: function () {
+								recy.recAjax.rAjaxList();
+							}
+					    });
+					    $.scrollLoad($('#boxDom'));
+					    $('body').scroll();
+					}
+					if (typeof(callback) === 'function') callback();
+				});
+			},
+			 recAjax :{
+				rAjaxList:function(callback, error){
+					if(sajaxFag){
+						sajaxFag = false;
+						var data ={
+							pageSize : 18,
+							pageNo : recy.API.pageNo,
+							editorId :'0',
+							orderByType : '2',
+							abbr : 'CN',
+							recordsNumber : recy.API.recordsNumber
+						}
+						$.ajax({
+					        type: "post",
+					        url:recy.API.personCenter,
+					        data:data,
+					        dataType: "json",
+					        success: function (data) {
+					            if(data.code ==200){
+					            	sajaxFag = true;
+					            	var pageItems = data.result.pageItems;
+									if (pageItems!=null && pageItems.length) {
+										recy.API.recordsNumber = data.result.recordsNumber;
+						            	$(data.result.pageItems).each(function (index, v) {
+			                                var $warp =$('#boxDom');
+										 	var shopDom = dom.shopDom(index, v);
+			                                $warp.append(shopDom);
+			                                $.Waterfall($warp.find('li'));
+			                                recy.clearFun(index); //清除单个
+			                                recy.recallFun(index); //撤回
+			                            });
+			                            ++recy.API.pageNo;;
+										$(window).scroll();
+										if (typeof(callback) === 'function') callback();
+		                            }else if(pageItems == null || pageItems.length <=0){
+		                            	sajaxFag = false;
+		                            }else {
+										sajaxFag = true;
+										if (typeof(error) === 'function') error();
+									}
+					            }else{
+					            	 //sajaxFag = true;
+					            }
+					        },
+			                error: function () {
+			                    statue = true;
+			                    sajaxFag = true;
+			                }
+					    });
+				    }
+				},
+				clickAjax:function(id,u){
+					$.ajax({
+				        type: "post",
+				        url:u,
+				        data:{
+				        	id: id
+				        },
+				        dataType: "json",
+				        success: function (data) {
+				            if(data.code ==200){
+				            	statue = true
+				            }else{
+				            	 alert(6);
+				            	 statue = true;
+				            }
+				        },
+		                error: function () {
+		                    statue = true;
+		                }
+				    });
+				}
+			},
+			clearFun : function(ix){
+				$('.clfun').click(function(){
+				  	if(statue){
+				  		statue = false;
+					  	var that = $(this);
+					  	var _id = that.parents().attr('data-goodsId')
+						  	recy.recAjax.clickAjax(_id,recy.API.recall);
+					}
+				});
+			},
+			recallFun : function(ix){
+				$('.recall').click(function(){
+				  	if(statue){
+				  		statue = false;
+					  	var that = $(this);
+					  	var _id = that.parents().attr('data-goodsId')
+						  	recy.recAjax.clickAjax(_id,recy.API.clear);
+					}
+				});
+			},
+		    rClearVal : function(){
+		    	var $rClearVal = $('#rClearVal');
+		    	$rClearVal.click(function(event) {
+		    		 var that = $(this);
+		    		 console.log(recy.checkD());
+		    	});
+
+		    },
+		    checkD : function(){
+		    	var str="";
+		    	var $cked = $("input[name='subBox']:checked");
+	            $cked.each(function(i,e){
+	            	var dLen = $cked.length;
+	            	if(dLen >1){
+	                    str += $(this).val() +",";
+	            	}else{
+	            		str += $(this).val();
+	            	}
+	            })
+	            str.split(",");
+	            return str;
+		    }
+		}
+		var dom ={
+			shopDom: function(index,item){
+				var dom =[];
+				var ass = item.associateEditorName;//对应副主编是否显示
+				(ass == null || ass =="") ? ass='' : ass='<p class="'+ass+'">对应副主编：'+item.associateEditorName+'</p>';
+				
+				dom.push('<li>',
+						'<div class="check"><lable for="123"><input type="checkbox" value="'+item.id+'" id="123" name="subBox"/> 选中</lable></div>',
+	                    '<div class="art-img">',
+	                        '<span class="art-span">',
+	                            '<img class="load" lazyload="'+ArtJS.server.image+''+item.imagePath+'?imageView2/2/format/jpg/w/270/q/50">',
+	                        '</span>',
+	                    '</div>',
+	                    '<div class="class-list">',
+	                    	'<p>标题：'+item.titile+'</p>',
+	                    	// '<p>商品名：'+item.goodsName+'</p>',
+	                    	// '<p>分类：{主分类}</p>',
+	                    	'<p>编辑人：'+item.editName+'</p>',
+	                    	'<p>职位：'+item.roleName+'</p>',
+	                    	''+ass+'',
+	                    	'<p>删除时间：'+item.updateDate+'</p>',
+	                    	'<div class="bnt" data-goodsId="'+item.id+'">',
+		                    	'<span class="clfun">清 除</span>',
+		                    	'<span class="recall">撤 回</span>',
+	                    	'</div>',
+	                    '</div>',
+	                '</li>');
+				return dom.join('');
+			}
+		}
+		recy.init();
+	});
+	function CheckAll(value,obj)  {
+		var form = document.getElementsByTagName("form");
+		 for(var i=0;i<form.length;i++){
+		    for (var j=0;j<form[i].elements.length;j++){
+		    if(form[i].elements[j].type=="checkbox"){
+			    var e = form[i].elements[j]; 
+			    if (value=="selectAll"){
+			    	e.checked=obj.checked;
+			    }     
+			    else{
+			    	e.checked=!e.checked;
+			    } 
+		       }
+		    }
+	 	}
+	  }
+</script>
+</html>

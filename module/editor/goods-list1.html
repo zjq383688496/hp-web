@@ -1,0 +1,277 @@
+<ul class="item-list">
+			<li ng-repeat="item in result.pageItems track by $index" ng-class="{true: 'item first', false: 'item'}[$index%3==0]">
+				<span class="flag">被退回</span>
+				<i class="btn-del" ng-click="delGoods(item,$event)">×</i>
+				<div class="img-box">
+				<!-- /images/img-loading_1x.gif -->
+					<img ng-src="{{imgUrl+item.imagePath+qnProduct}}" alt="">
+				</div>
+				<ul class="thumbnail">
+					<li class="first" ng-click="loadAdvert()"><img src="/images/humb-img-sr.png" alt=""></li>
+					<li ng-click="loadAdvert()"><img src="/images/humb-img-sr.png" alt=""></li>
+					<li ng-click="loadAdvert()"><img src="/images/humb-img-sr.png" alt=""></li>
+					<li ng-click="loadAdvert()"><img src="/images/humb-img-sr.png" alt=""></li>
+				</ul>
+				<h3 class="title">
+					<span class="label">标题：</span>
+					<span ng-bind="item.goodsName"></span>
+				</h3>
+				<div class="copyright">
+					<span><input type="checkbox" class="check"><em>版权问题</em></span>
+					<span><input type="checkbox" class="check"><em>设为精品</em></span>
+				</div>
+				<div class="btns">
+					<a class="btn-down" href="javascript:void(0)" ng-click="saveImage(imgUrl+item.imagePath+qnProduct)">下载</a>
+					<a class="btn-up" href="javascript:void(0)" ng-click="uploadPic()">上传</a>
+					<a class="btn-modify" href="javascript:void(0)" >修改衍生品属性</a>
+				</div>
+
+				<div class="tags">
+					<ul class="tag">
+						<li class="label first">语言：</li>
+						<li>综合</li>
+						<li>英语</li>
+						<li>韩语</li>
+						<li>意大利语</li>
+						<li class="active">西班牙语</li>
+						<li>德语</li>
+						<li>法语</li>
+						<li>日语</li>
+						<li>俄语</li>
+						<li>阿拉伯语</li>
+						<li>葡萄牙语</li>
+						<li>越南语</li>
+					</ul>
+					<ul class="tag">
+						<li class="label first">热词：</li>
+						<li>热词</li>
+						<li class="active">热词</li>
+						<li>热词</li>
+						<li>热词</li>
+						<li>热词</li>
+						<li>热词</li>
+						<li>热词</li>
+						<li>热词</li>
+					</ul>
+					<ul class="tag">
+						<li class="label first">作者标签：</li>
+						<li class="active">热词</li>
+						<li>热词</li>
+						<li>热词</li>
+						<li>热词</li>
+						<li>热词</li>
+						<li>热词</li>
+						<li>热词</li>
+					</ul>
+					<div class="normal">
+						<h3>小编标签：</h3>
+						<div class="tag-box">
+							<span ng-repeat="tag in item.tags track by $index">{{tag}}<i class="ico-del" ng-click="deleteTag($event,item,tag)">×</i></span>
+							<!-- <span>标签<i class="ico-del" ng-click="deleteTag($event,item)">×</i></span>
+							<span>标签<i class="ico-del" ng-click="deleteTag($event,item)">×</i></span> -->
+							<input type="text" class="txt-tag" ng-model="item.tagContent" placeholder="添加相关标签，用逗号或回车分隔" ng-keyup="addTag($event,item,'keyup')" ng-blur="addTag($event,item,'blur')">
+						</div>
+						<h4><span class="label">标签评分：</span><span>100</span></h4>
+					</div>
+					<div class="desc">
+						<h3>作者描述：</h3>
+						<p>作者描述作者描述作者描述作者描述作者描述作者描述作者描述作者描述作者描述作者描述作者描述作者描述作者描述作者描述作者描述作者...<a href="javascript:void(0)" ng-click="showFullText()">[查看全文]</a></p>
+						<h4><span class="label">编辑人：</span><span>编辑人名</span></h4>
+						<h4><span class="label">作者：</span><span>作者名</span></h4>
+						<h4><span class="label">国家：</span><span>CN</span></h4>
+					</div>
+				</div>
+
+				<div class="btns">
+					<a class="btn-down" href="#">提交</a>
+					<a class="btn-up" href="javascript:void(0)" ng-click="verifyNoPass()">审核不通过</a>
+				</div>
+			</li>
+		</ul>
+
+
+
+		
+
+		<ul class="item-list">
+			<li ng-repeat="item in result.pageItems track by $index" ng-if="$index%3==1" ng-class="{true: 'item first', false: 'item'}[$index%3==0]">
+				<span class="flag">被退回</span>
+				<i class="btn-del" ng-click="delGoods(item,$event)">×</i>
+				<div class="img-box">
+				<!-- /images/img-loading_1x.gif -->
+					<img ng-src="{{imgUrl+item.imagePath+qnProduct}}" alt="">
+				</div>
+				<ul class="thumbnail">
+					<li class="first" ng-click="loadAdvert()"><img src="/images/humb-img-sr.png" alt=""></li>
+					<li ng-click="loadAdvert()"><img src="/images/humb-img-sr.png" alt=""></li>
+					<li ng-click="loadAdvert()"><img src="/images/humb-img-sr.png" alt=""></li>
+					<li ng-click="loadAdvert()"><img src="/images/humb-img-sr.png" alt=""></li>
+				</ul>
+				<h3 class="title">
+					<span class="label">标题：</span>
+					<span ng-bind="item.goodsName"></span>
+				</h3>
+				<div class="copyright">
+					<span><input type="checkbox" class="check"><em>版权问题</em></span>
+					<span><input type="checkbox" class="check"><em>设为精品</em></span>
+				</div>
+				<div class="btns">
+					<a class="btn-down" href="javascript:void(0)" ng-click="saveImage(imgUrl+item.imagePath+qnProduct)">下载</a>
+					<a class="btn-up" href="javascript:void(0)" ng-click="uploadPic()">上传</a>
+					<a class="btn-modify" href="javascript:void(0)" >修改衍生品属性</a>
+				</div>
+
+				<div class="tags">
+					<ul class="tag">
+						<li class="label first">语言：</li>
+						<li>综合</li>
+						<li>英语</li>
+						<li>韩语</li>
+						<li>意大利语</li>
+						<li class="active">西班牙语</li>
+						<li>德语</li>
+						<li>法语</li>
+						<li>日语</li>
+						<li>俄语</li>
+						<li>阿拉伯语</li>
+						<li>葡萄牙语</li>
+						<li>越南语</li>
+					</ul>
+					<ul class="tag">
+						<li class="label first">热词：</li>
+						<li>热词</li>
+						<li class="active">热词</li>
+						<li>热词</li>
+						<li>热词</li>
+						<li>热词</li>
+						<li>热词</li>
+						<li>热词</li>
+						<li>热词</li>
+					</ul>
+					<ul class="tag">
+						<li class="label first">作者标签：</li>
+						<li class="active">热词</li>
+						<li>热词</li>
+						<li>热词</li>
+						<li>热词</li>
+						<li>热词</li>
+						<li>热词</li>
+						<li>热词</li>
+					</ul>
+					<div class="normal">
+						<h3>小编标签：</h3>
+						<div class="tag-box">
+							<span ng-repeat="tag in item.tags track by $index">{{tag}}<i class="ico-del" ng-click="deleteTag($event,item,tag)">×</i></span>
+							<!-- <span>标签<i class="ico-del" ng-click="deleteTag($event,item)">×</i></span>
+							<span>标签<i class="ico-del" ng-click="deleteTag($event,item)">×</i></span> -->
+							<input type="text" class="txt-tag" ng-model="item.tagContent" placeholder="添加相关标签，用逗号或回车分隔" ng-keyup="addTag($event,item,'keyup')" ng-blur="addTag($event,item,'blur')">
+						</div>
+						<h4><span class="label">标签评分：</span><span>100</span></h4>
+					</div>
+					<div class="desc">
+						<h3>作者描述：</h3>
+						<p ng-bind="item.describe">作者描述作者描述作者描述作者描述作者描述作者描述作者描述作者描述作者描述作者描述作者描述作者描述作者描述作者描述作者描述作者...<a href="javascript:void(0)" ng-click="showFullText()">[查看全文]</a></p>
+						<h4><span class="label">编辑人：</span><span ng-bind="item.editorName">编辑人名</span></h4>
+						<h4><span class="label">作者：</span><span ng-bind="item.userName">作者名</span></h4>
+						<h4><span class="label">国家：</span><span ng-bind="item.userAbbr">CN</span></h4>
+					</div>
+				</div>
+
+				<div class="btns">
+					<a class="btn-down" href="#">提交</a>
+					<a class="btn-up" href="javascript:void(0)" ng-click="verifyNoPass()">审核不通过</a>
+				</div>
+			</li>
+		</ul>
+
+
+		<ul class="item-list last">
+			<li ng-repeat="item in result.pageItems track by $index" ng-if="$index%3==2" ng-class="{true: 'item first', false: 'item'}[$index%3==0]">
+				<span class="flag">被退回</span>
+				<i class="btn-del" ng-click="delGoods(item,$event)">×</i>
+				<div class="img-box">
+				<!-- /images/img-loading_1x.gif -->
+					<img ng-src="{{imgUrl+item.imagePath+qnProduct}}" alt="">
+				</div>
+				<ul class="thumbnail">
+					<li class="first" ng-click="loadAdvert()"><img src="/images/humb-img-sr.png" alt=""></li>
+					<li ng-click="loadAdvert()"><img src="/images/humb-img-sr.png" alt=""></li>
+					<li ng-click="loadAdvert()"><img src="/images/humb-img-sr.png" alt=""></li>
+					<li ng-click="loadAdvert()"><img src="/images/humb-img-sr.png" alt=""></li>
+				</ul>
+				<h3 class="title">
+					<span class="label">标题：</span>
+					<span ng-bind="item.goodsName"></span>
+				</h3>
+				<div class="copyright">
+					<span><input type="checkbox" class="check"><em>版权问题</em></span>
+					<span><input type="checkbox" class="check"><em>设为精品</em></span>
+				</div>
+				<div class="btns">
+					<a class="btn-down" href="javascript:void(0)" ng-click="saveImage(imgUrl+item.imagePath+qnProduct)">下载</a>
+					<a class="btn-up" href="javascript:void(0)" ng-click="uploadPic()">上传</a>
+					<a class="btn-modify" href="javascript:void(0)" >修改衍生品属性</a>
+				</div>
+
+				<div class="tags">
+					<ul class="tag">
+						<li class="label first">语言：</li>
+						<li>综合</li>
+						<li>英语</li>
+						<li>韩语</li>
+						<li>意大利语</li>
+						<li class="active">西班牙语</li>
+						<li>德语</li>
+						<li>法语</li>
+						<li>日语</li>
+						<li>俄语</li>
+						<li>阿拉伯语</li>
+						<li>葡萄牙语</li>
+						<li>越南语</li>
+					</ul>
+					<ul class="tag">
+						<li class="label first">热词：</li>
+						<li>热词</li>
+						<li class="active">热词</li>
+						<li>热词</li>
+						<li>热词</li>
+						<li>热词</li>
+						<li>热词</li>
+						<li>热词</li>
+						<li>热词</li>
+					</ul>
+					<ul class="tag">
+						<li class="label first">作者标签：</li>
+						<li class="active">热词</li>
+						<li>热词</li>
+						<li>热词</li>
+						<li>热词</li>
+						<li>热词</li>
+						<li>热词</li>
+						<li>热词</li>
+					</ul>
+					<div class="normal">
+						<h3>小编标签：</h3>
+						<div class="tag-box">
+							<span ng-repeat="tag in item.tags track by $index">{{tag}}<i class="ico-del" ng-click="deleteTag($event,item,tag)">×</i></span>
+							<!-- <span>标签<i class="ico-del" ng-click="deleteTag($event,item)">×</i></span>
+							<span>标签<i class="ico-del" ng-click="deleteTag($event,item)">×</i></span> -->
+							<input type="text" class="txt-tag" ng-model="item.tagContent" placeholder="添加相关标签，用逗号或回车分隔" ng-keyup="addTag($event,item,'keyup')" ng-blur="addTag($event,item,'blur')">
+						</div>
+						<h4><span class="label">标签评分：</span><span>100</span></h4>
+					</div>
+					<div class="desc">
+						<h3>作者描述：</h3>
+						<p ng-bind="item.describe">作者描述作者描述作者描述作者描述作者描述作者描述作者描述作者描述作者描述作者描述作者描述作者描述作者描述作者描述作者描述作者...<a href="javascript:void(0)" ng-click="showFullText()">[查看全文]</a></p>
+						<h4><span class="label">编辑人：</span><span ng-bind="item.editorName">编辑人名</span></h4>
+						<h4><span class="label">作者：</span><span ng-bind="item.userName">作者名</span></h4>
+						<h4><span class="label">国家：</span><span ng-bind="item.userAbbr">CN</span></h4>
+					</div>
+				</div>
+
+				<div class="btns">
+					<a class="btn-down" href="#">提交</a>
+					<a class="btn-up" href="javascript:void(0)" ng-click="verifyNoPass()">审核不通过</a>
+				</div>
+			</li>
+		</ul>

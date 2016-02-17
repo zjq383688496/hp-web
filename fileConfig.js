@@ -22,6 +22,10 @@ function FileConfig(devPath) {
       {id:"test",name:"测试环境",path:"dist/test"},//测试环境
       {id:"online",name:"生产环境",path:"dist/online"}//生产环境
     ],//各环境参数
+    langHtmlSrc:[global_config.defaultEnv+"/page/CN/*",global_config.defaultEnv+"/page/CN/**/*"],//语言包源目录
+    langHtmlDest:global_config.defaultEnv+"/page",//语言包目录
+    langs:[{code:"CN",name:"中文"},
+        {code:"US",name:"英文"}],//各语言种类
     host:"m.cmall.com",//测试域名地址
     delCssSrc:global_config.defaultEnv+"/css",//清除css空文件目录
     zipSrc:[global_config.defaultEnv+"/*.*",global_config.defaultEnv+"/**/*.*"],//zip打包目录
@@ -30,16 +34,17 @@ function FileConfig(devPath) {
     lessSrc:["less/*.less","less/**/*.less"],//less源文件地址
     lessDest:global_config.defaultEnv+"/css",//less目标文件输出地址
     cssSrc:[global_config.defaultEnv+"/*.css",global_config.defaultEnv+"/**/*.css"],//css源文件地址
-    cssSrc1:["*.css","**/*.css","!css/*","!css/**/*","!node_modules/**/*","!dist/*","!dist/**/*","!less/*","!less/**/*"],//css源文件地址
+    //cssSrc1:["*.css","**/*.css","!css/*","!css/**/*","!node_modules/**/*","!dist/*","!dist/**/*","!less/*","!less/**/*"],//css源文件地址
+    cssSrc1:["*.css","**/*.css","!{node_modules,dist,less}/**/*","!{node_modules,dist,less}/*"],//css源文件地址
     cssDest:global_config.defaultEnv,//css目标文件输出地址  
     cssMapDest:"./maps",//css map目标文件输出地址
     revCssSrc:[global_config.revSrc+"/**/*.json",global_config.defaultEnv+"/*.css",global_config.defaultEnv+"/**/*.css"],//css rev 版本map填充原地址
     revCssDest:global_config.revSrc+"/css",//版本号map输出地址
-    jsSrc:["*.js","**/*.js","!node_modules/**/*","!dist/*","!dist/**/*"],//js源文件地址
+    jsSrc:["**/*.js","!{node_modules,dist,gulp}/**/*","!{node_modules,dist,gulp}/*"],//js源文件地址
     jsDest:global_config.defaultEnv,//js目标文件输出地址
     jsMapDest:"./../maps/js",//js map目标文件输出地址
     revJsDest:global_config.revSrc+"/js",//版本号map输出地址
-    revJsSrc:[global_config.revSrc+"/**/*.json",global_config.defaultEnv+"/*.js",global_config.defaultEnv+"/**/*.js"],//js rev 版本map填充原地址
+    revJsSrc:[global_config.revSrc+"/**/*.json",global_config.defaultEnv+"/**/*.js"],//js rev 版本map填充原地址
     imgSrc:["*.+(gif|png|jpg|jpeg)","**/*.+(gif|png|jpg|jpeg)","!node_modules/*","!node_modules/**/*","!dist/*","!dist/**/*"],//img源文件地址
     imgDest:global_config.defaultEnv,//img目标文件输出地址
     revImgDest:global_config.revSrc+"/images",//版本号map输出地址

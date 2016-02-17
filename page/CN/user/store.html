@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html ng-app="stores">
+    <head lang="en">
+        <meta charset="UTF-8">
+        <title></title>
+            <link rel="stylesheet" href="/font/iconfont.css">
+            <link rel="stylesheet" href="/css/header.css">
+            <link rel="stylesheet" href="/css/user/store.css">
+    </head>
+<body>
+    <div modheaderfull></div>
+    <div moduserhead></div>
+    <!--list-->
+    <div class="container media" ng-controller="storeCtr">
+        <div class="stores-nav-left">
+            <div class="st-box" style="visibility:hidden">
+                <dl>
+                    <dt>排序</dt>
+                    <dd><span>按时间</span></dd>
+                    <dd>按人气</dd>
+                    <dd>按价格</dd>
+                </dl>
+                <dl>
+                    <dt>热门</dt>
+                    <dd ng-click="tagFun()"><span>圣诞节</span></dd>
+                    <dd ng-click="tagFun()">爱情</dd>
+                    <dd>励志</dd>
+                    <dd>爱情</dd>
+                    <dd>二次元</dd>
+                </dl>
+            </div>
+        </div>
+        <div class="stores-nav-right" style="display:none">
+            <div class="store-bg">
+                <p style="background-image:url({{imgUrl}}{{uBan}}?imageView2/1/format/jpg/w/850/h/240/q/90)"></p>
+                <a class="g-editor" ng-click="gCoverFun()" ng-bind="ueditSt"></a>
+            </div>
+                <!-- banner修改 -->
+                <div class="ga-cover-editor" upfileimg>
+                    <i class="iconfont icon-close-b"></i>
+                    <div id="sUp">
+                        <span ng-bind="LANG.TEXT.T100"></span>
+                        <input type="file" name="fileDemo" title="{{LANG.TEXT.T100}}" mark="20" class="fileDemo" accept="image/jpeg,image/gif,image/png">
+                    </div>
+                    <div id="gaProgress">
+                        <em></em>
+                    </div>
+                    <p><font ng-bind="LANG.TEXT.T101"></font><br/>
+                    <font ng-bind="LANG.TEXT.T102"></font></p>
+            </div>
+            <ul class="art-stores-box a-imageload" style="display:none">
+                <li data-index="{{$index}}" ng-repeat="ustores in ustoreItems" class="gallery" data-in="in_{{ustores.goodsId}}op">
+                    <div class="art-img" ng-click="ugoodsInfo(ustores)">
+                        <span class="art-span img-loading">
+                            <img src="{{imgUrl}}{{ustores.imagePath}}{{qnProduct}}" class="a-imageshow">
+                        </span>
+                    </div>
+                    <div class="text">
+                        <h2>
+                            <span class="stores-title" ng-bind="ustores.goodsName"></span>
+                            <span class="user">
+                                <a href="/page/CN/user/gallery.html?uid={{ustores.uId}}">
+                                    <b><img class="a-imageshow" src="{{imgUrl}}{{ustores.createUserImage}}{{qnIcon}}" /></b><font ng-bind="ustores.createUserName"></font></a>
+                            </span>
+                        </h2>
+                    </div>
+                    <div class="light-price">
+                        <span data-in="in_{{ustores.goodsId}}ck" data-ght="{{ustores.light}}">
+                            <b type="{{ustores.artsGoodsType}}" ng-click="getLikeArts(ustores,$event)" class="iconfont icon-icon {{ustores.light==true?'light':''}}"></b>
+                            <i ng-bind="ustores.likeCount"></i>
+                        </span>
+                        <span>
+                            <font ng-bind="ustores.sympay"></font>&nbsp;<font ng-bind="ustores.sellPrice"></font>
+                        </span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="data-not">
+            <img src="/images/img-404.png" style="margin:0 auto;">
+            <p>{{LANG.TEXT.T108}}</p>
+        </div>
+    </div>
+    <!-- JS -->
+    <script src="/js/config.js"></script>
+    <script src="/js/ArtJS/lib/jquery-2.1.4.min.js"></script>
+    <script src="/js/ArtJS/ArtJS.js"></script>
+    <script src="/js/ArtJS/plug-in-unit.js"></script>
+    <script src="/js/init.js"></script>
+    <script src="/js/ArtJS/lib/angular.min.js"></script>
+    <script src="/module/mod-header-full.js"></script>
+    <script src="/module/mod-user-head.js"></script>
+    <script src="/module/mod-user-share.js"></script>
+    <script src="/js/user/headPortrait.js"></script>
+    <script src="/js/user/store.js"></script>
+</body>
+</html>

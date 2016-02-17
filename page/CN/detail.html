@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="keywords" content="artbulb"/>
+    <meta name="description" content="artbulb"/>
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="stylesheet" type="text/css" href="/css/header.css">
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/css/detail.css">
+    <link rel="stylesheet" type="text/css" href="/font/iconfont.css">    
+    <link rel="stylesheet" type="text/css" href="/css/media-queries.css">
+</head>
+<body ng-app="detail" id="detail">
+    <div modheaderfull></div>
+    <!-- <div class="headerbox inmobile">
+        <div class="logo"><a href="/"><img src="/images/logo.png"/></a></div>
+        <div class="top_search">
+            <form name="myform" id="queryForm" method="get">
+                <input name="Type" type="hidden" value="4"/>
+                <input name="searchType" type="hidden" value="02"/>
+                <input name="sType" id="sType" type="hidden" value="topic"/>
+                <input name="searchContext" type="text" class="input" id="search" placeholder="搜索艺术品、艺术家或文章"/>
+                <input name="" type="button" class="btn" id="dataSearch" data-role=""/>
+            </form>
+            <input type="hidden" id="upVal" value=""/>  
+        </div>
+    </div>
+    
+    用户信息，注册登录按钮
+    <div class="navbox subject">
+        <div class="nav_btn">
+            <a href="javascript:;"><img src="/images/nav_ico.png" /></a>
+        </div>
+        <div class="user" id="userLogin"></div>
+    </div> -->
+ 
+ 
+    <div class="wrapper inmobile">
+        <!--头部开始-->
+        <!--导航开始-->
+        <ul class="box-menu" id="box-menu">
+            <li><a href="/">艺术品</a></li>
+            <li><a href="theme.html">衍生品</a></li>
+            <li class="current"><a href="special.html">灯丝圈</a></li>
+        </ul>
+        <!--导航结束-->
+    </div>
+    
+    <div class="wrapper hasvideo" ng-controller="detailCtr">
+       <!--  <div class="topic_logo"><a href="/"><img src="/images/logo.png" /></a></div> -->
+        <div class="topic_cont">
+         <h1 ng-bind-html="detailArr.title | trustHtml"></h1>
+         <p class="v"><span ng-bind="detailArr.createTime"></span>  <font ng-bind="detailArr.memberName"></font></p>
+         <div class="video vdmobile" ng-if="detailArr.videoUrl!=null" ng-bind-html="detailArr.videoUrlStr | trustHtml"></div>
+         <div class="topic_content" ng-bind-html="detailArr.content | trustContent">
+         </div>
+         <div class="topic_content_bottom row">
+            <a class="user" href="user/gallery.html?proprietorId={{detailArr.memberId}}" target="_blank">
+                <span class="user-head">
+                    <img src="/images/tips01.png" loads data-url="{{img_url}}{{userData.imageUrl}}"/>
+                </span>
+                <span class="user-name" ng-bind="detailArr.memberName">
+                    <!-- ArtBulb官方账号 -->
+                </span>
+            </a>
+            <div class="fr">
+                <div class="click-number">
+                    <font class="iconfont">&#xe632;</font>
+                    <font ng-bind="LANGUAGE_NOW.special.click"><!-- 点击 --></font>：
+                    <font ng-bind="detailArr.look"></font>
+                </div>
+                <div class="shear" ng-click="showShearSite()">
+                    <font class="iconfont">&#xe603;</font>
+                    <font ng-bind="LANGUAGE_NOW.goods.share"><!-- 分享 --></font>
+                </div>
+                <div class="like" ng-click="Sitelike()" ng-class="detailArr.light==true?'active':''">
+                    <font class="like-ico"></font>
+                    <font ng-bind="LANGUAGE_NOW.special.like"><!-- 喜欢 --></font>
+                    
+                    <font ng-bind="detailArr.like"></font>
+                </div>
+            </div>
+         </div>
+
+         <div class="Comment_list">
+            <h2><font ng-bind="LANGUAGE_NOW.special.comment"><!-- 评论 --></font>（<font ng-bind="getDiscussByTopic.pageItems==undefined?0:getDiscussByTopic.pageItems.length"></font>）</h2>
+            <div class="Comment_list-li">
+                <!--评论输入-->
+                <div class="my_Comment">
+                    <div class="c_u_t_x">
+                       <img src="{{img_url}}{{userData.imageUrl}}" onerror="javascript:this.src='/images/tips01.png'">
+                    </div>
+                    <div class="c_list_input">
+                        <div id="mr_div_input" class="mr_div_input">
+                            <input type="text" id="c_input" class="c_input" placeholder="{{LANGUAGE_NOW.special.evaluation}}" ng-model="postContent"/>
+                        </div>
+                    </div>
+                    <div class="dp_list" id="dp_list_show">
+                       <!-- <div class="li_dp">
+                           <div class="www_bulb">
+                                <div class="_bulb" id="_bulb">
+                                    <a href="javascript:void(0);" class="one-star" star:value="20">20</a>
+                                    <a href="javascript:void(0);" class="two-stars" star:value="40">40</a>
+                                    <a href="javascript:void(0);" class="three-stars" star:value="60">60</a>
+                                    <a href="javascript:void(0);" class="four-stars" star:value="80">80</a>
+                                    <a href="javascript:void(0);" class="five-stars" star:value="100">100</a>
+                                </div>
+                                <span id="stars2-tips" class="result"></span>
+                                <input type="hidden" id="stars2-input" name="b" value="5"/>
+                           </div>
+                        </div>
+                        <c class="p" ng-bind="LANGUAGE_NOW.special.bulbScore">点击灯泡评分</c> -->
+                        <button id="b_send" ng-click="postBtopic($event);" ng-bind="LANGUAGE_NOW.special.comment"><!-- 评&nbsp;&nbsp;论 --></button>
+                    </div>
+                 </div>
+                 <!--评论结束-->
+                 <ul>
+                     <li ng-repeat="Btopic in getDiscussByTopic.pageItems">
+                         <div class="c_u_t_x"> <img src="/images/tips01.png" loads data-url="{{img_url}}{{Btopic.ownerHead}}" /> </div>
+                         <div class="c_list_content">
+                             <div class="name_dp"> <span ng-bind="Btopic.ownerName"></span>
+                                <!-- <div class="jb-dp">
+                                    <i ng-repeat="start in Btopic.startArr" ng-class="start.class"></i>
+                                </div> -->
+                             </div>
+                             <div class="c_con_list" ng-bind="Btopic.createDate"></div>
+                             <div class="c_cent_c" ng-bind="Btopic.cussContext"></div>
+                         </div>
+
+                         <i class="iconfont icon-close-b" ng-click="delDiscuss(Btopic)" ng-if="userData.memberId==Btopic.ownerId"></i>
+                     </li>
+                 </ul>
+                 <div class="c_page" ng-show="getDiscussByTopic.pageItems.length>0"> <a class="c_prev" ng-click="getComment('prev');"></a> <em ng-bind="commentPage"></em> <a class="c_next" ng-click="getComment('next');"></a> </div>
+             </div>
+         </div>
+         <!--相关衍生品 Start-->
+         <div class="por_details" ng-if="detailArr.arts.length>0">
+             <h1 ng-bind="LANGUAGE_NOW.special.relatedG"><!-- 相 关 衍 生 品 --></h1>
+             <div class="pord_img_list">
+                 <div class="container" style="width:870px;">
+                     <ul class="art_box clearfix" id="container">
+                         <li ng-repeat="arts in detailArr.arts" on-finish-render-filters>
+                             <div class="art_img" ng-click="goodsItemImg(arts)"><img ng-src="{{img_url}}{{arts.uri}}?imageView2/2/w/270/q/90"/></div>
+                             <div class="text">
+                                <h2><a ng-bind="arts.customerName"></a></h2>
+                                <span class="user">
+                                    <a target="_blank" href="user/gallery.html?proprietorId={{arts.ownerId}}">
+                                        <b>
+                                            <img src="/images/tips01.png" loads data-url="{{img_url}}{{arts.ownerPicture}}" />
+                                        </b>
+                                        <font ng-bind="arts.nickname"></font>
+                                    </a>
+                                </span>
+                                <div class="del">
+                                    <span>
+                                        <b ng-class="arts.light==true?'ico-likes':''" ng-click="like(arts)" ng-bind="arts.collectionNumber"></b>
+                                        <font ></font>
+                                    </span>
+                                    <span>
+                                        <font ng-bind="arts.currencySymbol"></font>
+                                        <font ng-bind="arts.sellPrice"></font>
+                                    </span>
+                                </div>
+                             </div>
+                         </li>
+                     </ul>
+                 </div>
+             </div>
+         </div>
+         <!--相关作品 End-->
+        </div>
+    </div>
+    <div artdetails on-finish-render-filters></div>
+    
+    <!--商品详情-star-->
+    <shopdetailsdir style="display:none;"></shopdetailsdir>
+    <!--商品详情-end-->
+    <div shear class="shear"></div>
+    <div report class="report"></div>
+    <div id="goodsDatail"></div>
+    <script src="/js/config.js"></script>
+    <script src="/js/ArtJS/lib/jquery-2.1.4.min.js"></script>
+    <script src="/js/ArtJS/ArtJS.js"></script>
+    <script src="/js/init.js"></script>
+    <script src="/js/ArtJS/lib/angular.min.js"></script>
+    <script src="/js/ArtJS/lib/angular-route.min.js"></script>
+    <script src="/module/mod-header-full.js"></script>
+    <!--<script src="/js/ArtJS/util/header.js"></script>-->
+    <script src="/js/old/jquer-arts.min.js"></script>
+    <script src="/js/old/store.js"></script>
+    <script src="/js/old/nvarchar.js"></script>
+    <script src="/js/old/main.js"></script>
+    <script src="/js/old/plug-in-unit.js"></script>
+    <script src="/js/old/global.js"></script>
+    <script src="/js/old/app.js"></script>
+    <script src="/js/old/art-details.js"></script>
+    <script src="/js/old/shop-details.js"></script>
+    <script src="/js/old/detail.js"></script>
+     <script type="text/javascript">
+        // seajs.use(['js/detail']);
+        HEADER_BOX.loginAndmune();//加载右侧
+    </script>
+    <script src="/js/detail.js"></script>
+</body>
+</body>
+</html>

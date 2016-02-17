@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html ng-app="shoppingCart">
+	<head>
+		<meta charset="UTF-8">
+	    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<title>购物车</title>
+		<link rel="stylesheet" href="/font/iconfont.css">
+	    <link rel="stylesheet" type="text/css" href="/css/header.css">
+		<link type="text/css" href="/css/user/cart.css" rel="stylesheet">
+	    <link rel="stylesheet" type="text/css" href="/css/media-queries.css">
+	</head>
+	<body ng-controller="shoppingCartCtr">
+		<!-- 头部开始 -->
+		<div modheaderfull></div>
+		<!-- 头部结束 -->
+
+		<div id="wrapper">
+			<!-- 购物车(有) -->
+			<div id="cartNav" class="container_cart">
+				<div style="overflow: hidden;">
+					<div class="cart_step">
+						<ul class="step01">
+							<li class="active first"><b>{{LANGUAGE_NOW.title.cart}}</b></li>
+							<li><b>{{LANGUAGE_NOW.title.checkout}}</b></li>
+							<li><b>{{LANGUAGE_NOW.title.pay}}</b></li>
+						</ul>
+					</div>
+					<!-- <div class="go_shopping">
+						<a href="/"><i></i>{{LANGUAGE_NOW.title.shopping}}</a>
+					</div> -->
+				</div>
+				<!--form-->
+				<form id="confirmform" method="post" action="cart/confirm.ct" name="confirmform">
+					<div class="cart_list">
+						<table class="order_tb" width="100%" cellspacing="0" cellpadding="0" border="0">
+							<thead>
+								<tr class="c_th">
+									<th width="8%" align="left">
+										<label><input type="checkbox" id="SelectAll"  onchange="CART.select.all(this);"></label>
+									</th>
+									<th width="15%">{{LANGUAGE_NOW.title.goods}}</th>
+									<th width="24%">&nbsp;</th>
+									<th width="20%">{{LANGUAGE_NOW.title.details}}</th>
+									<th width="11%">{{LANGUAGE_NOW.title.count}}</th>
+									<th width="11%">{{LANGUAGE_NOW.title.price}}</th>
+									<th width="11%">{{LANGUAGE_NOW.title.totalSub}}</th>
+								</tr>
+							</thead>
+							<tbody id="order_tb" class="order-tb"></tbody>
+							<tfoot>
+								<tr style="background-color:#F5F5F5;">
+									<td colspan="2"><span class="remove"><a onclick="CART.del.all(this);">{{LANGUAGE_NOW.cart.delSel}}</a></span></td>
+									<td>
+										<div class="coupon">
+											<input type="text" class="coupon_txt" id="couponCode" name="">
+											<input type="button" class="coupon_btn" onclick="couponBtnClick()" id="couponBtn" value="Redeem" name="">
+											<input type="hidden" value="" name="couponCodeUsed" id="couponCodeUsed">
+										</div>
+									</td>
+									<td colspan="2" valign="top" align="center">
+										<span>{{LANGUAGE_NOW.title.goods}}</span>
+										<span id="totalgoodsnum" class="total-goodsnum">0</span>
+									</td>
+									<td align="right" colspan="4">
+										{{LANGUAGE_NOW.title.total}}
+										<span class="goods-currency" name="goodsCurrency"></span>
+										<span id="totalmoney">0</span>
+									</td>
+								</tr>
+							</tfoot>
+						</table>
+						<!--提交按钮-->
+						<div class="cart_go">
+							<div class="go_checkout">
+							<a onclick="CART.submit(this);" data-href="/page/{{LANG.NAME}}/order/payment.html"><i></i>{{LANGUAGE_NOW.title.pay}}</a></div>
+							<div class="go_shopping">
+								<a href="/"><i></i>{{LANGUAGE_NOW.title.shopping}}</a>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+			<!-- 购物车(空) -->
+			<div id="cartNavNull" class="goods-contenter">
+				<div type="list_product_other" id="J_GoodsWall" class="goods clearfix masonry" style="position: relative; height: 0px;">
+					<div class="my-artworks-list" id="masonry">
+						<div id="image_wall">
+							<!-- <div class="go_shopping mcm"> 
+								<a href="/">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{LANGUAGE_NOW.title.shopping}}</a>
+							</div> -->
+							<div class="cart_no" style="margin-top:230px;">
+								<div class="mcd">
+									{{LANGUAGE_NOW.cart.empty}}
+									<a href="/">{{LANGUAGE_NOW.cart.browse}}</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<script src="/js/config.js"></script>
+		<script src="/js/ArtJS/lib/jquery-2.1.4.min.js"></script>
+		<script src="/js/ArtJS/ArtJS.js"></script>
+		<script src="/js/init.js"></script>
+		<script src="/js/ArtJS/lib/angular.min.js"></script>
+		<script src="/js/ArtJS/lib/angular-route.min.js"></script>
+		<script src="/module/mod-header-full.js"></script>
+		<!--<script src="/module/mod-home-tag.js"></script>-->
+		<script src="/js/old/nvarchar.js"></script>
+		<script src="/js/old/main.js"></script>
+		<script src="/js/old/app.js"></script>
+		<script src="/js/old/art-details.js"></script>		
+		<script src="/js/old/cart.js"></script>
+		<script src="/js/order/shopCart.js"></script>
+		<!--
+		<script src="/drift/dist/angular.js"></script>
+		<script src="/drift/dist/angular-route.min.js"></script>
+		<script src="/drift/dist/js/nvarchar.js"></script>
+		<script src="/drift/dist/js/main.js"></script>
+		<script src="/drift/script/app.js"></script>
+		<script src="/drift/dist/js/art-details.js"></script>
+		<script src="/drift/script/mod-header-full.js"></script>
+		<script src="/drift/dist/js/cart.js"></script>
+		<script src="/drift/dist/js/shopCart.js"></script>-->
+		
+	</body>
+</html>
